@@ -14,7 +14,7 @@
 </head>
 
 <body>
-	<a href="ProductView.jsp">Home</a></br>
+	<a href="ProductView.jsp">Home</a><br/>
 	<% if(cart != null && cart.getSize()!=0) { %>
 		<h2>Cart</h2>
 		<table border="1">
@@ -29,7 +29,20 @@
 		%>
 		<tr>
 			<td><%=beancart.getName()%></td>
-			<td> <input type="number" name="quantità" min="0" max="<%=beancart.getQuantity()%>" value="<%=beancart.getCartQuantity()%>"></td>
+			<td> 
+				<form action="product">
+					<input type="hidden" name="action" value="increaseQD">
+					<input type="hidden" name="id" value="<%=beancart.getCode()%>">
+					<input type="submit" value="+" >
+				</form>
+				<%=beancart.getCartQuantity()%>
+				<form action="product">
+					<input type="hidden" name="action" value="decreaseQD">
+					<input type="hidden" name="id" value="<%=beancart.getCode()%>">
+					<input type="submit" value="-" >
+				</form>
+			</td>
+			
 			<td><%=beancart.getTot()%></td>
 			<td><a href="product?action=deleteC&id=<%=beancart.getCode()%>">Delete from cart</a></td>
 		</tr>

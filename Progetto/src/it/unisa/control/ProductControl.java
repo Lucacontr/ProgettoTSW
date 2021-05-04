@@ -48,13 +48,18 @@ public class ProductControl extends HttpServlet {
 			if (action != null) {
 				if (action.equalsIgnoreCase("addC") || action.equalsIgnoreCase("addCartDetails")) {
 					int id = Integer.parseInt(request.getParameter("id"));
+					ProductBean b=cart.getProduct(id);
 					if(cart.isInCart(id)) {
-						ProductBean b=cart.getProduct(id);
-						b.setCartQuantity(b.getCartQuantity()+1);
-						b.setTot(b.getCartQuantity()*b.getPrice());
+						if(b.getCartQuantity()<b.getQuantity()) {
+							b.setCartQuantity(b.getCartQuantity()+1);
+							b.setTot(b.getCartQuantity()*b.getPrice());
+						}
 					}
 					else {
-						cart.addProduct(model.doRetrieveByKey(id));
+						ProductBean bean= (ProductBean) model.doRetrieveByKey(id);
+						bean.setCartQuantity(1);
+						bean.setTot(bean.getPrice());
+						cart.addProduct(bean);
 					}
 					request.getSession().setAttribute("cart", cart);
 					request.setAttribute("cart", cart);
@@ -110,6 +115,41 @@ public class ProductControl extends HttpServlet {
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
 					dispatcher.forward(request, response);
 				}
+				else if (action.equalsIgnoreCase("decreaseQD")) {
+					ProductBean b= cart.getProduct(Integer.parseInt(request.getParameter("id")));
+					if(b.getCartQuantity()>0) {
+						b.setCartQuantity(b.getCartQuantity()-1);
+						b.setTot(b.getCartQuantity()*b.getPrice());
+						cart.deleteProduct(b);
+						cart.addProduct(b);
+						request.getSession().setAttribute("cart", cart);
+						request.setAttribute("cart", cart);
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
+						dispatcher.forward(request, response);
+					}
+					else {
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				else if (action.equalsIgnoreCase("increaseQD")) {
+					ProductBean b= cart.getProduct(Integer.parseInt(request.getParameter("id")));
+					if(b.getCartQuantity()<b.getQuantity()) {
+						b.setCartQuantity(b.getCartQuantity()+1);
+						b.setTot(b.getCartQuantity()*b.getPrice());
+						cart.deleteProduct(b);
+						cart.addProduct(b);
+						request.getSession().setAttribute("cart", cart);
+						request.setAttribute("cart", cart);
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
+						dispatcher.forward(request, response);
+					}
+					else {
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
+						dispatcher.forward(request, response);
+					}
+				}
+				
 			}
 			else {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ProductView.jsp");

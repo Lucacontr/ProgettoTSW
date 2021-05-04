@@ -13,8 +13,6 @@ public class Cart {
 	
 	public void addProduct(ProductBean product) {
 		products.add(product);
-		product.setCartQuantity(1);
-		product.setTot(product.getPrice());
 	}
 	
 	public ProductBean getProduct(int id) {
