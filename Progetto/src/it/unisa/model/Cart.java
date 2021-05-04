@@ -50,4 +50,14 @@ public class Cart {
 		return products.size();
 	}
 	
+	public boolean replaceProduct(ProductBean bean) {
+		for(int i=0;i<products.size();i++){
+			if(bean.getCode()==products.get(i).getCode()) {
+				products.set(i, bean);
+				return true;
+			}
+		}
+		return false;
+	}
+	
 }

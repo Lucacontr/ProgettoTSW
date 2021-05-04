@@ -120,36 +120,25 @@ public class ProductControl extends HttpServlet {
 					if(b.getCartQuantity()>0) {
 						b.setCartQuantity(b.getCartQuantity()-1);
 						b.setTot(b.getCartQuantity()*b.getPrice());
-						cart.deleteProduct(b);
-						cart.addProduct(b);
+						cart.replaceProduct(b);
 						request.getSession().setAttribute("cart", cart);
 						request.setAttribute("cart", cart);
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
-						dispatcher.forward(request, response);
 					}
-					else {
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
-						dispatcher.forward(request, response);
-					}
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
+					dispatcher.forward(request, response);
 				}
 				else if (action.equalsIgnoreCase("increaseQD")) {
 					ProductBean b= cart.getProduct(Integer.parseInt(request.getParameter("id")));
 					if(b.getCartQuantity()<b.getQuantity()) {
 						b.setCartQuantity(b.getCartQuantity()+1);
 						b.setTot(b.getCartQuantity()*b.getPrice());
-						cart.deleteProduct(b);
-						cart.addProduct(b);
+						cart.replaceProduct(b);
 						request.getSession().setAttribute("cart", cart);
 						request.setAttribute("cart", cart);
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
-						dispatcher.forward(request, response);
 					}
-					else {
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
-						dispatcher.forward(request, response);
-					}
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
+					dispatcher.forward(request, response);
 				}
-				
 			}
 			else {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ProductView.jsp");
