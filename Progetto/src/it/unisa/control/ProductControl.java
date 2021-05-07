@@ -90,7 +90,6 @@ public class ProductControl extends HttpServlet {
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ProductView.jsp");
 					dispatcher.forward(request, response);
 				} else if (action.equalsIgnoreCase("insert")) {
-					System.out.println(request.getParameter("prezzo"));
 					String name = request.getParameter("nome");
 					String description = request.getParameter("descrizione");
 					int price = Integer.parseInt(request.getParameter("prezzo"));
@@ -101,7 +100,6 @@ public class ProductControl extends HttpServlet {
 					bean.setDescription(description);
 					bean.setPrice(price);
 					bean.setQuantity(quantity);
-					System.out.println(name + description + price + quantity);
 					model.doSave(bean);
 					request.removeAttribute("products");
 					request.setAttribute("products", model.doRetrieveAll(sort));
