@@ -42,7 +42,7 @@
 						<td><%=bean.getCode()%></td>
 						<td><%=bean.getName()%></td>
 						<td><%=bean.getDescription()%></td>
-						<td><a  href="product?action=delete&id=<%=bean.getCode()%>">Delete</a><br>
+						<td><a href="product?action=delete&id=<%=bean.getCode()%>">Delete</a><br>
 							<a href="product?action=read&id=<%=bean.getCode()%>">Details</a><br>
 							<a href="product?action=addC&id=<%=bean.getCode()%>">Add to cart</a>
 							</td>
