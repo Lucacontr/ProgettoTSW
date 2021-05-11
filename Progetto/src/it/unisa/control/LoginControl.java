@@ -58,6 +58,9 @@ public class LoginControl extends HttpServlet {
 				     System.out.println(theException); 
 				}
 			}
+			else if(action.equalsIgnoreCase("registration")) {
+				
+			}
 		}
 	}
 

@@ -10,8 +10,10 @@ import javax.sql.DataSource;
 
 public class UserDAO{
 	
-   static Connection currentCon = null;
-   static ResultSet rs = null;	
+   private static Connection currentCon = null;
+   private static ResultSet rs = null;
+   private static Statement stmt = null;    
+   private static PreparedStatement preparedStatement = null;
    
    private static DataSource ds;
    private static final String TABLE_NAME = "utente";
@@ -31,8 +33,7 @@ public class UserDAO{
    public static UserBean doRetrieve(UserBean bean) {
 	
       //preparing some objects for connection 
-      Statement stmt = null;    
-      PreparedStatement preparedStatement = null;
+      
 	
       String username = bean.getUsername();    
       String password = bean.getPassword();   
@@ -96,9 +97,14 @@ public class UserDAO{
 	         currentCon = null;
 	      }
 	   }
-	
-	return bean;
-		
-	   }	
-	}
+	   return bean;
+   }
+   
+   public static boolean doSave(UserBean bean) {
+	   
+	   
+	   
+   }
+   
+}
 
