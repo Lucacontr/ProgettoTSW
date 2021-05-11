@@ -64,7 +64,7 @@ public class LoginControl extends HttpServlet {
 				bean.setLastName(action);
 				bean.setUserName(action);
 				bean.setPassword(action);
-				
+				//
 			}
 		}
 	}
