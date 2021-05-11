@@ -35,12 +35,12 @@
 					<td><%=product.getDescription()%></td>
 					<td><%=product.getPrice()%></td>
 					<td><%=product.getQuantity()%></td>
-					<td><a href="product?action=addCartDetails&id=<%=product.getCode()%>">Add to cart</a></td>
+					<td><a href="cart?action=addCartDetails&id=<%=product.getCode()%>">Add to cart</a></td>
 				</tr>
 			</table>
 	<%
 		}
 	%>
-	<br/><a href="product?action=car">Vai al carrello</a>
+	<br/><a href="cart?action=Cart">Vai al carrello</a>
 </body>
 </html>

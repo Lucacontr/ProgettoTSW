@@ -44,7 +44,7 @@
 						<td><%=bean.getDescription()%></td>
 						<td><a href="product?action=delete&id=<%=bean.getCode()%>">Delete</a><br>
 							<a href="product?action=read&id=<%=bean.getCode()%>">Details</a><br>
-							<a href="product?action=addC&id=<%=bean.getCode()%>">Add to cart</a>
+							<a href="cart?action=add&id=<%=bean.getCode()%>">Add to cart</a>
 							</td>
 					</tr>
 		<%
@@ -59,7 +59,7 @@
 			}
 		%>
 	</table><br/>
-	<a href="product?action=car">Vai al carrello</a>
+	<a href="cart?action=Cart">Vai al carrello</a>
 	
 	<h2>Insert</h2>
 	<form action="product" method="post">
@@ -74,8 +74,8 @@
 		<label for="prezzo">Price:</label><br> 
 		<input name="prezzo" type="number" min="0" value="0" required><br>
 
-		<label for="quantita">Quantity:</label><br> 
-		<input name="quantita" type="number" min="1" value="1" required><br>
+		<label for="quantità">Quantity:</label><br> 
+		<input name="quantità" type="number" min="1" value="1" required><br>
 
 		<input type="submit" value="Add"><input type="reset" value="Reset">
 	</form>

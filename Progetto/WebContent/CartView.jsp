@@ -30,21 +30,21 @@
 		<tr>
 			<td><%=beancart.getName()%></td>
 			<td> 
-				<form action="product">
-					<input type="hidden" name="action" value="increaseQD">
+				<form action="cart">
+					<input type="hidden" name="action" value="increaseQ">
 					<input type="hidden" name="id" value="<%=beancart.getCode()%>">
 					<input type="submit" value="+" >
 				</form>
 				<%=beancart.getCartQuantity()%>
-				<form action="product">
-					<input type="hidden" name="action" value="decreaseQD">
+				<form action="cart">
+					<input type="hidden" name="action" value="decreaseQ">
 					<input type="hidden" name="id" value="<%=beancart.getCode()%>">
 					<input type="submit" value="-" >
 				</form>
 			</td>
 			
 			<td><%=beancart.getTot()%></td>
-			<td><a href="product?action=deleteC&id=<%=beancart.getCode()%>">Delete from cart</a></td>
+			<td><a href="cart?action=delete&id=<%=beancart.getCode()%>">Delete from cart</a></td>
 		</tr>
 		<%} %>
 	</table>
@@ -60,7 +60,7 @@
 		<h1>Il tuo carrello è vuoto</h1>
 	<% } %>
 	
-	<br/><a href="product?action=deleteCart">
+	<br/><a href="login?action=checkout">
 		<input type="submit" name="submit" value="Checkout"></a>
 </body>
 </html>
