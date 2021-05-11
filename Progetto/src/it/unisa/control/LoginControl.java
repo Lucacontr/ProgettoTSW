@@ -59,6 +59,11 @@ public class LoginControl extends HttpServlet {
 				}
 			}
 			else if(action.equalsIgnoreCase("registration")) {
+				UserBean bean= new UserBean();
+				bean.setFirstName(action);
+				bean.setLastName(action);
+				bean.setUserName(action);
+				bean.setPassword(action);
 				
 			}
 		}

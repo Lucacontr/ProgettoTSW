@@ -14,7 +14,6 @@ public class UserDAO{
    private static ResultSet rs = null;
    private static Statement stmt = null;    
    private static PreparedStatement preparedStatement = null;
-   
    private static DataSource ds;
    private static final String TABLE_NAME = "utente";
    
@@ -102,7 +101,7 @@ public class UserDAO{
    
    public static boolean doSave(UserBean bean) {
 	   
-	   
+	   String insert="insert into utente() values()"
 	   
    }
    
