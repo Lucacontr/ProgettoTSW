@@ -34,13 +34,13 @@ public class UserDAO{
       //preparing some objects for connection 
       
 	
-      String username = bean.getUsername();    
+      String email = bean.getEmail();    
       String password = bean.getPassword();   
 	    
-      String searchQuery = "SELECT * FROM " + UserDAO.TABLE_NAME + " WHERE username = ? AND pw = ?";
+      String searchQuery = "SELECT * FROM " + UserDAO.TABLE_NAME + " WHERE email = ? AND pw = ?";
       
 	   // "System.out.println" prints in the console; Normally used to trace the process
-	   System.out.println("Your user name is " + username);          
+	   System.out.println("Your user name is " + email);          
 	   System.out.println("Your password is " + password);
 	   System.out.println("Query: "+searchQuery);
    
@@ -48,7 +48,7 @@ public class UserDAO{
 	      //connect to DB 
 		  currentCon = ds.getConnection();
 	      preparedStatement=currentCon.prepareStatement(searchQuery);
-	      preparedStatement.setString(1, username);
+	      preparedStatement.setString(1, email);
 	      preparedStatement.setString(2, password);
 	      rs = preparedStatement.executeQuery();	        
 	      boolean more = rs.next();
@@ -101,14 +101,14 @@ public class UserDAO{
    
    public static boolean doSave(UserBean bean) {
 	   
-	   String insert="insert into utente(nome, cognome, username, pw) values(?, ?, ?, ?)";
+	   String insert="insert into utente(nome, cognome, email, pw) values(?, ?, ?, ?)";
 	   try{
 		      //connect to DB 
 			  currentCon = ds.getConnection();
 		      preparedStatement=currentCon.prepareStatement(insert);
 		      preparedStatement.setString(1, bean.getFirstName());
 		      preparedStatement.setString(2, bean.getLastName());
-		      preparedStatement.setString(3, bean.getUsername());
+		      preparedStatement.setString(3, bean.getEmail());
 		      preparedStatement.setString(4, bean.getPassword());
 		      if(preparedStatement.executeUpdate()==1) {
 		    	  return true;
@@ -120,6 +120,5 @@ public class UserDAO{
 			return false;
 	   } 
    }
-   
 }
 

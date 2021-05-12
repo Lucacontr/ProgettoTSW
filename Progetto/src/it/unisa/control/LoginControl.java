@@ -36,25 +36,16 @@ public class LoginControl extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if(action!=null) {
-			/*if(action.equalsIgnoreCase("checkout")){
-				Cart cart= (Cart) request.getSession().getAttribute("cart");
-				if(cart.getSize()==0) {
-					 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
-			    	 dispatcher.forward(request, response);
-				}
-				else response.sendRedirect("LoginView.jsp");
-			}*/
-			if(action.equalsIgnoreCase("verify")) {
+			if(action.equalsIgnoreCase("checkout")) {
 				try {
-					 HttpSession session = request.getSession(true);
+					 HttpSession session = request.getSession();
 			    	 UserBean user= new UserBean();
-				     user.setUserName(request.getParameter("un"));
+				     user.setEmail(request.getParameter("email"));
 				     user.setPassword(request.getParameter("pw"));
 				     user = UserDAO.doRetrieve(user);
-				     session.setAttribute("currentSessionUser", user);
 				     if (user.isValid()){
-				    	 System.out.println("ciao");
-				    	 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
+				    	 session.setAttribute("currentSessionUser", user);
+				    	 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/order");
 				    	 dispatcher.forward(request, response); 		
 				     }
 				     else{
@@ -70,7 +61,7 @@ public class LoginControl extends HttpServlet {
 				UserBean bean= new UserBean();
 				bean.setFirstName(request.getParameter("name"));
 				bean.setLastName(request.getParameter("surname"));
-				bean.setUserName(request.getParameter("username"));
+				bean.setEmail(request.getParameter("email"));
 				bean.setPassword(request.getParameter("pw"));
 				if(UserDAO.doSave(bean)) {
 					bean.setValid(true);
@@ -79,7 +70,7 @@ public class LoginControl extends HttpServlet {
 			    	dispatcher.forward(request, response); 
 				}
 				else {
-					request.getSession().setAttribute("username", "false");
+					request.getSession().setAttribute("email", "false");
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registrazioneUtente.jsp");
 			    	dispatcher.forward(request, response); 
 				}

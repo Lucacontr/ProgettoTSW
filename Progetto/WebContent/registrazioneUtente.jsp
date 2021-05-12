@@ -13,12 +13,12 @@
 		<label>Cognome: </label><input id="surname" name ="surname" type="text" placeholder="Rossi" required>
 	</fieldset><br>
 	<fieldset>
-		<legend>Username e PASSWORD</legend>
-		<label>Username: </label> <input id="user" name="username" type="text" placeholder="username" required>
+		<legend>Email e PASSWORD</legend>
+		<label>Email: </label> <input id="email" name="email" type="text" placeholder="email" required>
 		<% 
-			if(request.getSession().getAttribute("username")!=null && request.getSession().getAttribute("username").equals("false"))
+			if(request.getSession().getAttribute("email")!=null && request.getSession().getAttribute("email").equals("false"))
 			{	
-				%>   Username già utilizzato, scegline un altro
+				%>   email già utilizzata, scegline un altro
 			<%}%>
 		<br><br>
 		<label>Password: </label><input id="pw" name="pw" type="password" placeholder="password" required>

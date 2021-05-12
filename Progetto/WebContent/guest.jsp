@@ -4,11 +4,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Dettagli dell'ordine</title>
+<title>Insert title here</title>
 </head>
 <body>
 
+	<form action="order" method="post">
+		<input type="hidden" name="action" value="guest">
 	
+	</form>
 
 </body>
 </html>

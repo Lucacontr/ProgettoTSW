@@ -20,9 +20,9 @@
 		%><br> Utente non valido, reinserisci le credenziali<br/><br/>   
 		<%}%>
 		<form action="login" method="post">
-			<input type="hidden" name="action" value="verify">
-			Please enter your username 		
-			<input type="text" name="un"/><br>		
+			<input type="hidden" name="action" value="checkout">
+			Please enter your email 		
+			<input type="text" name="email"/><br>		
 		
 			Please enter your password
 			<input type="password" name="pw"/>
@@ -30,6 +30,7 @@
 			<input type="submit" value="submit">			
 		
 		</form>
+		<a href="guest.jsp">Acquista senza registrarti</a>
 		<a href="registrazioneUtente.jsp">Registrati</a>
 	</body>
 </html>

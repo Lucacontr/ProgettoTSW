@@ -10,7 +10,6 @@ import java.util.LinkedList;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 public class OrderDAO {
@@ -24,31 +23,35 @@ public class OrderDAO {
 
 			ds = (DataSource) envCtx.lookup("jdbc/cc");
 
-		} catch (NamingException e) {
+		} catch (Exception e) {
 			System.out.println("Error:" + e.getMessage());
 		}
 	}
 
 	private static final String TABLE_NAME = "ordine";
 
-	public synchronized void doSave(OrderBean order) throws SQLException {
+	public static synchronized void doSave(OrderBean order) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + OrderDAO.TABLE_NAME
-				+ " (dataEffettuazione, prezzoTotale, utente) VALUES (now(), ?, ?)";
+				+ " (data_Effettuazione, prezzo_Totale, utente) VALUES (now(), ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setDouble(1, order.getPrezzoTot());
 			preparedStatement.setString(2, order.getUtente());
-
-			preparedStatement.executeUpdate();
+			if(preparedStatement.executeUpdate()==1)System.out.println("aggiunta");
+			else System.out.println("non aggiunta");
 			connection.setAutoCommit(false);
 			connection.commit();
-		} finally {
+		}
+		catch (Exception ex){
+		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		}
+		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
@@ -59,7 +62,7 @@ public class OrderDAO {
 		}
 	}
 
-	public synchronized OrderBean doRetrieveByKey(int code) throws SQLException {
+	public static synchronized OrderBean doRetrieveByKey(int code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -81,7 +84,11 @@ public class OrderDAO {
 				bean.setPrezzoTot(rs.getDouble("prezzo_totale"));
 			}
 
-		} finally {
+		}
+		catch (Exception ex){
+		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		}
+		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
@@ -93,7 +100,7 @@ public class OrderDAO {
 		return bean;
 	}
 
-	public synchronized boolean doDelete(int code) throws SQLException {
+	public static synchronized boolean doDelete(int code) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -108,7 +115,11 @@ public class OrderDAO {
 
 			result = preparedStatement.executeUpdate();
 
-		} finally {
+		}
+		catch (Exception ex){
+		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		}
+		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
@@ -120,7 +131,7 @@ public class OrderDAO {
 		return (result != 0);
 	}
 
-	public synchronized Collection<OrderBean> doRetrieveAll(String order) throws SQLException {
+	public static synchronized Collection<OrderBean> doRetrieveAll(String order) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -147,7 +158,11 @@ public class OrderDAO {
 				orders.add(bean);
 			}
 
-		} finally {
+		}
+		catch (Exception ex){
+		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		}
+		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();
@@ -159,7 +174,7 @@ public class OrderDAO {
 		return orders;
 	}
 	
-	public synchronized Collection<OrderBean> doRetrieveByUser(String user) throws SQLException {
+	public static synchronized Collection<OrderBean> doRetrieveByUser(String user) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -182,7 +197,11 @@ public class OrderDAO {
 				orders.add(bean);
 			}
 
-		} finally {
+		}
+		catch (Exception ex){
+		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		}
+		finally {
 			try {
 				if (preparedStatement != null)
 					preparedStatement.close();

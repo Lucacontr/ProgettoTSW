@@ -5,7 +5,7 @@ USE cc;
 DROP TABLE IF EXISTS prodotto;
 
 CREATE TABLE prodotto (	
-  id int primary key AUTO_INCREMENT,
+  id int primary key AUTO_INCREMENT not null,
   prezzo double default 0,
   nome char(20),
   specifiche char(200),
@@ -23,18 +23,14 @@ DROP TABLE IF EXISTS utente;
 CREATE TABLE utente (	
   nome char(25),
   cognome char(25),
-  username char (30),
   pw char(50),
   indirizzo char(200),
-  email char(35),
+  email char(35) primary key not null,
   telefono char(15),
   numCarta char(16),
   intestatario char(50),
   dataScad char(7),
-  CVV char(3),
-
-	PRIMARY KEY(username)
-
+  CVV char(3)
 );
 
 DROP TABLE IF EXISTS ordine;
@@ -44,12 +40,11 @@ CREATE TABLE ordine (
 	data_Effettuazione datetime,
     Prezzo_Totale double,
     Prezzo_Tot_IVA double,
-    utente varchar(30),
+    utente varchar(35) not null,
     
-    FOREIGN KEY (utente) REFERENCES utente(username)
+    FOREIGN KEY (utente) REFERENCES utente(email)
     ON DELETE RESTRICT
     ON UPDATE CASCADE
-
 );
 
 DROP TABLE IF EXISTS dettaglio; 
@@ -58,8 +53,6 @@ CREATE TABLE Dettaglio (
 	prezzoUnitario double,
     quantità int,
     IVA int,
-    
-    
     id_Prodotto int,
     id_Ordine int,
     
@@ -82,9 +75,13 @@ INSERT INTO prodotto (nome, descrizione, prezzo, quantità) values
 ("Dyson 6300", "Aspirapolvere", 329, 3),
 ("Asus 3200", "Router", 189, 22);
 
-INSERT INTO utente (nome, cognome, username, pw) values 
-("Luca", "Contrasto", "lucacontr", "luca1234"),
-("Giacomo", "Cubix", "giacubix", "cubix2021"),
-("Franco", "Vecchio", "fvecchio", "fravecc12"),
-("Luigi", "Lodi", "llodi", "lodi89"),
-("Vittorio", "Francia", "vittofran", "francia00");
+INSERT INTO utente (nome, cognome, email, pw) values 
+("Luca", "Contrasto", "lucacontr@gmail.com", "luca1234"),
+("Giacomo", "Cubix", "giacubix@gmail.com", "cubix2021"),
+("Franco", "Vecchio", "fvecchio@gmail.com", "fravecc12"),
+("Luigi", "Lodi", "llodi@gmail.com", "lodi89"),
+("Vittorio", "Francia", "vittofran@gmail.com", "francia00");
+
+INSERT INTO ordine (utente, prezzo_totale) values 
+("vittofran@gmail.com", 1200);
+

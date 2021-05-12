@@ -2,7 +2,7 @@ package it.unisa.model;
 
 public class UserBean {
 	
-    private String username;
+    private String email;
     private String password;
     private String firstName;
     private String lastName;
@@ -36,12 +36,12 @@ public class UserBean {
 	}
 	
 			
-    public String getUsername() {
-       return username;
+    public String getEmail() {
+       return email;
 			}
 
-    public void setUserName(String newUsername) {
-       username = newUsername;
+    public void setEmail(String newemail) {
+       email = newemail;
 			}
 
 				

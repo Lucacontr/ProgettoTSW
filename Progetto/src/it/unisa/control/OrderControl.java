@@ -18,7 +18,6 @@ import it.unisa.model.*;
 @WebServlet("/Order")
 public class OrderControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;  
-	private static OrderDAO model= new OrderDAO();
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -33,6 +32,7 @@ public class OrderControl extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
+		UserBean user=(UserBean)request.getSession().getAttribute("currentSessionUser");
 		
 		try {
 			if(action!=null) {
@@ -42,16 +42,31 @@ public class OrderControl extends HttpServlet {
 						 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
 				    	 dispatcher.forward(request, response);
 					}
-					else if(request.getAttribute("currentsessionUser")==null) response.sendRedirect("LoginView.jsp");
+					else if(user==null) {
+						response.sendRedirect("LoginView.jsp");
+					}
 					else{
-						
-						//inserire ordine nel db
-						
-						UserBean user= (UserBean)request.getAttribute("currentsessionUser");
-						request.getSession().setAttribute("orders", model.doRetrieveByUser(user.getUsername()));
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLoggedjsp");
+						OrderBean order=new OrderBean();
+						order.setPrezzoTot(cart.getTotPrice());
+						order.setUtente(user.getEmail());
+						OrderDAO.doSave(order);
+						DetailDAO.doSave(cart, order.getId());
+						request.getSession().setAttribute("cart", new Cart());
+						request.getSession().removeAttribute("orders");
+						request.getSession().setAttribute("orders", OrderDAO.doRetrieveByUser(user.getEmail()));
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
 						dispatcher.forward(request, response);
 					}
+				}
+				else if(action.equalsIgnoreCase("detail")){
+					int id = Integer.parseInt(request.getParameter("id"));
+					request.getSession().removeAttribute("products");
+					request.getSession().setAttribute("products", DetailDAO.doRetrieveProducts(id));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/OrderDetailsView.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(action.equalsIgnoreCase("guest")){
+					
 				}
 			}
 		}

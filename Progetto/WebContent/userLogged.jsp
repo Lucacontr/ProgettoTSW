@@ -15,10 +15,10 @@ if ((currentUser==null)||(!currentUser.isValid()))
 }
 
 	Collection<?> orders = (Collection<?>) request.getAttribute("orders");
-    if(orders == null) {
-	response.sendRedirect("ProductView.jsp");	
-	return;
-}
+  //  if(orders == null) {
+	//response.sendRedirect("ProductView.jsp");	
+//	return;
+//}
 
 %>
  
@@ -42,10 +42,10 @@ if ((currentUser==null)||(!currentUser.isValid()))
 <h4>Ordini effettuati</h4>
 	<table border="1">
 		<tr>
-			<th>Code </a></th>
-			<th>Data </a></th>
-			<th>Utente </a></th>
+			<th>Code </th>
+			<th>Data </th>
 			<th>Prezzo Totale</th>
+			<th></th>
 		</tr>
 		<%
 			if (orders != null && orders.size() != 0) {
@@ -57,7 +57,7 @@ if ((currentUser==null)||(!currentUser.isValid()))
 						<td><%=bean.getId()%></td>
 						<td><%=bean.getDataEff()%></td>
 						<td><%=bean.getPrezzoTot()%></td>
-						<td></td>
+						<td><a href="order/action=detail&id=<%=bean.getId()%>">Dettaglio ordine</a></td>
 					</tr>
 		<%
 				}
