@@ -6,6 +6,7 @@ import java.util.List;
 public class Cart {
 
 	private List<ProductBean> products;
+	private double prezzoTot;
 	
 	public Cart() {
 		products = new ArrayList<ProductBean>();
@@ -13,6 +14,25 @@ public class Cart {
 	
 	public void addProduct(ProductBean product) {
 		products.add(product);
+		this.setCartPrice();
+	}
+	
+	public void increaseProductQ(ProductBean b) {
+		if(b.getCartQuantity()<b.getQuantity()) {
+			b.setCartQuantity(b.getCartQuantity()+1);
+			b.setTot(b.getCartQuantity()*b.getPrice());
+			this.replaceProduct(b);
+			this.setCartPrice();
+		}
+	}
+	
+	public void decreaseProductQ(ProductBean b) {
+		if(b.getCartQuantity()>0) {
+			b.setCartQuantity(b.getCartQuantity()-1);
+			b.setTot(b.getCartQuantity()*b.getPrice());
+			this.replaceProduct(b);
+			this.setCartPrice();
+		}
 	}
 	
 	public ProductBean getProduct(int id) {
@@ -28,6 +48,7 @@ public class Cart {
 		for(ProductBean prod : products) {
 			if(prod.getCode() == product.getCode()) {
 				products.remove(prod);
+				this.setCartPrice();
 				break;
 			}
 		}
@@ -58,6 +79,21 @@ public class Cart {
 			}
 		}
 		return false;
+	}
+	
+	public double getTotPrice() {
+		return this.prezzoTot;
+	}
+	
+	public void setTotPrice(double n) {
+		this.prezzoTot=n;
+	}
+	
+	private void setCartPrice() {
+		this.prezzoTot=0;
+		for (ProductBean productBean : products) {
+			this.prezzoTot+= productBean.getPrice()*productBean.getCartQuantity();
+		}
 	}
 	
 }

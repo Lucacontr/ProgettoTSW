@@ -101,8 +101,24 @@ public class UserDAO{
    
    public static boolean doSave(UserBean bean) {
 	   
-	   String insert="insert into utente() values()"
-	   
+	   String insert="insert into utente(nome, cognome, username, pw) values(?, ?, ?, ?)";
+	   try{
+		      //connect to DB 
+			  currentCon = ds.getConnection();
+		      preparedStatement=currentCon.prepareStatement(insert);
+		      preparedStatement.setString(1, bean.getFirstName());
+		      preparedStatement.setString(2, bean.getLastName());
+		      preparedStatement.setString(3, bean.getUsername());
+		      preparedStatement.setString(4, bean.getPassword());
+		      if(preparedStatement.executeUpdate()==1) {
+		    	  return true;
+		      }
+		      return false;
+	   }
+	   catch (Exception ex){
+			System.out.println("Log In failed: An Exception has occurred! " + ex);
+			return false;
+	   } 
    }
    
 }

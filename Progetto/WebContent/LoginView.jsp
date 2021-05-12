@@ -1,6 +1,7 @@
 <%@ page language="java" 
     contentType="text/html; charset=windows-1256"
     pageEncoding="windows-1256"
+    import="it.unisa.model.UserBean"
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
@@ -13,16 +14,22 @@
 	</head>
 
 	<body>
-		<form action="login">
+		<% 
+		UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));
+		if ((currentUser!=null)&&(!currentUser.isValid())){	
+		%><br> Utente non valido, reinserisci le credenziali<br/><br/>   
+		<%}%>
+		<form action="login" method="post">
 			<input type="hidden" name="action" value="verify">
 			Please enter your username 		
 			<input type="text" name="un"/><br>		
 		
 			Please enter your password
-			<input type="text" name="pw"/>
+			<input type="password" name="pw"/>
 			
 			<input type="submit" value="submit">			
 		
 		</form>
+		<a href="registrazioneUtente.jsp">Registrati</a>
 	</body>
 </html>

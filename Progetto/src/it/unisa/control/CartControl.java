@@ -47,12 +47,8 @@ public class CartControl extends HttpServlet {
 				if (action.equalsIgnoreCase("add") || action.equalsIgnoreCase("addCartDetails")) {
 					int id = Integer.parseInt(request.getParameter("id"));
 					ProductBean b=cart.getProduct(id);
-					if(cart.isInCart(id)) {
-						if(b.getCartQuantity()<b.getQuantity()) {
-							b.setCartQuantity(b.getCartQuantity()+1);
-							b.setTot(b.getCartQuantity()*b.getPrice());
-						}
-					}
+					if(cart.isInCart(id))
+						cart.increaseProductQ(b);
 					else {
 						ProductBean bean= (ProductBean) model.doRetrieveByKey(id);
 						bean.setCartQuantity(1);
@@ -60,7 +56,6 @@ public class CartControl extends HttpServlet {
 						cart.addProduct(bean);
 					}
 					request.getSession().setAttribute("cart", cart);
-					request.setAttribute("cart", cart);
 					if(action.equalsIgnoreCase("addCartDetails")) {
 						request.removeAttribute("product");
 						request.setAttribute("product", model.doRetrieveByKey(id));
@@ -85,25 +80,15 @@ public class CartControl extends HttpServlet {
 				}
 				else if (action.equalsIgnoreCase("decreaseQ")) {
 					ProductBean b= cart.getProduct(Integer.parseInt(request.getParameter("id")));
-					if(b.getCartQuantity()>0) {
-						b.setCartQuantity(b.getCartQuantity()-1);
-						b.setTot(b.getCartQuantity()*b.getPrice());
-						cart.replaceProduct(b);
-						request.getSession().setAttribute("cart", cart);
-						request.setAttribute("cart", cart);
-					}
+					cart.decreaseProductQ(b);
+					request.getSession().setAttribute("cart", cart);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
 					dispatcher.forward(request, response);
 				}
 				else if (action.equalsIgnoreCase("increaseQ")) {
 					ProductBean b= cart.getProduct(Integer.parseInt(request.getParameter("id")));
-					if(b.getCartQuantity()<b.getQuantity()) {
-						b.setCartQuantity(b.getCartQuantity()+1);
-						b.setTot(b.getCartQuantity()*b.getPrice());
-						cart.replaceProduct(b);
-						request.getSession().setAttribute("cart", cart);
-						request.setAttribute("cart", cart);
-					}
+					cart.increaseProductQ(b);
+					request.getSession().setAttribute("cart", cart);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
 					dispatcher.forward(request, response);
 				}

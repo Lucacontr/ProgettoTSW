@@ -15,13 +15,12 @@ CREATE TABLE prodotto (
   numVendite int,
   descrizioneCompleta text,
   IVA int,
-  quantit‡ int default 0
+  quantit√† int default 0
 );
 
 DROP TABLE IF EXISTS utente;
 
 CREATE TABLE utente (	
-  id int primary key AUTO_INCREMENT,
   nome char(25),
   cognome char(25),
   username char (30),
@@ -32,7 +31,9 @@ CREATE TABLE utente (
   numCarta char(16),
   intestatario char(50),
   dataScad char(7),
-  CVV char(3)
+  CVV char(3),
+
+	PRIMARY KEY(username)
 
 );
 
@@ -40,21 +41,22 @@ DROP TABLE IF EXISTS ordine;
 
 CREATE TABLE ordine (
 	id int primary key AUTO_INCREMENT,
-    quantit‡ int default 1,
-	dataOrd datetime,
+	data_Effettuazione datetime,
+    Prezzo_Totale double,
+    Prezzo_Tot_IVA double,
+    utente varchar(30),
     
-    utente int,
-    FOREIGN KEY (utente) REFERENCES utente(id)
+    FOREIGN KEY (utente) REFERENCES utente(username)
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 
 );
 
-DROP TABLE IF EXISTS inserito; 
+DROP TABLE IF EXISTS dettaglio; 
 
-CREATE TABLE inserito (
+CREATE TABLE Dettaglio (
 	prezzoUnitario double,
-    quantit‡ int,
+    quantit√† int,
     IVA int,
     
     
@@ -67,12 +69,12 @@ CREATE TABLE inserito (
     
     FOREIGN KEY (id_Ordine) REFERENCES ordine(id)
     ON DELETE RESTRICT
-    ON UPDATE CASCADE
+    ON UPDATE CASCADE,
     
-    PRIMARY KEY(id_prodotto, id_Ordine);
+    PRIMARY KEY(id_prodotto, id_Ordine)
 );
 
-INSERT INTO prodotto (nome, descrizione, prezzo, quantit‡) values
+INSERT INTO prodotto (nome, descrizione, prezzo, quantit√†) values
 ("Samsung F8000", "TV 48 pollici", 550, 5),
 ("Huawei P8", "Smartphone", 390, 13),
 ("Onkyo SR 646", "Receiver", 510, 4),

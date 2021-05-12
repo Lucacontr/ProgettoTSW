@@ -19,7 +19,8 @@ import it.unisa.model.*;
 @WebServlet("/LoginControl")
 public class LoginControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    /**
+	
+	/**
      * @see HttpServlet#HttpServlet()
      */
     public LoginControl() {
@@ -35,23 +36,30 @@ public class LoginControl extends HttpServlet {
 		String action = request.getParameter("action");
 		
 		if(action!=null) {
-			if(action.equalsIgnoreCase("checkout")) {
-				response.sendRedirect("LoginView.jsp");
-			}
-			else if(action.equalsIgnoreCase("verify")) {
+			/*if(action.equalsIgnoreCase("checkout")){
+				Cart cart= (Cart) request.getSession().getAttribute("cart");
+				if(cart.getSize()==0) {
+					 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
+			    	 dispatcher.forward(request, response);
+				}
+				else response.sendRedirect("LoginView.jsp");
+			}*/
+			if(action.equalsIgnoreCase("verify")) {
 				try {
 					 HttpSession session = request.getSession(true);
 			    	 UserBean user= new UserBean();
 				     user.setUserName(request.getParameter("un"));
 				     user.setPassword(request.getParameter("pw"));
 				     user = UserDAO.doRetrieve(user);
-				     System.out.println("login"+user.isValid());
+				     session.setAttribute("currentSessionUser", user);
 				     if (user.isValid()){
-				    	 session.setAttribute("currentSessionUser", user);
-				         response.sendRedirect("userLogged.jsp"); //logged-in page      		
+				    	 System.out.println("ciao");
+				    	 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
+				    	 dispatcher.forward(request, response); 		
 				     }
 				     else{
-				    	 response.sendRedirect("invalidLogin.jsp"); //error page 
+				    	 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/LoginView.jsp");
+				    	 dispatcher.forward(request, response); 
 				     }
 				} 		
 				catch (Throwable theException){
@@ -60,11 +68,21 @@ public class LoginControl extends HttpServlet {
 			}
 			else if(action.equalsIgnoreCase("registration")) {
 				UserBean bean= new UserBean();
-				bean.setFirstName(action);
-				bean.setLastName(action);
-				bean.setUserName(action);
-				bean.setPassword(action);
-				//
+				bean.setFirstName(request.getParameter("name"));
+				bean.setLastName(request.getParameter("surname"));
+				bean.setUserName(request.getParameter("username"));
+				bean.setPassword(request.getParameter("pw"));
+				if(UserDAO.doSave(bean)) {
+					bean.setValid(true);
+					request.getSession().setAttribute("currentSessionUser", bean);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
+			    	dispatcher.forward(request, response); 
+				}
+				else {
+					request.getSession().setAttribute("username", "false");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registrazioneUtente.jsp");
+			    	dispatcher.forward(request, response); 
+				}
 			}
 		}
 	}

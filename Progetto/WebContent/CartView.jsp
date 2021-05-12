@@ -49,18 +49,14 @@
 		<%} %>
 	</table>
 	<p><%
-	double pr=0;
-	for(ProductBean beancart: prodcart) {
-			pr+=beancart.getTot();
-		}
 	%>
-		Prezzo totale:<%=pr%>
+		Prezzo totale:<%=cart.getTotPrice()%>
 		</p>
 	<% } else { %>	
 		<h1>Il tuo carrello è vuoto</h1>
 	<% } %>
 	
-	<br/><a href="login?action=checkout">
+	<br/><a href="order?action=checkout">
 		<input type="submit" name="submit" value="Checkout"></a>
 </body>
 </html>
