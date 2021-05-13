@@ -1,10 +1,8 @@
 package it.unisa.model;
 
-import java.time.LocalDateTime;
-
 public class OrderBean {
 
-	private LocalDateTime dataEff;
+	private String dataEff;
 	private String utente;
 	private double prezzoTot;
 	private int id;
@@ -21,7 +19,7 @@ public class OrderBean {
 		this.id = id;
 	}
 	
-	public LocalDateTime getDataEff() {
+	public String getDataEff() {
 		return dataEff;
 	}
 	
@@ -33,7 +31,7 @@ public class OrderBean {
 		return utente;
 	}
 	
-	public void setDataEff(LocalDateTime dataEff) {
+	public void setDataEff(String dataEff) {
 		this.dataEff = dataEff;
 	}
 	

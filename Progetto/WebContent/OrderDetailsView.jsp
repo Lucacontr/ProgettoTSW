@@ -22,7 +22,7 @@
 					<th>Code</th>
 					<th>Name</th>
 					<th>Description</th>
-					<th>Price</th>
+					<th>Unit Price</th>
 			
 				</tr>
 				<%

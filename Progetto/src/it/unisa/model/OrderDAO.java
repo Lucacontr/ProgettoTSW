@@ -30,25 +30,32 @@ public class OrderDAO {
 
 	private static final String TABLE_NAME = "ordine";
 
-	public static synchronized void doSave(OrderBean order) throws SQLException {
+	public static synchronized OrderBean doSave(OrderBean order) throws SQLException {
 
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-
+		
 		String insertSQL = "INSERT INTO " + OrderDAO.TABLE_NAME
-				+ " (data_Effettuazione, prezzo_Totale, utente) VALUES (now(), ?, ?)";
+				+ " (data_Effettuazione, prezzo_Totale, utente) VALUES (?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(insertSQL);
-			preparedStatement.setDouble(1, order.getPrezzoTot());
-			preparedStatement.setString(2, order.getUtente());
-			preparedStatement.executeUpdate();
+			LocalDateTime now=LocalDateTime.now();
+			String n= now.getYear()+"-"+now.getMonthValue()+"-"+now.getDayOfMonth()+" "+now.getHour()+":"+now.getMinute()+":"+now.getSecond();
+			System.out.println(n);
+			preparedStatement.setString(1, n);
+			preparedStatement.setDouble(2, order.getPrezzoTot());
+			preparedStatement.setString(3, order.getUtente());
+			if(preparedStatement.executeUpdate()==1) {
+				order.setDataEff(n);
+			}
 			connection.setAutoCommit(false);
 			connection.commit();
 		}
 		catch (Exception ex){
 		      System.out.println("Insert failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
 		}
 		finally {
 			try {
@@ -59,6 +66,7 @@ public class OrderDAO {
 					connection.close();
 			}
 		}
+		return order;
 	}
 
 	public static synchronized OrderBean doRetrieveByKey(int code) throws SQLException {
@@ -78,7 +86,7 @@ public class OrderDAO {
 
 			while (rs.next()) {
 				bean.setId(rs.getInt("id"));
-				bean.setDataEff(LocalDateTime.parse(rs.getString("data_effettuazione")));
+				bean.setDataEff(rs.getString("data_effettuazione"));
 				bean.setUtente(rs.getString("utente"));
 				bean.setPrezzoTot(rs.getDouble("prezzo_totale"));
 			}
@@ -86,6 +94,7 @@ public class OrderDAO {
 		}
 		catch (Exception ex){
 		      System.out.println("OrderDAO.doRetriveByKey failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
 		}
 		finally {
 			try {
@@ -117,6 +126,7 @@ public class OrderDAO {
 		}
 		catch (Exception ex){
 		      System.out.println("OrderDAO.doDelete failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
 		}
 		finally {
 			try {
@@ -151,7 +161,7 @@ public class OrderDAO {
 			while (rs.next()) {
 				OrderBean bean = new OrderBean();
 				bean.setId(rs.getInt("id"));
-				bean.setDataEff(LocalDateTime.parse(rs.getString("data_effettuazione")));
+				bean.setDataEff(rs.getString("data_effettuazione"));
 				bean.setUtente(rs.getString("utente"));
 				bean.setPrezzoTot(rs.getDouble("prezzo_totale"));
 				orders.add(bean);
@@ -160,6 +170,7 @@ public class OrderDAO {
 		}
 		catch (Exception ex){
 		      System.out.println("OrderDAO.doRetriveAll failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
 		}
 		finally {
 			try {
@@ -179,7 +190,7 @@ public class OrderDAO {
 
 		Collection<OrderBean> orders = new LinkedList<OrderBean>();
 
-		String selectSQL = "SELECT * FROM " + OrderDAO.TABLE_NAME + "WHERE utente= ?";
+		String selectSQL = "SELECT * FROM " + OrderDAO.TABLE_NAME + " WHERE utente= ?";
 
 		try {
 			connection = ds.getConnection();
@@ -190,7 +201,7 @@ public class OrderDAO {
 			while (rs.next()) {
 				OrderBean bean = new OrderBean();
 				bean.setId(rs.getInt("id"));
-				bean.setDataEff(LocalDateTime.parse(rs.getString("data_effettuazione")));
+				bean.setDataEff(rs.getString("data_effettuazione"));
 				bean.setUtente(rs.getString("utente"));
 				bean.setPrezzoTot(rs.getDouble("prezzo_totale"));
 				orders.add(bean);
@@ -199,6 +210,7 @@ public class OrderDAO {
 		}
 		catch (Exception ex){
 		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
 		}
 		finally {
 			try {
@@ -212,8 +224,8 @@ public class OrderDAO {
 		return orders;
 	}
 	
-	public static synchronized int getId(String Utente, LocalDateTime data) throws SQLException {
-		String selectSQL = "SELECT id FROM " + OrderDAO.TABLE_NAME + "WHERE utente= ? and data= ?";
+	public static synchronized int getId(String Utente, String data) throws SQLException {
+		String selectSQL = "SELECT id FROM " + OrderDAO.TABLE_NAME + " WHERE utente= ? and data_effettuazione= ?";
 		int id=0;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -221,13 +233,14 @@ public class OrderDAO {
 			connection = ds.getConnection();
 			preparedStatement = connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, Utente);
-			preparedStatement.setString(2, data.toString());
+			preparedStatement.setString(2, data);
 			ResultSet rs = preparedStatement.executeQuery();
 			rs.next();
 			id=rs.getInt(1);
 		}
 		catch (Exception ex){
 		      System.out.println("OrderDAO.getId failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
 		}
 		finally {
 			try {

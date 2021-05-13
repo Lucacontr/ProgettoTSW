@@ -14,11 +14,7 @@ if ((currentUser==null)||(!currentUser.isValid()))
     return;
 }
 
-	Collection<?> orders = (Collection<?>) request.getAttribute("orders");
-  //  if(orders == null) {
-	//response.sendRedirect("ProductView.jsp");	
-//	return;
-//}
+	Collection<?> orders = (Collection<?>) request.getSession().getAttribute("orders");
 
 %>
  
@@ -57,7 +53,7 @@ if ((currentUser==null)||(!currentUser.isValid()))
 						<td><%=bean.getId()%></td>
 						<td><%=bean.getDataEff()%></td>
 						<td><%=bean.getPrezzoTot()%></td>
-						<td><a href="order/action=detail&id=<%=bean.getId()%>">Dettaglio ordine</a></td>
+						<td><a href="order?action=detail&id=<%=bean.getId()%>">Dettaglio ordine</a></td>
 					</tr>
 		<%
 				}

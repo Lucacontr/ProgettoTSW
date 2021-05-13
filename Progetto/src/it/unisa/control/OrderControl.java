@@ -49,7 +49,7 @@ public class OrderControl extends HttpServlet {
 						OrderBean order=new OrderBean();
 						order.setPrezzoTot(cart.getTotPrice());
 						order.setUtente(user.getEmail());
-						OrderDAO.doSave(order);
+						order=OrderDAO.doSave(order);
 						DetailDAO.doSave(cart, OrderDAO.getId(order.getUtente(), order.getDataEff()));
 						request.getSession().setAttribute("cart", new Cart());
 						request.getSession().removeAttribute("orders");

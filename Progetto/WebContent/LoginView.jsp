@@ -30,7 +30,7 @@
 			<input type="submit" value="submit">			
 		
 		</form>
-		<a href="guest.jsp">Acquista senza registrarti</a>
+		<a href="guest.jsp">Acquista senza registrarti</a><br/>
 		<a href="registrazioneUtente.jsp">Registrati</a>
 	</body>
 </html>

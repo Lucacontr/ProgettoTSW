@@ -20,7 +20,6 @@ public class DetailDAO {
 	   private static Statement stmt = null;    
 	   private static PreparedStatement preparedStatement = null;
 	   private static DataSource ds;
-	   private static final String TABLE_NAME = "dettaglio";
 	   
 		static {
 			try {
@@ -36,14 +35,14 @@ public class DetailDAO {
 	   
 	   public static Collection<ProductBean> doRetrieveProducts(int id) {
 	
-	      String searchQuery = "SELECT * FROM prodotto where id= any(select * from " + DetailDAO.TABLE_NAME + " WHERE id_ordine = ?)";
+	      String searchQuery = "SELECT prodotto.* FROM prodotto join dettaglio where prodotto.id=dettaglio.id_prodotto and id_ordine = ?";
 	      Collection<ProductBean> products = new LinkedList<ProductBean>();
 	      
 		   try{
 		      //connect to DB 
 			  currentCon = ds.getConnection();
 		      preparedStatement=currentCon.prepareStatement(searchQuery);
-		      preparedStatement.setInt(2, id);
+		      preparedStatement.setInt(1, id);
 		      rs = preparedStatement.executeQuery();	        
 		      
 		      while(rs.next()) {
@@ -57,6 +56,7 @@ public class DetailDAO {
 		   } 
 		   catch (Exception ex){
 		      System.out.println("DetailDAO.doRetriveProducts failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
 		   } 
 		   //some exception handling
 		   finally{
@@ -90,7 +90,7 @@ public class DetailDAO {
 		   
 		   String insert="insert into dettaglio(id_prodotto, id_ordine, quantità, prezzounitario) values(?, ?, ?, ?)";
 		   try{
-			      
+			      System.out.println(ordine);
 				  currentCon = ds.getConnection();
 				  List<ProductBean> products=cart.getProducts();
 				  for(ProductBean product: products) {
