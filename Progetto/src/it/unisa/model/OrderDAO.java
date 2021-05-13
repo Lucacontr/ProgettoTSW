@@ -43,13 +43,12 @@ public class OrderDAO {
 			preparedStatement = connection.prepareStatement(insertSQL);
 			preparedStatement.setDouble(1, order.getPrezzoTot());
 			preparedStatement.setString(2, order.getUtente());
-			if(preparedStatement.executeUpdate()==1)System.out.println("aggiunta");
-			else System.out.println("non aggiunta");
+			preparedStatement.executeUpdate();
 			connection.setAutoCommit(false);
 			connection.commit();
 		}
 		catch (Exception ex){
-		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		      System.out.println("Insert failed: An Exception has occurred! " + ex);
 		}
 		finally {
 			try {
@@ -86,7 +85,7 @@ public class OrderDAO {
 
 		}
 		catch (Exception ex){
-		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		      System.out.println("OrderDAO.doRetriveByKey failed: An Exception has occurred! " + ex);
 		}
 		finally {
 			try {
@@ -117,7 +116,7 @@ public class OrderDAO {
 
 		}
 		catch (Exception ex){
-		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		      System.out.println("OrderDAO.doDelete failed: An Exception has occurred! " + ex);
 		}
 		finally {
 			try {
@@ -160,7 +159,7 @@ public class OrderDAO {
 
 		}
 		catch (Exception ex){
-		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		      System.out.println("OrderDAO.doRetriveAll failed: An Exception has occurred! " + ex);
 		}
 		finally {
 			try {
@@ -211,6 +210,35 @@ public class OrderDAO {
 			}
 		}
 		return orders;
+	}
+	
+	public static synchronized int getId(String Utente, LocalDateTime data) throws SQLException {
+		String selectSQL = "SELECT id FROM " + OrderDAO.TABLE_NAME + "WHERE utente= ? and data= ?";
+		int id=0;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, Utente);
+			preparedStatement.setString(2, data.toString());
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			id=rs.getInt(1);
+		}
+		catch (Exception ex){
+		      System.out.println("OrderDAO.getId failed: An Exception has occurred! " + ex);
+		}
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return id;
 	}
 	
 }

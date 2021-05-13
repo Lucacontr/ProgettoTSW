@@ -25,7 +25,7 @@ CREATE TABLE utente (
   cognome char(25),
   pw char(50),
   indirizzo char(200),
-  email char(35) primary key not null,
+  email varchar(35) primary key not null,
   telefono char(15),
   numCarta char(16),
   intestatario char(50),
@@ -82,6 +82,4 @@ INSERT INTO utente (nome, cognome, email, pw) values
 ("Luigi", "Lodi", "llodi@gmail.com", "lodi89"),
 ("Vittorio", "Francia", "vittofran@gmail.com", "francia00");
 
-INSERT INTO ordine (utente, prezzo_totale) values 
-("vittofran@gmail.com", 1200);
 

@@ -50,7 +50,7 @@ public class OrderControl extends HttpServlet {
 						order.setPrezzoTot(cart.getTotPrice());
 						order.setUtente(user.getEmail());
 						OrderDAO.doSave(order);
-						DetailDAO.doSave(cart, order.getId());
+						DetailDAO.doSave(cart, OrderDAO.getId(order.getUtente(), order.getDataEff()));
 						request.getSession().setAttribute("cart", new Cart());
 						request.getSession().removeAttribute("orders");
 						request.getSession().setAttribute("orders", OrderDAO.doRetrieveByUser(user.getEmail()));

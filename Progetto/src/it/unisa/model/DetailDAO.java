@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.naming.Context;
 import javax.naming.InitialContext;
@@ -55,7 +56,7 @@ public class DetailDAO {
 		      }
 		   } 
 		   catch (Exception ex){
-		      System.out.println("Log In failed: An Exception has occurred! " + ex);
+		      System.out.println("DetailDAO.doRetriveProducts failed: An Exception has occurred! " + ex);
 		   } 
 		   //some exception handling
 		   finally{
@@ -87,16 +88,17 @@ public class DetailDAO {
 	   
 	   public static boolean doSave(Cart cart, int ordine) {
 		   
-		   String insert="insert into dettaglio(id_prodotto, id_ordine, quantità, prezzo) values(?, ?, ?, ?)";
+		   String insert="insert into dettaglio(id_prodotto, id_ordine, quantità, prezzounitario) values(?, ?, ?, ?)";
 		   try{
 			      
 				  currentCon = ds.getConnection();
-				  for(int i=0;i<cart.getSize();i++) {
+				  List<ProductBean> products=cart.getProducts();
+				  for(ProductBean product: products) {
 					  preparedStatement=currentCon.prepareStatement(insert);
-				      preparedStatement.setInt(1, cart.getProduct(i).getCode());
+				      preparedStatement.setInt(1, product.getCode());
 				      preparedStatement.setInt(2, ordine);
-				      preparedStatement.setInt(3, cart.getProduct(i).getCartQuantity());
-				      preparedStatement.setInt(4, cart.getProduct(i).getPrice());
+				      preparedStatement.setInt(3, product.getCartQuantity());
+				      preparedStatement.setInt(4, product.getPrice());
 				      if(preparedStatement.executeUpdate()!=1) {
 				    	  return false;
 				      }
@@ -104,7 +106,8 @@ public class DetailDAO {
 				  return true;
 		   }
 		   catch (Exception ex){
-				System.out.println("Log In failed: An Exception has occurred! " + ex);
+				System.out.println("DetailDAO.doSave failed: An Exception has occurred! " + ex);
+				ex.printStackTrace();
 				return false;
 		   } 
 	   }
