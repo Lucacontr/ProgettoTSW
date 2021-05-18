@@ -1,0 +1,83 @@
+
+	html {
+			font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	}
+
+	header {
+   		background: #5A42EC;
+   		background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    	background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    	background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+    }
+
+	nav {
+		background: #5A42EC;
+   		background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    	background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    	background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+        }
+
+    #category {
+        background-color: none;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.5s;
+        cursor: pointer;
+
+    }
+    
+    #category:hover {
+        background-color: white;
+        color: #5A42EC;
+    }
+
+    #offerte {
+        font-weight: bold;
+        background-color: none;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        transition-duration: 0.5s;
+        cursor: pointer;
+    }
+
+    #offerte:hover {
+        background-color: white;
+        color: #5A42EC;
+    }
+
+	footer {
+		background: #5A42EC;
+   		background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    	background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    	background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+        margin-top: 0px;
+        margin-bottom: 0px;
+        margin-right: 0px;
+        margin-left: 0px;
+	}
+
+	table{
+		width: 100%;
+	}
+
+	td{
+		text-align: center;
+		color: white;
+	}
+    
