@@ -9,8 +9,13 @@ public class ProductBean implements Serializable {
 	int code;
 	String name;
 	String description;
-	int price;
+	double price;
 	int quantity;
+	double sconto;
+	double prezzoScontato;
+	int nvendite;
+	int nvisualizzazioni;
+	double iva;
 	int cartQuantity;
 	double tot;
 	
@@ -18,9 +23,6 @@ public class ProductBean implements Serializable {
 		code = -1;
 		name = "";
 		description = "";
-		quantity = 0;
-		cartQuantity = 0;
-		tot=0;
 	}
 
 	public double getTot() {
@@ -55,11 +57,11 @@ public class ProductBean implements Serializable {
 		this.description = description;
 	}
 
-	public int getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(int price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -84,4 +86,44 @@ public class ProductBean implements Serializable {
 		return name + " (" + code + "), " + price + " " + quantity + ". " + description;
 	}
 
+	public double getIva() {
+		return iva;
+	}
+	
+	public int getNvendite() {
+		return nvendite;
+	}
+	
+	public int getNvisualizzazioni() {
+		return nvisualizzazioni;
+	}
+	
+	public double getPrezzoScontato() {
+		return prezzoScontato;
+	}
+	
+	public double getSconto() {
+		return sconto;
+	}
+	
+	public void setIva(double iva) {
+		this.iva = iva;
+	}
+	
+	public void setNvendite(int nvendite) {
+		this.nvendite = nvendite;
+	}
+	
+	public void setNvisualizzazioni(int nvisualizzazioni) {
+		this.nvisualizzazioni = nvisualizzazioni;
+	}
+	
+	public void setPrezzoScontato(double prezzoScontato) {
+		this.prezzoScontato = prezzoScontato;
+	}
+	
+	public void setSconto(double sconto) {
+		this.sconto = sconto;
+	}
+	
 }

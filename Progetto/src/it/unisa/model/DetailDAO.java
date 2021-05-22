@@ -88,9 +88,8 @@ public class DetailDAO {
 	   
 	   public static boolean doSave(Cart cart, int ordine) {
 		   
-		   String insert="insert into dettaglio(id_prodotto, id_ordine, quantità, prezzounitario) values(?, ?, ?, ?)";
+		   String insert="insert into dettaglio(id_prodotto, id_ordine, quantità, prezzounitario, iva) values(?, ?, ?, ?, ?)";
 		   try{
-			      System.out.println(ordine);
 				  currentCon = ds.getConnection();
 				  List<ProductBean> products=cart.getProducts();
 				  for(ProductBean product: products) {
@@ -98,10 +97,14 @@ public class DetailDAO {
 				      preparedStatement.setInt(1, product.getCode());
 				      preparedStatement.setInt(2, ordine);
 				      preparedStatement.setInt(3, product.getCartQuantity());
-				      preparedStatement.setInt(4, product.getPrice());
+				      preparedStatement.setDouble(4, product.getPrice());
+				      preparedStatement.setDouble(5, product.getIva());
+				      
 				      if(preparedStatement.executeUpdate()!=1) {
 				    	  return false;
 				      }
+				      product.setNvendite(product.getNvendite()+product.getCartQuantity());
+				      ProductDAO.doUpdate(product);
 				  }
 				  return true;
 		   }

@@ -10,11 +10,12 @@ CREATE TABLE prodotto (
   nome char(20),
   specifiche char(200),
   descrizione char(250),
-  sconto int,
-  numVisualizzazioni int,
-  numVendite int,
+  sconto double default 0,
+  prezzo_scontato double default 0,
+  NVisualizzazioni int default 0,
+  NVendite int default 0,
   descrizioneCompleta text,
-  IVA int,
+  IVA double default 22,
   quantità int default 0
 );
 
@@ -50,9 +51,9 @@ CREATE TABLE ordine (
 DROP TABLE IF EXISTS dettaglio; 
 
 CREATE TABLE Dettaglio (
-	prezzoUnitario double,
-    quantità int,
-    IVA int,
+	prezzoUnitario double not null,
+    quantità int not null,
+    IVA double not null,
     id_Prodotto int,
     id_Ordine int,
     
@@ -67,8 +68,13 @@ CREATE TABLE Dettaglio (
     PRIMARY KEY(id_prodotto, id_Ordine)
 );
 
+CREATE TABLE amministratore(
+	username varchar(35) primary key,
+    password varchar(35) not null
+);
+
 INSERT INTO prodotto (nome, descrizione, prezzo, quantità) values
-("Samsung F8000", "TV 48 pollici", 550, 5),
+("Samsung F8000", "TV 48 pollici", 550.90, 5),
 ("Huawei P8", "Smartphone", 390, 13),
 ("Onkyo SR 646", "Receiver", 510, 4),
 ("Sony w808c", "TV 43 pollici", 640, 11),
@@ -82,4 +88,4 @@ INSERT INTO utente (nome, cognome, email, pw) values
 ("Luigi", "Lodi", "llodi@gmail.com", "lodi89"),
 ("Vittorio", "Francia", "vittofran@gmail.com", "francia00");
 
-
+insert into amministratore(username, password) values ("root", "root");

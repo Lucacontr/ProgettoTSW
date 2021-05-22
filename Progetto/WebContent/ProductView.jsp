@@ -4,11 +4,9 @@
 <%
 	Collection<?> products = (Collection<?>) request.getAttribute("products");
 	if(products == null) {
-		response.sendRedirect("./product");	
+		response.sendRedirect("product");	
 		return;
 	}
-	
-	ProductBean product = (ProductBean) request.getAttribute("product");
 	
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
 %>
@@ -60,24 +58,5 @@
 		%>
 	</table><br/>
 	<a href="cart?action=Cart">Vai al carrello</a>
-	
-	<h2>Insert</h2>
-	<form action="product" method="post">
-		<input type="hidden" name="action" value="insert"> 
-		
-		<label for="nome">Name:</label><br> 
-		<input name="nome" type="text" maxlength="20" required placeholder="enter name"><br> 
-		
-		<label for="descrizione">Description:</label><br>
-		<textarea name="descrizione" maxlength="100" rows="3" required placeholder="enter description"></textarea><br>
-		
-		<label for="prezzo">Price:</label><br> 
-		<input name="prezzo" type="number" min="0" value="0" required><br>
-
-		<label for="quantità">Quantity:</label><br> 
-		<input name="quantità" type="number" min="1" value="1" required><br>
-
-		<input type="submit" value="Add"><input type="reset" value="Reset">
-	</form>
 </body>
 </html>
