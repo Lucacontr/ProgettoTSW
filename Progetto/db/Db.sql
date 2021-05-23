@@ -81,11 +81,25 @@ INSERT INTO prodotto (nome, descrizione, prezzo, quantità) values
 ("Dyson 6300", "Aspirapolvere", 329, 3),
 ("Asus 3200", "Router", 189, 22);
 
+CREATE TRIGGER prezzo_scontato_insert
+BEFORE INSERT ON Prodotto
+for each row
+set new.prezzo_scontato=(new.prezzo-(new.prezzo*new.sconto/100));
+
+CREATE TRIGGER prezzo_scontato_update
+BEFORE update ON Prodotto
+for each row
+set new.prezzo_scontato=(new.prezzo-(new.prezzo*new.sconto/100));
+
 INSERT INTO utente (nome, cognome, email, pw) values 
 ("Luca", "Contrasto", "lucacontr@gmail.com", "luca1234"),
 ("Giacomo", "Cubix", "giacubix@gmail.com", "cubix2021"),
 ("Franco", "Vecchio", "fvecchio@gmail.com", "fravecc12"),
 ("Luigi", "Lodi", "llodi@gmail.com", "lodi89"),
 ("Vittorio", "Francia", "vittofran@gmail.com", "francia00");
+
+INSERT INTO ordine (data_effettuazione, prezzo_totale, utente) values 
+("2020-05-30", 250, "lucacontr@gmail.com"),
+("2021-05-30", 250, "lucacontr@gmail.com");
 
 insert into amministratore(username, password) values ("root", "root");

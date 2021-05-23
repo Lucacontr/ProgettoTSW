@@ -25,6 +25,7 @@ public class ProductDAO{
 
 		} catch (NamingException e) {
 			System.out.println("Error:" + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 

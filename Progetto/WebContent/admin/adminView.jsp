@@ -67,7 +67,8 @@
 		%>
 	</table><br/>
 	
-	<a href="insert.jsp">Inserisci un nuovo prodotto al catalogo</a>
+	<a href="insert.jsp">Inserisci un nuovo prodotto al catalogo</a><br/><br/>
+	<a href="OrdersView.jsp">Visualizza ordini</a><br/><br/>
 	
 </body>
 </html>

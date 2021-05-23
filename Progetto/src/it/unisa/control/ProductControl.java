@@ -71,8 +71,6 @@ public class ProductControl extends HttpServlet {
 					 nuovo.setCode(bean.getCode());
 					 nuovo.setNvendite(bean.getNvendite());
 					 nuovo.setNvisualizzazioni(bean.getNvisualizzazioni());
-					 nuovo.setSconto(bean.getSconto());
-					 nuovo.setPrezzoScontato(bean.getPrezzoScontato());
 					 ProductDAO.doUpdate(nuovo);
 					 request.removeAttribute("products");
 					 request.setAttribute("products", ProductDAO.doRetrieveAll(sort));

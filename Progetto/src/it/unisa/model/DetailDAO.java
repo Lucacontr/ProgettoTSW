@@ -104,6 +104,7 @@ public class DetailDAO {
 				    	  return false;
 				      }
 				      product.setNvendite(product.getNvendite()+product.getCartQuantity());
+				      product.setQuantity(product.getQuantity()-product.getCartQuantity());
 				      ProductDAO.doUpdate(product);
 				  }
 				  return true;

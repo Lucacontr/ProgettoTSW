@@ -1,6 +1,7 @@
 package it.unisa.control;
 
 import java.io.IOException;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -67,6 +68,21 @@ public class OrderControl extends HttpServlet {
 				}
 				else if(action.equalsIgnoreCase("guest")){
 					
+				}
+				else if(action.equalsIgnoreCase("filterDate")){
+					String inizio=request.getParameter("inizio");
+					String fine=request.getParameter("fine");
+					Collection<?> orders = (Collection<?>) OrderDAO.doRetrieveAllbyDate(inizio, fine);
+					request.setAttribute("orders", orders);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/OrdersView.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if(action.equalsIgnoreCase("filterUser")){
+					String utente=request.getParameter("user");
+					Collection<?> orders = (Collection<?>) OrderDAO.doRetrieveAllbyUser(utente);
+					request.setAttribute("orders", orders);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/OrdersView.jsp");
+					dispatcher.forward(request, response);
 				}
 			}
 		}
