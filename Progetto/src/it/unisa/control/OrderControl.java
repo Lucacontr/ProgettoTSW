@@ -51,10 +51,10 @@ public class OrderControl extends HttpServlet {
 						order.setPrezzoTot(cart.getTotPrice());
 						order.setUtente(user.getEmail());
 						order=OrderDAO.doSave(order);
-						DetailDAO.doSave(cart, OrderDAO.getId(order.getUtente(), order.getDataEff()));
+						DetailDAO.doSave(cart, OrderDAO.getIdUtente(order.getUtente(), order.getDataEff()));
 						request.getSession().setAttribute("cart", new Cart());
 						request.getSession().removeAttribute("orders");
-						request.getSession().setAttribute("orders", OrderDAO.doRetrieveByUser(user.getEmail()));
+						request.getSession().setAttribute("orders", OrderDAO.doRetrieveAllByUser(user.getEmail()));
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
 						dispatcher.forward(request, response);
 					}
@@ -67,7 +67,19 @@ public class OrderControl extends HttpServlet {
 					dispatcher.forward(request, response);
 				}
 				else if(action.equalsIgnoreCase("guest")){
-					
+					Cart cart= (Cart) request.getSession().getAttribute("cart");
+					if(cart==null || cart.getSize()==0) {
+						 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
+				    	 dispatcher.forward(request, response);
+					}
+					GuestBean guest= getGuestByRequest(request, response);
+					GuestDAO.doSave(guest);
+					OrderBean order=new OrderBean();
+					order.setPrezzoTot(cart.getTotPrice());
+					order.setGuest(GuestDAO.getId(guest));
+					order=OrderDAO.doSave(order);
+					DetailDAO.doSave(cart, OrderDAO.getIdGuest(order.getGuest(), order.getDataEff()));
+					response.sendRedirect("ProductView.jsp");
 				}
 				else if(action.equalsIgnoreCase("filterDate")){
 					String inizio=request.getParameter("inizio");
@@ -79,7 +91,7 @@ public class OrderControl extends HttpServlet {
 				}
 				else if(action.equalsIgnoreCase("filterUser")){
 					String utente=request.getParameter("user");
-					Collection<?> orders = (Collection<?>) OrderDAO.doRetrieveAllbyUser(utente);
+					Collection<?> orders = (Collection<?>) OrderDAO.doRetrieveAllByUser(utente);
 					request.setAttribute("orders", orders);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/admin/OrdersView.jsp");
 					dispatcher.forward(request, response);
@@ -97,6 +109,16 @@ public class OrderControl extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
+	}
+	
+	private GuestBean getGuestByRequest(HttpServletRequest request, HttpServletResponse response) {
+		GuestBean guest= new GuestBean();
+		guest.setNome(request.getParameter("nome"));
+		guest.setEmail(request.getParameter("email"));
+		guest.setTelefono(request.getParameter("telefono"));
+		guest.setCognome(request.getParameter("cognome"));
+		guest.setIndirizzo(request.getParameter("indirizzo"));
+		return guest;
 	}
 
 }

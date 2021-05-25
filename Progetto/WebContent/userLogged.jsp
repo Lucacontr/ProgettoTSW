@@ -17,24 +17,14 @@ if ((currentUser==null)||(!currentUser.isValid()))
 	Collection<?> orders = (Collection<?>) request.getSession().getAttribute("orders");
 
 %>
- 
    <!DOCTYPE html>
-
    <html>
-
       <head>
          <meta http-equiv="Content-Type" 
             content="text/html; charset=windows-1256">
          <title>   User Logged Successfully   </title>
       </head>
-	
       <body>
-
-         <center>
-            
-			
-            Welcome <%=currentUser.getFirstName() + " " + currentUser.getLastName() %>
-         </center>
 <h4>Ordini effettuati</h4>
 	<table border="1">
 		<tr>

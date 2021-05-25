@@ -4,11 +4,20 @@ public class OrderBean {
 
 	private String dataEff;
 	private String utente;
+	private int guest;
 	private double prezzoTot;
 	private int id;
 	
 	public OrderBean() {
-
+		
+	}
+	
+	public int getGuest() {
+		return guest;
+	}
+	
+	public void setGuest(int guest) {
+		this.guest = guest;
 	}
 	
 	public int getId() {

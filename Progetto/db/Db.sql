@@ -19,14 +19,12 @@ CREATE TABLE prodotto (
   quantità int default 0
 );
 
-DROP TABLE IF EXISTS utente;
-
 CREATE TABLE utente (	
   nome char(25),
   cognome char(25),
   pw char(50),
   indirizzo char(200),
-  email varchar(35) primary key not null,
+  email varchar(35) primary key,
   telefono char(15),
   numCarta char(16),
   intestatario char(50),
@@ -34,21 +32,31 @@ CREATE TABLE utente (
   CVV char(3)
 );
 
-DROP TABLE IF EXISTS ordine;
+CREATE TABLE guest(
+	id int auto_increment primary key,
+	nome varchar(35) not null,
+    cognome varchar(35) not null,
+	email varchar(35) not null,
+	telefono varchar(35) not null,
+	indirizzo varchar(35) not null,
+	data_ora varchar(35) not null
+);
 
 CREATE TABLE ordine (
 	id int primary key AUTO_INCREMENT,
 	data_Effettuazione datetime,
     Prezzo_Totale double,
     Prezzo_Tot_IVA double,
-    utente varchar(35) not null,
+    utente varchar(35),
+    guest int ,
     
+	FOREIGN KEY (guest) REFERENCES guest(id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
     FOREIGN KEY (utente) REFERENCES utente(email)
     ON DELETE RESTRICT
     ON UPDATE CASCADE
 );
-
-DROP TABLE IF EXISTS dettaglio; 
 
 CREATE TABLE Dettaglio (
 	prezzoUnitario double not null,
@@ -97,9 +105,5 @@ INSERT INTO utente (nome, cognome, email, pw) values
 ("Franco", "Vecchio", "fvecchio@gmail.com", "fravecc12"),
 ("Luigi", "Lodi", "llodi@gmail.com", "lodi89"),
 ("Vittorio", "Francia", "vittofran@gmail.com", "francia00");
-
-INSERT INTO ordine (data_effettuazione, prezzo_totale, utente) values 
-("2020-05-30", 250, "lucacontr@gmail.com"),
-("2021-05-30", 250, "lucacontr@gmail.com");
 
 insert into amministratore(username, password) values ("root", "root");

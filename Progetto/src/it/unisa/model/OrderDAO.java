@@ -37,16 +37,28 @@ public class OrderDAO {
 		
 		String insertSQL = "INSERT INTO " + OrderDAO.TABLE_NAME
 				+ " (data_Effettuazione, prezzo_Totale, utente) VALUES (?, ?, ?)";
-
+		String insertSQLguest = "INSERT INTO " + OrderDAO.TABLE_NAME
+				+ " (data_Effettuazione, prezzo_Totale, guest) VALUES (?, ?, ?)";
+		
+		
 		try {
 			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(insertSQL);
+			if(order.getGuest()!=0) {
+				preparedStatement = connection.prepareStatement(insertSQLguest);
+			}
+			else {
+				preparedStatement = connection.prepareStatement(insertSQL);
+			}
 			LocalDateTime now=LocalDateTime.now();
 			String n= now.getYear()+"-"+now.getMonthValue()+"-"+now.getDayOfMonth()+" "+now.getHour()+":"+now.getMinute()+":"+now.getSecond();
-			System.out.println(n);
 			preparedStatement.setString(1, n);
 			preparedStatement.setDouble(2, order.getPrezzoTot());
-			preparedStatement.setString(3, order.getUtente());
+			if(order.getGuest()!=0) {
+				preparedStatement.setInt(3, order.getGuest());
+			}
+			else {
+				preparedStatement.setString(3, order.getUtente());
+			}
 			if(preparedStatement.executeUpdate()==1) {
 				order.setDataEff(n);
 			}
@@ -225,7 +237,7 @@ public class OrderDAO {
 		return orders;
 	}
 	
-	public static synchronized Collection<OrderBean> doRetrieveAllbyUser(String user) throws SQLException {
+	public static synchronized Collection<OrderBean> doRetrieveAllByUser(String user) throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
@@ -265,49 +277,9 @@ public class OrderDAO {
 		return orders;
 	}
 	
-	public static synchronized Collection<OrderBean> doRetrieveByUser(String user) throws SQLException {
-		Connection connection = null;
-		PreparedStatement preparedStatement = null;
-
-		Collection<OrderBean> orders = new LinkedList<OrderBean>();
-
-		String selectSQL = "SELECT * FROM " + OrderDAO.TABLE_NAME + " WHERE utente= ?";
-
-		try {
-			connection = ds.getConnection();
-			preparedStatement = connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, user);
-			ResultSet rs = preparedStatement.executeQuery();
-
-			while (rs.next()) {
-				OrderBean bean = new OrderBean();
-				bean.setId(rs.getInt("id"));
-				bean.setDataEff(rs.getString("data_effettuazione"));
-				bean.setUtente(rs.getString("utente"));
-				bean.setPrezzoTot(rs.getDouble("prezzo_totale"));
-				orders.add(bean);
-			}
-
-		}
-		catch (Exception ex){
-		      System.out.println("Log In failed: An Exception has occurred! " + ex);
-		      ex.printStackTrace();
-		}
-		finally {
-			try {
-				if (preparedStatement != null)
-					preparedStatement.close();
-			} finally {
-				if (connection != null)
-					connection.close();
-			}
-		}
-		return orders;
-	}
-	
-	public static synchronized int getId(String Utente, String data) throws SQLException {
+	public static synchronized int getIdUtente(String Utente, String data) throws SQLException {
 		String selectSQL = "SELECT id FROM " + OrderDAO.TABLE_NAME + " WHERE utente= ? and data_effettuazione= ?";
-		int id=0;
+		int id=-1;
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		try {
@@ -320,7 +292,37 @@ public class OrderDAO {
 			id=rs.getInt(1);
 		}
 		catch (Exception ex){
-		      System.out.println("OrderDAO.getId failed: An Exception has occurred! " + ex);
+		      System.out.println("OrderDAO.getIdUtente failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
+		}
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return id;
+	}
+	
+	public static synchronized int getIdGuest(int guest, String data) throws SQLException {
+		String selectSQL = "SELECT id FROM " + OrderDAO.TABLE_NAME + " WHERE guest= ? and data_effettuazione= ?";
+		int id=-1;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, guest);
+			preparedStatement.setString(2, data);
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			id=rs.getInt(1);
+		}
+		catch (Exception ex){
+		      System.out.println("OrderDAO.getIdGuest failed: An Exception has occurred! " + ex);
 		      ex.printStackTrace();
 		}
 		finally {
