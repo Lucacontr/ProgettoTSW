@@ -9,11 +9,14 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="ProductStyle.css" rel="stylesheet" type="text/css">
-	<title>Details <%=product.getName()%> </title>
+	<link href="css/container.css" rel="stylesheet">
+	<title>CCeShop</title>
 </head>
 
 <body>
+<div class="container">
+<%@include file="fragments/header.jsp" %>
+<%@include file="fragments/navigationBar.jsp" %>
 <a href="ProductView.jsp">Home</a>
 	<h2>Details</h2>
 	<%
@@ -42,5 +45,8 @@
 		}
 	%>
 	<br/><a href="cart?action=Cart">Vai al carrello</a>
+	</div>
+<%@include file="fragments/footer.jsp" %>
+
 </body>
 </html>

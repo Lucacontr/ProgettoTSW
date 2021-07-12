@@ -1,6 +1,7 @@
 package it.unisa.control;
 
 
+
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 
 import it.unisa.model.*;
 
@@ -32,29 +36,30 @@ public class LoginControl extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		String action = request.getParameter("action");
 		
 		if(action!=null) {
-			if(action.equalsIgnoreCase("checkout")) {
+			if(action.equalsIgnoreCase("login")) {
+				System.out.println("sono qui");
 				try {
-					 HttpSession session = request.getSession();
-			    	 UserBean user= new UserBean();
-				     user.setEmail(request.getParameter("email"));
-				     user.setPassword(request.getParameter("pw"));
-				     user = UserDAO.doRetrieve(user);
-				     if (user.isValid()){
-				    	 session.setAttribute("currentSessionUser", user);
-				    	 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/order");
-				    	 dispatcher.forward(request, response); 		
-				     }
-				     else{
-				    	 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/LoginView.jsp");
-				    	 dispatcher.forward(request, response); 
-				     }
+					HttpSession session = request.getSession();
+					String un=request.getParameter("un");
+					String pw=request.getParameter("pw");
+					UserBean user= new UserBean();
+				    user.setEmail(un);
+				    user.setPassword(pw);
+				    user = UserDAO.doRetrieve(user);
+				    String json = new Gson().toJson(user);
+				    if (user.isValid()){
+				    	session.setAttribute("currentSessionUser", user);
+				    }
+			    	response.setContentType("application/json");
+			        response.setCharacterEncoding("UTF-8");
+			        response.getWriter().write(json);
 				} 		
-				catch (Throwable theException){
-				     System.out.println(theException); 
+				catch (Throwable e){
+					e.printStackTrace();
+				    System.out.println(e); 
 				}
 			}
 			else if(action.equalsIgnoreCase("registration")) {
@@ -63,22 +68,15 @@ public class LoginControl extends HttpServlet {
 				bean.setLastName(request.getParameter("surname"));
 				bean.setEmail(request.getParameter("email"));
 				bean.setPassword(request.getParameter("pw"));
-				if(UserDAO.doSave(bean)) {
-					bean.setValid(true);
-					request.getSession().setAttribute("currentSessionUser", bean);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
-			    	dispatcher.forward(request, response); 
-				}
-				else {
-					request.getSession().setAttribute("email", "false");
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/registrazioneUtente.jsp");
-			    	dispatcher.forward(request, response); 
-				}
+				UserDAO.doSave(bean);
+				bean.setValid(true);
+				request.getSession().setAttribute("currentSessionUser", bean);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
+		    	dispatcher.forward(request, response); 
 			}
 			else if(action.equalsIgnoreCase("admin")) {
 				String username = request.getParameter("username");
 				String password = request.getParameter("password");
-				
 				String redirectedPage;
 				try {
 					AdminBean ad= new AdminBean();
@@ -103,7 +101,6 @@ public class LoginControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

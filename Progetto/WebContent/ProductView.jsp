@@ -17,46 +17,59 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="ProductStyle.css" rel="stylesheet" type="text/css">
 	<title>CCeShop</title>
+	<script type="text/javascript" src="scripts/jquery.js"></script>
 </head>
 
 <body>
-	<h2>Products</h2>
-	<table border="1">
-		<tr>
-			<th><a href="product?sort=id">Code </a></th>
-			<th><a href="product?sort=nome">Name </a></th>
-			<th><a href="product?sort=descrizione">Description </a></th>
-			<th>Action</th>
-		</tr>
+<script>
+$(document).ready(function() {
+    $("#search").keyup(function() {
+        var search = $(this).val();
+        if(search != '') {
+            $.ajax({
+                type : "GET",
+                url : "product?search="+search+"&action=search",
+                success : function(html) {
+                    $("#result").html(html);
+                    $("#result").css({"color":"red"});
+                },
+                error: function (xmlHttpRequest, textStatus, errorThrown) {
+                    alert(errorThrown);
+               }
+            });
+        }
+    });
+});
+</script>
+<div class="container">   
+<%@include file="fragments/header.jsp" %>
+<%@include file="fragments/navigationBar.jsp" %>
+	
 		<%
 			if (products != null && products.size() != 0) {
 				Iterator<?> it = products.iterator();
 				while (it.hasNext()) {
 					ProductBean bean = (ProductBean) it.next();
 		%>
-					<tr>
-						<td><%=bean.getCode()%></td>
-						<td><%=bean.getName()%></td>
-						<td><%=bean.getDescription()%></td>
-						<td><a href="product?action=delete&id=<%=bean.getCode()%>">Delete</a><br>
-							<a href="product?action=read&id=<%=bean.getCode()%>">Details</a><br>
-							<a href="cart?action=add&id=<%=bean.getCode()%>">Add to cart</a>
-							</td>
-					</tr>
+				<div id="product_container">
+					<div id="img">
+					
+					</div>
+					<%=bean.getName()%>
+					<button id="add"><a href="cart?action=add&id=<%=bean.getCode()%>">Add to cart</a></button> 
+				</div>		
 		<%
 				}
 			}
 			else {
 		%>
-		<tr>
-			<td colspan="6">No products available</td>
-		</tr>
+			No products available
 		<%
 			}
 		%>
-	</table><br/>
-	<a href="cart?action=Cart">Vai al carrello</a>
+</div>
+<%@include file="fragments/footer.jsp" %>	
+</div> 
 </body>
 </html>

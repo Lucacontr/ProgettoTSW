@@ -2,12 +2,15 @@ package it.unisa.control;
 
 import java.io.IOException; 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.google.gson.Gson;
 
 import it.unisa.model.*;
 /**
@@ -37,6 +40,21 @@ public class ProductControl extends HttpServlet {
 
 		try {
 			if (action != null) {
+				if (action.equalsIgnoreCase("search")) {
+					System.out.println("ciao");
+					ArrayList<ProductBean> list =(ArrayList<ProductBean>)ProductDAO.doRetrieveAll("");
+					ArrayList<String> result=new ArrayList<String>();
+					String s=request.getParameter("search");
+					for (ProductBean productBean : list) {
+						if(productBean.getName().contains(s)) {
+							result.add(productBean.getName());
+						}
+					}
+					String json = new Gson().toJson(result);
+					response.setContentType("application/json");
+			        response.setCharacterEncoding("UTF-8");
+			        response.getWriter().write(json);
+				}
 				if (action.equalsIgnoreCase("read")) {
 					int id = Integer.parseInt(request.getParameter("id"));
 					request.removeAttribute("product");

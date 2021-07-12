@@ -16,13 +16,16 @@
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/ProductStyle.css" />
+	<link href="../css/container.css" rel="stylesheet">
 	<title>CCeShop</title>
 </head>
 
 
 
 <body>
+<div class="container">
+<%@include file="../fragments/header.jsp" %>
+<%@include file="../fragments/navigationBar.jsp" %>
 <h2>Orders </h2>
 	<table>
 		<tr>
@@ -71,5 +74,7 @@ Filtra prodotti per utente:<br/>
 		<input type="text" name="user" placeholder="mariorossi@gmail.com"><br/><br/>
 		<input type="submit" value="Filtra"><input type="reset" value="Reset">
 	</form>
+</div>
+	<%@include file="../fragments/footer.jsp" %>
 </body>
 </html>

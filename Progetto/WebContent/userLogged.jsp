@@ -20,11 +20,13 @@ if ((currentUser==null)||(!currentUser.isValid()))
    <!DOCTYPE html>
    <html>
       <head>
-         <meta http-equiv="Content-Type" 
-            content="text/html; charset=windows-1256">
-         <title>   User Logged Successfully   </title>
+		<link href="css/container.css" rel="stylesheet">
+         <title>CCeShop</title>
       </head>
       <body>
+      <div class="container">
+      <%@include file="fragments/header.jsp" %>
+      <%@include file="fragments/navigationBar.jsp" %>
 <h4>Ordini effettuati</h4>
 	<table border="1">
 		<tr>
@@ -57,6 +59,8 @@ if ((currentUser==null)||(!currentUser.isValid()))
 			}
 		%>
 	</table><br/>
+	</div>
+	<%@include file="fragments/footer.jsp" %>	
       </body>
 	
    </html>

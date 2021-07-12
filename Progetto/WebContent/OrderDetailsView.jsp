@@ -10,12 +10,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="ProductStyle.css" rel="stylesheet" type="text/css">
-	<title>Detail order </title>
+	<link href="css/container.css" rel="stylesheet">
+	<meta charset="ISO-8859-1">
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>CCeShop</title>
 </head>
 <body>
+<div class="container">
+<%@include file="fragments/header.jsp" %>
+<%@include file="fragments/navigationBar.jsp" %>
 	<h2>Detail</h2>
 			<table border="1">
 				<tr>
@@ -39,7 +42,7 @@
 				</tr>
 				<%}}%>
 			</table>
-	
-
+</div>
+<%@include file="fragments/footer.jsp" %>	
 </body>
 </html>

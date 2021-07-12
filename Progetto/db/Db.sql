@@ -16,7 +16,19 @@ CREATE TABLE prodotto (
   NVendite int default 0,
   descrizioneCompleta text,
   IVA double default 22,
-  quantità int default 0
+  quantità int default 0,
+  thumbnail varchar(256)
+);
+
+CREATE TABLE immagine(
+	prodotto int,
+    immagine varchar(256),
+    
+     FOREIGN KEY (prodotto) REFERENCES prodotto(id)
+     ON DELETE RESTRICT
+     ON UPDATE CASCADE,
+     
+     PRIMARY KEY(prodotto, immagine)
 );
 
 CREATE TABLE utente (	
@@ -81,6 +93,26 @@ CREATE TABLE amministratore(
     password varchar(35) not null
 );
 
+CREATE TABLE Categoria(
+	nome varchar(35) primary key,
+	thumbnail varchar(256)
+);
+
+CREATE TABLE Appartenenza(
+	categoria varchar(35),
+	prodotto int,
+	
+	PRIMARY KEY(prodotto, categoria),
+	
+	FOREIGN KEY (prodotto) REFERENCES prodotto(id)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE,
+	
+    FOREIGN KEY (categoria) REFERENCES categoria(nome)
+    ON DELETE RESTRICT
+    ON UPDATE CASCADE
+);
+
 INSERT INTO prodotto (nome, descrizione, prezzo, quantità) values
 ("Samsung F8000", "TV 48 pollici", 550.90, 5),
 ("Huawei P8", "Smartphone", 390, 13),
@@ -88,6 +120,8 @@ INSERT INTO prodotto (nome, descrizione, prezzo, quantità) values
 ("Sony w808c", "TV 43 pollici", 640, 11),
 ("Dyson 6300", "Aspirapolvere", 329, 3),
 ("Asus 3200", "Router", 189, 22);
+
+INSERT INTO categoria(nome) values ("informatica"), ("smartphones"), ("tv"), ("videogmes");
 
 CREATE TRIGGER prezzo_scontato_insert
 BEFORE INSERT ON Prodotto

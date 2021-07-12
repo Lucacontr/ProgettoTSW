@@ -1,9 +1,13 @@
 <!DOCTYPE html>
+
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <html>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.ProductBean,it.unisa.model.ProductDAO"%>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link rel="stylesheet" href="../ProductStyle.css">
+	<link href="${pageContext.request.contextPath}/css/container.css" rel="stylesheet">
+	
 	<title>CCeShop</title>
 </head>
 
@@ -18,6 +22,10 @@
 %>
 
 <body>
+
+<div class="container">
+<%@include file="../fragments/header.jsp" %>
+<%@include file="../fragments/navigationBar.jsp" %>
 	<h2>Products </h2>
 	<table>
 		<tr>
@@ -69,6 +77,7 @@
 	
 	<a href="insert.jsp">Inserisci un nuovo prodotto al catalogo</a><br/><br/>
 	<a href="OrdersView.jsp">Visualizza ordini</a><br/><br/>
-	
+</div>
+	<%@include file="../fragments/footer.jsp" %>
 </body>
 </html>

@@ -12,13 +12,17 @@
 %>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="../ProductStyle.css" rel="stylesheet">
+	<link href="../css/container.css" rel="stylesheet">
+	
 	<title>CCeShop</title>
 </head>
 
 
 
 <body>
+<div class="container">
+<%@include file="../fragments/header.jsp" %>
+<%@include file="../fragments/navigationBar.jsp" %>
 	<h2>Modify</h2>
 	<form action="../product" method="post">
 		<input type="hidden" name="action" value="modify">
@@ -44,5 +48,7 @@
 
 		<input type="submit" value="Modifica"><input type="reset" value="Reset">
 	</form>
+</div>
+	<%@include file="../fragments/footer.jsp" %>
 </body>
 </html>
