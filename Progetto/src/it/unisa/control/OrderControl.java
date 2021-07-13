@@ -39,7 +39,7 @@ public class OrderControl extends HttpServlet {
 			if(action!=null) {
 				if(action.equalsIgnoreCase("checkout")){
 					Cart cart= (Cart) request.getSession().getAttribute("cart");
-					if(cart.getSize()==0) {
+					if(cart.getSize()==0 || cart==null) {
 						 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
 				    	 dispatcher.forward(request, response);
 					}

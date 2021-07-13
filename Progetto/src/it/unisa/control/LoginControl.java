@@ -40,7 +40,6 @@ public class LoginControl extends HttpServlet {
 		
 		if(action!=null) {
 			if(action.equalsIgnoreCase("login")) {
-				System.out.println("sono qui");
 				try {
 					HttpSession session = request.getSession();
 					String un=request.getParameter("un");

@@ -3,7 +3,7 @@
     pageEncoding="windows-1256"
     import="it.unisa.model.UserBean"
 %>
-
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <!DOCTYPE html>
 
 <html>
@@ -11,7 +11,7 @@
 		<link rel="icon" href="images/favicon.ico" type="image/x-icon" />
 		<link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
         <title>CCeShop</title>
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 		<script type="text/javascript" src="js/formCheck.js"></script>
 		<link href="css/container.css" rel="stylesheet">
 	</head>
@@ -27,12 +27,13 @@
                 var pwd=$('#password').val();
                 $.ajax({
                     type: "GET",
-                    url:"login?un="+user+"&password="pwd+"&action=login",  
-                   	beforeSend:function(){
-                   		$('#emailDiv').html("ciao");
-                   	},
+                    url:"login?action=login",
+                    data: {
+                    	un: user,
+                    	pw:pwd
+                    },
                     success: function (data) {
-                    	 $('#emailDiv').html("ciao");
+                    	window.location.replace("Progetto/userLogged.jsp");
                     }
                 });                                
             });
@@ -48,7 +49,7 @@
 		<br><br>
 		<a href="guest.jsp">Acquista senza registrarti</a><br/>
 		<a href="registrazioneUtente.jsp">Registrati</a>
+		<%@include file="fragments/footer.jsp" %>	
 	</div>
-	<%@include file="fragments/footer.jsp" %>	
 	</body>
 </html>

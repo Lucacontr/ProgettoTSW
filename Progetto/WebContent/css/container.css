@@ -1,8 +1,36 @@
-html, body { height: 100%; }
+html, body {
+	height: auto;
+	margin:0;
+}
 
-.container {
-    min-height: 100%;
+div#container {
+	position:relative; 
+    width: 100%; 
     height: auto !important;
     height: 100%;
-    margin: 0 auto -100px; 
+    min-height:100%;
+}
+
+div#content{
+    padding: 0 0 100px 0;
+    width:990px;
+    margin:0 auto;
+}
+
+div#footer { 
+	margin:0;
+    bottom:0;
+    height:100px;
+    position:absolute;
+    width:100%;
+    text-align:center;
+    background: #5A42EC;
+  	background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+   	background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+   	background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+}
+
+table#footer_table{
+	color: white;
+	width: 100% !important;
 }

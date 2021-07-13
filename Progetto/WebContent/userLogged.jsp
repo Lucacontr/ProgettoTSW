@@ -59,8 +59,9 @@ if ((currentUser==null)||(!currentUser.isValid()))
 			}
 		%>
 	</table><br/>
-	</div>
 	<%@include file="fragments/footer.jsp" %>	
-      </body>
+	</div>
 	
-   </html>
+    </body>
+	
+</html>

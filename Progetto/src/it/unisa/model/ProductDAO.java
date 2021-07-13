@@ -37,7 +37,7 @@ public class ProductDAO{
 		PreparedStatement preparedStatement = null;
 
 		String insertSQL = "INSERT INTO " + ProductDAO.TABLE_NAME
-				+ " (nome, descrizione, prezzo, quantità) VALUES (?, ?, ?, ?)";
+				+ " (nome, descrizione, prezzo, quantità, thumbnail) VALUES (?, ?, ?, ?, ?)";
 
 		try {
 			connection = ds.getConnection();
@@ -46,7 +46,7 @@ public class ProductDAO{
 			preparedStatement.setString(2, product.getDescription());
 			preparedStatement.setDouble(3, product.getPrice());
 			preparedStatement.setInt(4, product.getQuantity());
-
+			preparedStatement.setString(5, product.getThumbnail());
 			preparedStatement.executeUpdate();
 			connection.setAutoCommit(false);
 			connection.commit();
@@ -164,17 +164,13 @@ public class ProductDAO{
 		return (result != 0);
 	}
 
-	public static synchronized Collection<ProductBean> doRetrieveAll(String order) throws SQLException {
+	public static synchronized Collection<ProductBean> doRetrieveAll() throws SQLException {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 
 		Collection<ProductBean> products = new LinkedList<ProductBean>();
 
 		String selectSQL = "SELECT * FROM " + ProductDAO.TABLE_NAME;
-
-		if (order != null && !order.equals("")) {
-			selectSQL += " ORDER BY " + order;
-		}
 
 		try {
 			connection = ds.getConnection();
@@ -195,6 +191,7 @@ public class ProductDAO{
 				bean.setPrezzoScontato(rs.getDouble("prezzo_scontato"));
 				bean.setNvendite(rs.getInt("nvendite"));
 				bean.setNvisualizzazioni(rs.getInt("nvisualizzazioni"));
+				bean.setThumbnail("thumbnail");
 				products.add(bean);
 			}
 
@@ -208,6 +205,35 @@ public class ProductDAO{
 			}
 		}
 		return products;
+	}
+	
+	public static synchronized int getIdThumbnail(String thumb) throws SQLException {
+		String selectSQL = "SELECT id FROM prodotto WHERE thumbnail= ?";
+		int id=-1;
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, thumb);
+			ResultSet rs = preparedStatement.executeQuery();
+			rs.next();
+			id=rs.getInt(1);
+		}
+		catch (Exception ex){
+		      System.out.println("ProductDAO.getIdThumbnail failed: An Exception has occurred! " + ex);
+		      ex.printStackTrace();
+		}
+		finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return id;
 	}
 
 }

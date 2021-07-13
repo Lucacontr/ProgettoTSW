@@ -42,7 +42,7 @@
 				</tr>
 				<%}}%>
 			</table>
+			<%@include file="fragments/footer.jsp" %>	
 </div>
-<%@include file="fragments/footer.jsp" %>	
 </body>
 </html>

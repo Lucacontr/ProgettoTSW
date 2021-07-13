@@ -24,7 +24,7 @@
 		     <input type="reset" value="Reset"/>
 		</fieldset>
 		</form> 
+		<%@include file="fragments/footer.jsp" %>	
 	</div>
-<%@include file="fragments/footer.jsp" %>	
 	</body>
 </html>

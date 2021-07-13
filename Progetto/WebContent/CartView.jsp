@@ -1,3 +1,4 @@
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 
@@ -9,7 +10,8 @@
 
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<link href="css/container.css" rel="stylesheet">
+	<link rel="stylesheet" href="<c:url value="/css/general.css"/>">
+	<link rel="shortcut icon" href="<c:url value="/images/favicon.ico"/>" type="image/x-icon">
 	<title>CCeShop</title>
 </head>
 
@@ -60,8 +62,8 @@
 	
 	<br/><a href="order?action=checkout">
 		<input type="submit" name="submit" value="Checkout"></a>
-</div>
+		
 <%@include file="fragments/footer.jsp" %>	
-
+</div>
 </body>
 </html>

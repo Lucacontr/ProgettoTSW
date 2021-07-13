@@ -3,6 +3,7 @@ package it.unisa.control;
 import java.io.IOException; 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -26,12 +27,9 @@ public class ProductControl extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
-		
-		String sort = (String) request.getParameter("sort");
-		
 		try {
-			request.removeAttribute("products");
-			request.setAttribute("products", ProductDAO.doRetrieveAll(sort));
+			request.removeAttribute("categories");
+			request.setAttribute("categories", CategoriaDAO.doRetrieveAll());
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
 		}
@@ -41,8 +39,7 @@ public class ProductControl extends HttpServlet {
 		try {
 			if (action != null) {
 				if (action.equalsIgnoreCase("search")) {
-					System.out.println("ciao");
-					ArrayList<ProductBean> list =(ArrayList<ProductBean>)ProductDAO.doRetrieveAll("");
+					Collection<ProductBean> list =(Collection<ProductBean>)ProductDAO.doRetrieveAll();
 					ArrayList<String> result=new ArrayList<String>();
 					String s=request.getParameter("search");
 					for (ProductBean productBean : list) {
@@ -68,20 +65,24 @@ public class ProductControl extends HttpServlet {
 					int id = Integer.parseInt(request.getParameter("id"));
 					ProductDAO.doDelete(id);
 					request.removeAttribute("products");
-					request.setAttribute("products", ProductDAO.doRetrieveAll(sort));
+					request.setAttribute("products", ProductDAO.doRetrieveAll());
 					if(request.getSession().getAttribute("adminRoles")!=null) {
 						response.sendRedirect("admin/adminView.jsp");
 					}
 					else {
-						response.sendRedirect("ProductView.jsp");
+						response.sendRedirect("index.jsp");
 					}
 				} else if (action.equalsIgnoreCase("insert")) {
 					ProductDAO.doSave(getProductbyRequest(request, response));
+					String[] results = request.getParameterValues("categoria");
+					for (int i = 0; i < results.length; i++) {
+					    AppartenenzaDAO.doSave(new AppartenenzaBean(ProductDAO.getIdThumbnail(request.getParameter("thumb")), results[i]));
+					}
 					request.removeAttribute("products");
-					request.setAttribute("products", ProductDAO.doRetrieveAll(sort));
+					request.setAttribute("products", ProductDAO.doRetrieveAll());
 					if(request.getSession().getAttribute("adminRoles")!=null)
 						response.sendRedirect("admin/adminView.jsp");
-					else response.sendRedirect("ProductView.jsp");
+					else response.sendRedirect("index.jsp");
 				}
 				 else if (action.equalsIgnoreCase("modify")) {
 					 ProductBean bean=ProductDAO.doRetrieveByKey(Integer.parseInt(request.getParameter("id")));
@@ -91,18 +92,19 @@ public class ProductControl extends HttpServlet {
 					 nuovo.setNvisualizzazioni(bean.getNvisualizzazioni());
 					 ProductDAO.doUpdate(nuovo);
 					 request.removeAttribute("products");
-					 request.setAttribute("products", ProductDAO.doRetrieveAll(sort));
+					 request.setAttribute("products", ProductDAO.doRetrieveAll());
 					 if(request.getSession().getAttribute("adminRoles")!=null)
 						 response.sendRedirect("admin/adminView.jsp");
-					 else response.sendRedirect("ProductView.jsp");
+					 else response.sendRedirect("index.jsp");
 				 }
 			}
 			else {
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ProductView.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
 				dispatcher.forward(request, response);
 			}
 		} catch (SQLException e) {
 			System.out.println("Error:" + e.getMessage());
+			e.printStackTrace();
 		}
 	}
 
@@ -118,6 +120,7 @@ public class ProductControl extends HttpServlet {
 		int quantity = Integer.parseInt(request.getParameter("quantita"));
 		double sconto = Double.parseDouble(request.getParameter("sconto"));
 		double iva = Double.parseDouble(request.getParameter("iva"));
+		String thumb= request.getParameter("thumb");
 		ProductBean bean = new ProductBean();
 		bean.setName(name);
 		bean.setDescription(description);
@@ -125,6 +128,7 @@ public class ProductControl extends HttpServlet {
 		bean.setQuantity(quantity);
 		bean.setIva(iva);
 		bean.setSconto(sconto);
+		bean.setThumbnail(thumb);
 		return bean;
 	}
 	

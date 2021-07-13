@@ -28,8 +28,7 @@
 	<input type="submit"> <input type="reset">
 	<input type="hidden" name="action" value="registration">
 	</form>
+	<%@include file="fragments/footer.jsp" %>
 </div>
-<%@include file="fragments/footer.jsp" %>
-	
 </body>
 </html>

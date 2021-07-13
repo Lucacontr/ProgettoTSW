@@ -12,7 +12,7 @@
 </head>
 
 <%
-	Collection<?> products = (Collection<?>) ProductDAO.doRetrieveAll(null);
+	Collection<?> products = (Collection<?>) ProductDAO.doRetrieveAll();
 // Check user credentials
 	Boolean adminRoles = (Boolean) session.getAttribute("adminRoles");
 	if ((adminRoles == null) || (!adminRoles.booleanValue())){	

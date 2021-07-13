@@ -1,10 +1,5 @@
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
-
-<head>
-	<link rel="stylesheet" href="<c:url value="/css/footer.css"/>">
-</head>
-<footer>
-	<table id="footer">
+<div id="footer">
+	<table id="footer_table">
 		<tr>
 			<th>SOCIAL</th>
 			<th>CHI SIAMO</th>
@@ -24,4 +19,4 @@
 			<td>PEC</td>
 		</tr>
 	</table>
-</footer>
+</div>

@@ -45,8 +45,7 @@
 		}
 	%>
 	<br/><a href="cart?action=Cart">Vai al carrello</a>
+	<%@include file="fragments/footer.jsp" %>
 	</div>
-<%@include file="fragments/footer.jsp" %>
-
 </body>
 </html>

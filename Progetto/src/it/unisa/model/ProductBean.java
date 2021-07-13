@@ -6,18 +6,19 @@ public class ProductBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	int code;
-	String name;
-	String description;
-	double price;
-	int quantity;
-	double sconto;
-	double prezzoScontato;
-	int nvendite;
-	int nvisualizzazioni;
-	double iva;
-	int cartQuantity;
-	double tot;
+	private int code;
+	private String name;
+	private String description;
+	private double price;
+	private int quantity;
+	private double sconto;
+	private double prezzoScontato;
+	private int nvendite;
+	private int nvisualizzazioni;
+	private double iva;
+	private int cartQuantity;
+	private double tot;
+	private String thumbnail;
 	
 	public ProductBean() {
 		code = -1;
@@ -25,6 +26,14 @@ public class ProductBean implements Serializable {
 		description = "";
 	}
 
+	public String getThumbnail() {
+		return thumbnail;
+	}
+	
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
+	}
+	
 	public double getTot() {
 		return tot;
 	}

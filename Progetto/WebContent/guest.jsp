@@ -22,7 +22,7 @@
 			<label>Indirizzo: <input id="indirizzo" name="indirizzo" type="text" placeholder="via Umberto Nobile 1, Eboli SA" required></label><br><br>
 			<input type="submit" value="Invia"> <input type="reset">
 		</form>
+		<%@include file="fragments/footer.jsp" %>	
 	</div>
-<%@include file="fragments/footer.jsp" %>	
 	</body>
 </html>

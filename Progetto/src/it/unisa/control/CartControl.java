@@ -62,7 +62,7 @@ public class CartControl extends HttpServlet {
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/DetailsView.jsp");
 						dispatcher.forward(request, response);
 					}
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ProductView.jsp");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
 					dispatcher.forward(request, response);
 				} else if (action.equalsIgnoreCase("delete")) {
 					int id = Integer.parseInt(request.getParameter("id"));
