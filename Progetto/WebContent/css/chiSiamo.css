@@ -1,0 +1,58 @@
+	#LContr{
+		border-radius: 50%;
+		width: 200px;
+		border: 5px solid #2690F8;
+
+	}
+
+	#GCubix {
+		border-radius: 50%;
+		width: 200px;
+		border: 5px solid #2690F8;
+	}
+
+	#ChiSiamo {
+		margin-left: auto;
+		margin-right: auto;
+	}
+
+	div#chiSiamo{
+		background: #5A42EC;
+   		background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    	background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    	background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+        margin: 0px;
+	}
+
+	h1 {
+		color: white;
+		text-align: center;
+		font-size: 50px;
+
+	}
+
+	#chis {
+		width: 100%;
+		align-items: center;
+		text-align: center;
+		margin-left: auto;
+		margin-right: auto;
+		background: #5A42EC;
+		background: -webkit-linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+		background: -moz-linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+		background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+	}
+
+	#descrCS {
+		text-align: center;
+		background: #5A42EC;
+		background: -webkit-linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+		background: -moz-linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+		background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+
+	}
+	

@@ -39,7 +39,11 @@ public class OrderControl extends HttpServlet {
 			if(action!=null) {
 				if(action.equalsIgnoreCase("checkout")){
 					Cart cart= (Cart) request.getSession().getAttribute("cart");
-					if(cart.getSize()==0 || cart==null) {
+					if(cart == null) {
+						cart = new Cart();
+						request.getSession().setAttribute("cart", cart);
+					}
+					else if(cart.getSize()==0) {
 						 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
 				    	 dispatcher.forward(request, response);
 					}
@@ -47,17 +51,22 @@ public class OrderControl extends HttpServlet {
 						response.sendRedirect("LoginView.jsp");
 					}
 					else{
-						OrderBean order=new OrderBean();
-						order.setPrezzoTot(cart.getTotPrice());
-						order.setUtente(user.getEmail());
-						order=OrderDAO.doSave(order);
-						DetailDAO.doSave(cart, OrderDAO.getIdUtente(order.getUtente(), order.getDataEff()));
-						request.getSession().setAttribute("cart", new Cart());
-						request.getSession().removeAttribute("orders");
-						request.getSession().setAttribute("orders", OrderDAO.doRetrieveAllByUser(user.getEmail()));
-						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
+						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RiepilogoOrdine.jsp");
 						dispatcher.forward(request, response);
 					}
+				}
+				else if(action.equalsIgnoreCase("conferma")){
+					Cart cart= (Cart) request.getSession().getAttribute("cart");
+					OrderBean order=new OrderBean();
+					order.setPrezzoTot(cart.getTotPrice());
+					order.setUtente(user.getEmail());
+					order=OrderDAO.doSave(order);
+					DetailDAO.doSave(cart, OrderDAO.getIdUtente(order.getUtente(), order.getDataEff()));
+					request.getSession().setAttribute("cart", new Cart());
+					request.getSession().removeAttribute("orders");
+					request.getSession().setAttribute("orders", OrderDAO.doRetrieveAllByUser(user.getEmail()));
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/userLogged.jsp");
+					dispatcher.forward(request, response);
 				}
 				else if(action.equalsIgnoreCase("detail")){
 					int id = Integer.parseInt(request.getParameter("id"));

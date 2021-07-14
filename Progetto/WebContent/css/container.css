@@ -1,6 +1,7 @@
 html, body {
-	height: auto;
+	height: 100%;
 	margin:0;
+	margin-bottom: -100px;
 }
 
 div#container {
@@ -21,7 +22,7 @@ div#footer {
 	margin:0;
     bottom:0;
     height:100px;
-    position:absolute;
+    position:relative;
     width:100%;
     text-align:center;
     background: #5A42EC;

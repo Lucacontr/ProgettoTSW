@@ -47,12 +47,26 @@ public class ProductControl extends HttpServlet {
 							result.add(productBean.getName());
 						}
 					}
+					System.out.println("sono qui");
 					String json = new Gson().toJson(result);
 					response.setContentType("application/json");
 			        response.setCharacterEncoding("UTF-8");
 			        response.getWriter().write(json);
 				}
-				if (action.equalsIgnoreCase("read")) {
+				else if (action.equalsIgnoreCase("ricerca")) {
+					Collection<ProductBean> list =(Collection<ProductBean>)ProductDAO.doRetrieveAll();
+					ArrayList<ProductBean> result=new ArrayList<ProductBean>();
+					String s=request.getParameter("s");
+					for (ProductBean productBean : list) {
+						if(productBean.getName().contains(s)) {
+							result.add(productBean);
+						}
+					}
+					request.setAttribute("trovati", result);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/ricerca.jsp");
+					dispatcher.forward(request, response);
+				}
+				else if (action.equalsIgnoreCase("read")) {
 					int id = Integer.parseInt(request.getParameter("id"));
 					request.removeAttribute("product");
 					ProductBean bean=ProductDAO.doRetrieveByKey(id);

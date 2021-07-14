@@ -101,7 +101,7 @@ public class UserDAO{
    
    public static boolean doSave(UserBean bean) {
 	   
-	   String insert="insert into utente(nome, cognome, email, pw) values(?, ?, ?, ?)";
+	   String insert="insert into utente(nome, cognome, email, pw, indirizzo, telefono, numCarta, dataScad, CVV) values(?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	   try{
 		      //connect to DB 
 			  currentCon = ds.getConnection();
@@ -110,6 +110,11 @@ public class UserDAO{
 		      preparedStatement.setString(2, bean.getLastName());
 		      preparedStatement.setString(3, bean.getEmail());
 		      preparedStatement.setString(4, bean.getPassword());
+		      preparedStatement.setString(5, bean.getAddress());
+		      preparedStatement.setString(6, bean.getPhoneNumber());
+		      preparedStatement.setString(7, bean.getPAN());
+		      preparedStatement.setString(8, bean.getExpDate());
+		      preparedStatement.setString(9, bean.getCVV());
 		      if(preparedStatement.executeUpdate()==1) {
 		    	  return true;
 		      }

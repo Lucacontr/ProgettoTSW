@@ -67,6 +67,11 @@ public class LoginControl extends HttpServlet {
 				bean.setLastName(request.getParameter("surname"));
 				bean.setEmail(request.getParameter("email"));
 				bean.setPassword(request.getParameter("pw"));
+				bean.setAddress(request.getParameter("address"));
+				bean.setPAN(request.getParameter("PAN"));
+				bean.setCVV(request.getParameter("CVV"));
+				bean.setExpDate(request.getParameter("expDate"));
+				bean.setPhoneNumber(request.getParameter("tel"));
 				UserDAO.doSave(bean);
 				bean.setValid(true);
 				request.getSession().setAttribute("currentSessionUser", bean);

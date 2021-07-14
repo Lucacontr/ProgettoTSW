@@ -191,7 +191,7 @@ public class ProductDAO{
 				bean.setPrezzoScontato(rs.getDouble("prezzo_scontato"));
 				bean.setNvendite(rs.getInt("nvendite"));
 				bean.setNvisualizzazioni(rs.getInt("nvisualizzazioni"));
-				bean.setThumbnail("thumbnail");
+				bean.setThumbnail(rs.getString("thumbnail"));
 				products.add(bean);
 			}
 
@@ -236,4 +236,131 @@ public class ProductDAO{
 		return id;
 	}
 
+	public static synchronized Collection<ProductBean> doRetrievePiuVisti() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<ProductBean> products = new LinkedList<ProductBean>();
+
+		String selectSQL = "SELECT * FROM " + ProductDAO.TABLE_NAME + " ORDER BY nVisualizzazioni DESC";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ProductBean bean = new ProductBean();
+				bean.setCode(rs.getInt("id"));
+				bean.setName(rs.getString("nome"));
+				bean.setDescription(rs.getString("descrizione"));
+				bean.setPrice(rs.getDouble("prezzo"));
+				bean.setQuantity(rs.getInt("quantità"));
+				bean.setIva(rs.getDouble("iva"));
+				bean.setSconto(rs.getDouble("sconto"));
+				bean.setPrezzoScontato(rs.getDouble("prezzo_scontato"));
+				bean.setNvendite(rs.getInt("nvendite"));
+				bean.setNvisualizzazioni(rs.getInt("nvisualizzazioni"));
+				bean.setThumbnail(rs.getString("thumbnail"));
+				products.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return products;
+	}
+	
+	public static synchronized Collection<ProductBean> doRetrievePiuVenduti() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<ProductBean> products = new LinkedList<ProductBean>();
+
+		String selectSQL = "SELECT * FROM " + ProductDAO.TABLE_NAME + " ORDER BY nVendite DESC";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ProductBean bean = new ProductBean();
+
+				bean.setCode(rs.getInt("id"));
+				bean.setName(rs.getString("nome"));
+				bean.setDescription(rs.getString("descrizione"));
+				bean.setPrice(rs.getDouble("prezzo"));
+				bean.setQuantity(rs.getInt("quantità"));
+				bean.setIva(rs.getDouble("iva"));
+				bean.setSconto(rs.getDouble("sconto"));
+				bean.setPrezzoScontato(rs.getDouble("prezzo_scontato"));
+				bean.setNvendite(rs.getInt("nvendite"));
+				bean.setNvisualizzazioni(rs.getInt("nvisualizzazioni"));
+				bean.setThumbnail(rs.getString("thumbnail"));
+				products.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return products;
+	}
+	
+	public static synchronized Collection<ProductBean> doRetrieveOfferte() throws SQLException {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+
+		Collection<ProductBean> products = new LinkedList<ProductBean>();
+
+		String selectSQL = "SELECT * FROM " + ProductDAO.TABLE_NAME + " WHERE sconto > 0";
+
+		try {
+			connection = ds.getConnection();
+			preparedStatement = connection.prepareStatement(selectSQL);
+
+			ResultSet rs = preparedStatement.executeQuery();
+
+			while (rs.next()) {
+				ProductBean bean = new ProductBean();
+				bean.setCode(rs.getInt("id"));
+				bean.setName(rs.getString("nome"));
+				bean.setDescription(rs.getString("descrizione"));
+				bean.setPrice(rs.getDouble("prezzo"));
+				bean.setQuantity(rs.getInt("quantità"));
+				bean.setIva(rs.getDouble("iva"));
+				bean.setSconto(rs.getDouble("sconto"));
+				bean.setPrezzoScontato(rs.getDouble("prezzo_scontato"));
+				bean.setNvendite(rs.getInt("nvendite"));
+				bean.setNvisualizzazioni(rs.getInt("nvisualizzazioni"));
+				bean.setThumbnail(rs.getString("thumbnail"));
+				products.add(bean);
+			}
+
+		} finally {
+			try {
+				if (preparedStatement != null)
+					preparedStatement.close();
+			} finally {
+				if (connection != null)
+					connection.close();
+			}
+		}
+		return products;
+	}
+	
 }

@@ -33,7 +33,7 @@
                     	pw:pwd
                     },
                     success: function (data) {
-                    	window.location.replace("Progetto/userLogged.jsp");
+                    	window.location.replace("userLogged.jsp");
                     }
                 });                                
             });

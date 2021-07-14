@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "a" %>
 
 <%
 	Collection<?> categories = (Collection<?>) request.getAttribute("categories");
@@ -8,13 +10,14 @@
 		return;
 	}
 	
+	Collection<?> visti = (Collection<?>) ProductDAO.doRetrievePiuVisti();
+	Collection<?> venduti = (Collection<?>) ProductDAO.doRetrievePiuVenduti();
+	
 	Cart cart = (Cart) request.getSession().getAttribute("cart");
 %>
-<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "a" %>
+
 <!DOCTYPE html>
 <html>
-<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
-
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<title>CCeShop</title>
@@ -67,14 +70,59 @@
 					<%
 							}
 						}
-						else {
 					%>
+					
+					<div id="+visti">
+						<br/><br/><br/><h2>I PIÙ VISTI</h2>
+						<%
+							if (visti != null && visti.size() != 0) {
+								Iterator<?> it = visti.iterator();
+								while (it.hasNext()) {
+									ProductBean bean = (ProductBean) it.next();
+						%>
+								<div id="box">
+									<a href="product?action=read&id=<%=bean.getCode()%>">
+										<div id="img">
+											<img src="<%=bean.getThumbnail()%>" alt="IMG">
+										</div>
+										<div id="nome"><%=bean.getName()%></div>
+									</a>
+								</div>
+						<%
+								}
+							}
+						%>
+					</div>
+					
+					<div id="+venduti">
+						<br/><br/><br/><h2>I PIÙ VENDUTI</h2>
 						
-					<%
-						}
-					%>
+						<%
+							if (venduti != null && venduti.size() != 0) {
+								Iterator<?> it = venduti.iterator();
+								while (it.hasNext()) {
+									ProductBean bean = (ProductBean) it.next();
+						%>
+								<div id="box">
+									<a href="product?action=read&id=<%=bean.getCode()%>">
+										<div id="img">
+											<img src="<%=bean.getThumbnail()%>" alt="IMG">
+										</div>
+										<div id="nome"><%=bean.getName()%></div>
+									</a>
+								</div>
+						<%
+								}
+							}
+						%>
+						
+					</div>
+				
 				</div>
-			<%@include file="fragments/footer.jsp" %>
+			<%@include file="fragments/chiSiamo.jsp" %>
+			
+			
 		</div>
+		<%@include file="fragments/footer.jsp" %>
 	</body>
 </html>
