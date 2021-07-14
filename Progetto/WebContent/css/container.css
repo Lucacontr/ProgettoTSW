@@ -4,7 +4,7 @@ html, body {
 	margin-bottom: -100px;
 }
 
-div#container {
+#container {
 	position:relative; 
     width: 100%; 
     height: auto !important;
@@ -12,13 +12,7 @@ div#container {
     min-height:100%;
 }
 
-div#content{
-    padding: 0 0 100px 0;
-    width:990px;
-    margin:0 auto;
-}
-
-div#footer { 
+#footer { 
 	margin:0;
     bottom:0;
     height:100px;
@@ -31,7 +25,7 @@ div#footer {
    	background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
 }
 
-table#footer_table{
+#footer_table{
 	color: white;
 	width: 100% !important;
 }

@@ -41,14 +41,14 @@ public class ProductControl extends HttpServlet {
 				if (action.equalsIgnoreCase("search")) {
 					Collection<ProductBean> list =(Collection<ProductBean>)ProductDAO.doRetrieveAll();
 					ArrayList<String> result=new ArrayList<String>();
-					String s=request.getParameter("search");
+					String s=request.getParameter("search").toLowerCase();
 					for (ProductBean productBean : list) {
-						if(productBean.getName().contains(s)) {
+						if(productBean.getName().toLowerCase().contains(s)) {
 							result.add(productBean.getName());
 						}
 					}
-					System.out.println("sono qui");
 					String json = new Gson().toJson(result);
+					json.replace(",", "<br/>");
 					response.setContentType("application/json");
 			        response.setCharacterEncoding("UTF-8");
 			        response.getWriter().write(json);
@@ -56,9 +56,9 @@ public class ProductControl extends HttpServlet {
 				else if (action.equalsIgnoreCase("ricerca")) {
 					Collection<ProductBean> list =(Collection<ProductBean>)ProductDAO.doRetrieveAll();
 					ArrayList<ProductBean> result=new ArrayList<ProductBean>();
-					String s=request.getParameter("s");
+					String s=request.getParameter("s").toLowerCase();
 					for (ProductBean productBean : list) {
-						if(productBean.getName().contains(s)) {
+						if(productBean.getName().toLowerCase().contains(s)) {
 							result.add(productBean);
 						}
 					}

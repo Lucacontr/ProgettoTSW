@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "a" %>
 
@@ -27,27 +25,6 @@
 	</head>
 
 	<body>
-		<script>
-		$(document).ready(function() {
-		    $("#s").keyup(function() {
-		        var search = $(this).val();
-		        if(search != '') {
-		            $.ajax({
-		                type : "GET",
-		                url : "product?action=search",
-		                data: {
-		                	search:search
-		                },
-		                success : function(html) {
-		                    $("#result").html(html);
-		                    $("#result").css({"color":"red"});
-		                }
-		            });
-		        }
-		    });
-		});
-		</script>
-		
 		<div id="container">   
 		<%@include file="fragments/header.jsp" %>
 		<%@include file="fragments/navigationBar.jsp" %>
@@ -64,7 +41,7 @@
 									<div id="img">
 										<img src="<%=bean.getThumbnail()%>" alt="IMG">
 									</div>
-									<div id="nome"><%=bean.getNome()%></div>
+									<div id="prodotto"><%=bean.getNome()%></div>
 								</a>
 							</div>
 					<%
@@ -120,8 +97,6 @@
 				
 				</div>
 			<%@include file="fragments/chiSiamo.jsp" %>
-			
-			
 		</div>
 		<%@include file="fragments/footer.jsp" %>
 	</body>

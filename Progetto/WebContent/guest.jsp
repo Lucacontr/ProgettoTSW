@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
+
+<%
+	Cart cart = (Cart) request.getSession().getAttribute("cart");
+%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -12,16 +15,27 @@
 	<div class="container">
 		<%@include file="fragments/header.jsp" %>
 		<%@include file="fragments/navigationBar.jsp" %>
-		<a href="LoginView.jsp">Accedi</a> o continua ad acquistare senza loggarti:
-		<form action="order" method="post">
-			<input type="hidden" name="action" value="guest">
-			<label>Nome: <input id="nome" name="nome" type="text" placeholder="Mario" required onblur="checkNome(this.form.nome)"></label><br><br><div id="nomeDiv"></div>
-			<label>Cognome: <input id="cognome" name ="cognome" type="text" placeholder="Rossi" required onblur="checkCognome(this.form.cognome)"></label><div id="cognomeDiv"></div>
-			<label>Email: <input id="email" name="email" type="text" placeholder="mariorossi@gmail.com" required onblur="checkEmail(this.form.email)"></label><br><br><div id="emailDiv"></div>
-			<label>Telefono: <input id="telefono" name ="telefono" type="text" placeholder="3332343123" required onblur="checkTelefono(this.form.telefono)"></label><div id="telefonoDiv"></div>
-			<label>Indirizzo: <input id="indirizzo" name="indirizzo" type="text" placeholder="via Umberto Nobile 1, Eboli SA" required></label><br><br>
-			<input type="submit" value="Invia"> <input type="reset">
-		</form>
+		<%
+			if(cart != null){
+		%>
+				<a href="LoginView.jsp">Accedi</a> o continua ad acquistare senza loggarti:
+				<form action="order" method="post">
+					<input type="hidden" name="action" value="guest">
+					<label>Nome: <input id="nome" name="nome" type="text" placeholder="Mario" required onblur="checkNome(this.form.nome)"></label><br><br><div id="nomeDiv"></div>
+					<label>Cognome: <input id="cognome" name ="cognome" type="text" placeholder="Rossi" required onblur="checkCognome(this.form.cognome)"></label><div id="cognomeDiv"></div>
+					<label>Email: <input id="email" name="email" type="text" placeholder="mariorossi@gmail.com" required onblur="checkEmail(this.form.email)"></label><br><br><div id="emailDiv"></div>
+					<label>Telefono: <input id="telefono" name ="telefono" type="text" placeholder="3332343123" required onblur="checkTelefono(this.form.telefono)"></label><div id="telefonoDiv"></div>
+					<label>Indirizzo: <input id="indirizzo" name="indirizzo" type="text" placeholder="via Umberto Nobile 1, Eboli SA" required></label><br><br>
+					<input type="submit" value="Invia"> <input type="reset">
+				</form>
+		<%
+			}
+			else{
+		%>
+			<h2>Il tuo carrello è vuoto</h2>
+		<%
+			}
+		%>
 		<%@include file="fragments/footer.jsp" %>	
 	</div>
 	</body>

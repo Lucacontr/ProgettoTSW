@@ -7,8 +7,8 @@ DROP TABLE IF EXISTS prodotto;
 CREATE TABLE prodotto (	
   id int primary key AUTO_INCREMENT not null,
   prezzo double default 0,
-  nome char(50),
-  descrizione char(250),
+  nome varchar(50),
+  descrizione varchar(250),
   sconto double default 0,
   prezzo_scontato double default 0,
   NVisualizzazioni int default 0,
@@ -30,16 +30,15 @@ CREATE TABLE immagine(
 );
 
 CREATE TABLE utente (	
-  nome char(25),
-  cognome char(25),
+  nome varchar(25),
+  cognome varchar(25),
   pw char(50),
-  indirizzo char(200),
+  indirizzo varchar(200),
   email varchar(35) primary key,
-  telefono char(15),
-  numCarta char(16),
-  intestatario char(50),
-  dataScad char(7),
-  CVV char(3)
+  telefono varchar(15),
+  numCarta varchar(16),
+  dataScad varchar(7),
+  CVV varchar(3)
 );
 
 CREATE TABLE guest(
@@ -111,8 +110,10 @@ CREATE TABLE Appartenenza(
     ON UPDATE CASCADE
 );
 
+INSERT INTO prodotto (nome, descrizione, prezzo, quantità, thumbnail, sconto) values
+("Samsung F8000", "TV 48 Pollici", 550.90, 5, "https://images.samsung.com/is/image/samsung/it_UE75F8000SZXZT_001_Front_black?$LazyLoad_Home_IMG$", 23); /*CATEGORIA TV*/
+
 INSERT INTO prodotto (nome, descrizione, prezzo, quantità, thumbnail) values
-("Samsung F8000", "TV 48 Pollici", 550.90, 5, "https://images.samsung.com/is/image/samsung/it_UE75F8000SZXZT_001_Front_black?$LazyLoad_Home_IMG$"), /*CATEGORIA TV*/
 ("Samsung S21", "Smartphone", 890, 13, "https://asset.mediaw.it/wcsstore/MMCatalogAssetStore/asset/images/14/72/147294.jpg"), /*CATEGORIA SMARTPHONE*/
 ("XiaoMI Mi11 Ultra", "Smartphone", 800, 4, "https://www.notebookcheck.it/uploads/tx_nbc2/XiaomiMi11Ultra.jpg"), /*CATEGORIA SMARTPHONE*/
 ("Sony TV LED", "TV 48 pollici", 640, 11, "https://images.eprice.it/nobrand/0/hres/803/209463803/DAM209463803-0-5317d555-3376-4b16-b4f6-14b6943f5896.jpg"), /*CATEGORIA TV*/

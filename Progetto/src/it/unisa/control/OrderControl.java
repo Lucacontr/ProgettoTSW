@@ -88,7 +88,7 @@ public class OrderControl extends HttpServlet {
 					order.setGuest(GuestDAO.getId(guest));
 					order=OrderDAO.doSave(order);
 					DetailDAO.doSave(cart, OrderDAO.getIdGuest(order.getGuest(), order.getDataEff()));
-					response.sendRedirect("ProductView.jsp");
+					response.sendRedirect("index.jsp");
 				}
 				else if(action.equalsIgnoreCase("filterDate")){
 					String inizio=request.getParameter("inizio");
