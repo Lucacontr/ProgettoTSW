@@ -63,6 +63,7 @@
 											<img src="<%=bean.getThumbnail()%>" alt="IMG">
 										</div>
 										<div id="nome"><%=bean.getName()%></div>
+										<div id="prezzo">Prezzo: <%=bean.getPrice()%></div>
 									</a>
 								</div>
 						<%

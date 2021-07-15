@@ -172,6 +172,12 @@ header{
 #menu a{text-decoration:none; color:#666;}
 #menu a:hover{text-decoration:none; color:#666;}
 
+@media screen and (min-width: 768px){
+		#hamburger {
+  			display:none ;
+  		}
+}	
+
 /* Tablet e Telefono*/
 @media screen and (max-width: 768px) and (min-width: 320px) {
   body {

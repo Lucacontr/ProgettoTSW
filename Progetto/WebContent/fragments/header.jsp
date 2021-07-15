@@ -1,4 +1,5 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
 
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
@@ -35,10 +36,10 @@
 		    
 		});
 		
-		$( document ).ready(function() {
-
+		function myFunction(){
 			$( "#cross" ).hide();
 			$( "#menu" ).hide();
+			$( "#hamburger" ).show();
 			$( "#hamburger" ).click(function() {
 				$( "#menu" ).slideToggle( "slow", function() {
 					$( "#hamburger" ).hide();
@@ -52,20 +53,33 @@
 					$( "#hamburger" ).show();
 				});
 			});
-
-		});
+		}
+		
+		var x = window.matchMedia("(max-width: 768px)")
+		myFunction(x) // Call listener function at run time
+		x.addListener(myFunction)
 </script>
 
 <header>
-  		<div id="logo"><a href="index.jsp"><img src="<c:url value="/images/nuovo/logo.png"/>"></a></div>
-		   		<div id="ricerca">
-		   			<form method=get action="product">
-						<input type="search" id="s" name="s" placeholder="Cerca sul sito">
-						<button type="submit" id="sub"><i class="fa fa-search"></i></button>
-						<div id="result"></div>
-						<input type="hidden" name="action" value="ricerca">
-					</form>		
-				</div>
+		<div id="logo"><a href="index.jsp"><img src="<c:url value="/images/nuovo/logo.png"/>"></a></div>
+   		<div id="ricerca">
+   			<form method=get action="product">
+				<input type="search" id="s" name="s" placeholder="Cerca sul sito">
+				<button type="submit" id="sub"><i class="fa fa-search"></i></button>
+				<div id="result"></div>
+				<input type="hidden" name="action" value="ricerca">
+			</form>		
+		</div>
+		<div id="userLogged">
+			<%
+	 			UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));
+				if ((currentUser!=null)&&(currentUser.isValid()))
+				{	
+				    %>Ciao, currentUser.getName()<% 
+				    return;
+				}
+			%>
+		</div>
 		<div id="bottoniera">				
 	   		<div id="bottone_utente">
 				<a href="login.jsp"><img src="<c:url value="/images/nuovo/user.png"/>"></a>
@@ -80,10 +94,12 @@
 
 <div id="menu">
   <ul>
-    <a href="#"><li>LINK ONE</li></a>
-    <a href="#"><li>LINK TWO</li></a>
-    <a href="#"><li>LINK THREE</li></a>
-    <a href="#"><li>LINK FOUR</li></a>
-    <a href="#"><li>LINK FIVE</li></a>
+    <a href="category.jsp?nome=informatica"><li>Informatica</li></a>
+    <a href="category.jsp?nome=smartphone"><li>Smartphone</li></a>
+    <a href="category.jsp?nome=tv"><li>TV</li></a>
+    <a href="category.jsp?nome=videogames"><li>Videogames</li></a>
+    <a href="offerte.jsp"><li>Offerte</li></a>
+    <a href="fragments/chiSiamo.jsp"><li>Chi SiamoE</li></a>
+    <a href="userLogged.jsp"><li>Area Utente</li></a>
   </ul>
 </div> 
