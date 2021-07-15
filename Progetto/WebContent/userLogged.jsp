@@ -1,19 +1,11 @@
 <%@ page language="java" 
-         contentType="text/html; charset=windows-1256"
          pageEncoding="windows-1256"
-         import="java.util.Collection"
-         import="java.util.Iterator"
+         import="java.util.*"
          import="it.unisa.model.*"
    %>
 <% 
 // Check user credentials
-  UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));
-if ((currentUser==null)||(!currentUser.isValid()))
-{	
-    %> <br/>Utente non valido<% 
-    return;
-}
-
+  
 	Collection<?> orders = (Collection<?>) request.getSession().getAttribute("orders");
 
 %>
@@ -27,6 +19,12 @@ if ((currentUser==null)||(!currentUser.isValid()))
       <div class="container">
       <%@include file="fragments/header.jsp" %>
       <%@include file="fragments/navigationBar.jsp" %>
+      <%
+      	if ((currentUser==null)||(!currentUser.isValid())){	
+			   	response.sendRedirect("login.jsp"); 
+			    return;
+	  	} 
+	  %>
 <h4>Ordini effettuati</h4>
 	<table border="1">
 		<tr>

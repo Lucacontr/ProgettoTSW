@@ -26,33 +26,53 @@ table td{
 	font-size: 1.5vw;
     margin:50px 30px;
     position: static;
-    border-style: solid;
-    border-color: black;
+    border: 3px solid #2690F8;
     padding: 20px;
     text-align:center;
     display:inline-block;
     height: 11em;
     width: 11em;
-}
+    border-radius: 15px;
+   }
 
  a:link {
   text-decoration: none;
-  color: black;
+  color: #2690F8;
 }
 
 a:visited {
   text-decoration: none;
-  color: black;
+  color: #2690F8;
 }
 
 a:hover {
   text-decoration: underline;
-  color: black;
+  color: #2690F8;
 }
 
 a:active {
   text-decoration: underline;
-  color: black;
+  color: #2690F8;
+}
+
+#categorie, #piuVisti, #piuVend{
+	margin-left: auto;
+	margin-right: auto;
+}
+
+div #categorie, #piuVisti, #piuVend{
+	background: #5A42EC;
+   	background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    margin: 0px;
+}
+
+h1 {
+	color: white;
+	text-align: center;
+	font-size: 50px;
+
 }
 
 

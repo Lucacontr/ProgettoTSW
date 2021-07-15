@@ -1,3 +1,4 @@
+<%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
 <!doctype html>
 <html>
 <head>
@@ -11,7 +12,16 @@
 	<script type="text/javascript" src="js/formCheck.js"></script>
 </head>
 <body class="align">
-	<script>
+	<%
+		UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
+		if (currentUser!=null&&(currentUser.isValid())){
+	%>	
+		<script>
+		</script>
+	<%
+		}
+	%>
+		<script>
 		$(document).ready(function(){
             $('#submit').click(function(){   
                 var user=$('#email').val();
@@ -24,7 +34,7 @@
                     	pw:pwd
                     },
                     success: function (data) {
-                    	window.history.go(-1);
+                    	window.location=document.referrer
                     }
                 });                                
             });

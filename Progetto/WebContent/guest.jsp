@@ -18,7 +18,7 @@
 		<%
 			if(cart != null){
 		%>
-				<a href="LoginView.jsp">Accedi</a> o continua ad acquistare senza loggarti:
+				<a href="login.jsp">Accedi</a> o continua ad acquistare senza loggarti:
 				<form action="order" method="post">
 					<input type="hidden" name="action" value="guest">
 					<label>Nome: <input id="nome" name="nome" type="text" placeholder="Mario" required onblur="checkNome(this.form.nome)"></label><br><br><div id="nomeDiv"></div>

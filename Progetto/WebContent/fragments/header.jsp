@@ -72,17 +72,22 @@
 		</div>
 		<div id="userLogged">
 			<%
-	 			UserBean currentUser = (UserBean) (session.getAttribute("currentSessionUser"));
-				if ((currentUser!=null)&&(currentUser.isValid()))
-				{	
-				    %>Ciao, currentUser.getName()<% 
-				    return;
+	 			UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
+				if (currentUser!=null&&(currentUser.isValid())){
+				    %>Ciao, <%=currentUser.getFirstName()%><%
 				}
-			%>
+			%>		
 		</div>
 		<div id="bottoniera">				
 	   		<div id="bottone_utente">
-				<a href="login.jsp"><img src="<c:url value="/images/nuovo/user.png"/>"></a>
+	   			<%
+				if ((currentUser!=null) &&(currentUser.isValid())){
+				%><a href="userLogged.jsp">
+				<%
+				}else{
+				%><a href="login.jsp">
+				<%}%>
+				<img src="<c:url value="/images/nuovo/user.png"/>"></a></a>
 			</div>
 			<div id="bottone_carrello">
 				<a href="cart?action=Cart"><img src="<c:url value="/images/nuovo/cart2.png"/>"></a>
@@ -99,7 +104,6 @@
     <a href="category.jsp?nome=tv"><li>TV</li></a>
     <a href="category.jsp?nome=videogames"><li>Videogames</li></a>
     <a href="offerte.jsp"><li>Offerte</li></a>
-    <a href="fragments/chiSiamo.jsp"><li>Chi SiamoE</li></a>
     <a href="userLogged.jsp"><li>Area Utente</li></a>
   </ul>
 </div> 

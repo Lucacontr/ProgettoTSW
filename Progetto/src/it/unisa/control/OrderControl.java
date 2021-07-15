@@ -48,7 +48,7 @@ public class OrderControl extends HttpServlet {
 				    	 dispatcher.forward(request, response);
 					}
 					else if(user==null) {
-						response.sendRedirect("LoginView.jsp");
+						response.sendRedirect("login.jsp");
 					}
 					else{
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/RiepilogoOrdine.jsp");

@@ -91,47 +91,47 @@ header{
 }
 
 #navigationBar{
-	background: #5A42EC;
-  	background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
-   	background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
-   	background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+	background: #5A42EC !important; 
+  	background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%) !important;
+   	background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%) !important;
+   	background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%) !important;
 }
 
  .category {
-        background-color: none;
-        border: none;
-        color: white;
-        padding: 16px 32px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        margin: 4px 2px;
-        transition-duration: 0.5s;
-        cursor: pointer;
+        background-color: none !important;
+        border: none !important;
+        color: white !important;
+        padding: 16px 32px !important;
+        text-align: center !important;
+        text-decoration: none !important;
+        display: inline-block !important;
+        margin: 4px 2px !important;
+        transition-duration: 0.5s !important;
+        cursor: pointer !important;
     }
     
 .category:hover {
-       background-color: white;
-       color: #5A42EC;
+       background-color: white !important;
+       color: #5A42EC !important;
 }
 
 .offerte {
-    font-weight: bold;
-    background-color: none;
-    border: none;
-    color: white;
-    padding: 16px 32px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    margin: 4px 2px;
-    transition-duration: 0.5s;
-    cursor: pointer;
+    font-weight: bold !important;
+    background-color: none !important;
+    border: none !important;
+    color: white !important;
+    padding: 16px 32px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    display: inline-block !important;
+    margin: 4px 2px !important;
+    transition-duration: 0.5s !important;
+    cursor: pointer !important;
 }
 
 .offerte:hover {
-    background-color: white;
-    color: #5A42EC;
+    background-color: white !important;
+    color: #5A42EC !important;
 }
 
 #hamburger {

@@ -29,7 +29,7 @@
 		<%@include file="fragments/header.jsp" %>
 		<%@include file="fragments/navigationBar.jsp" %>
 				<div id="content">
-					<br/><br/><br/><h2>CATEGORIE</h2>
+					<br/><br/><br/><div id="categorie"><h1>CATEGORIE</h1></div>
 					<%
 						if (categories != null && categories.size() != 0) {
 							Iterator<?> it = categories.iterator();
@@ -50,7 +50,7 @@
 					%>
 					
 					<div id="+visti">
-						<br/><br/><br/><h2>I PIÙ VISTI</h2>
+						<br/><br/><br/><div id="piuVisti"><h1>I PIU' VISTI</h1></div>
 						<%
 							if (visti != null && visti.size() != 0) {
 								Iterator<?> it = visti.iterator();
@@ -73,7 +73,7 @@
 					</div>
 					
 					<div id="+venduti">
-						<br/><br/><br/><h2>I PIÙ VENDUTI</h2>
+						<br/><br/><br/><div id="piuVend"><h1>I PIU' VENDUTI</h1></div>
 						
 						<%
 							if (venduti != null && venduti.size() != 0) {

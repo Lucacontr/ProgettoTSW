@@ -38,6 +38,7 @@ svg {
   vertical-align: middle;
 }
 
+
 /* ---------- ALIGN ---------- */
 .align {
   display: grid;
@@ -101,10 +102,10 @@ svg {
 }
 
 .login__form {
-  background-color: #fff;
+  background-color:#09BBFE;
   border-bottom-left-radius: 1.25em;
   border-bottom-right-radius: 1.25em;
-  color: #777;
+  color: #09BBFE;
   display: grid;
   gap: 0.875em;
   padding: 1.25em 1.625em;
