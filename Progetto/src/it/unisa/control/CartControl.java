@@ -19,14 +19,11 @@ import it.unisa.model.*;
 public class CartControl extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-	static ProductDAO model = new ProductDAO();   
-	
     /**
      * @see HttpServlet#HttpServlet()
      */
     public CartControl() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
 	/**
@@ -50,7 +47,7 @@ public class CartControl extends HttpServlet {
 					if(cart.isInCart(id))
 						cart.increaseProductQ(b);
 					else {
-						ProductBean bean= (ProductBean) model.doRetrieveByKey(id);
+						ProductBean bean= (ProductBean) ProductDAO.doRetrieveByKey(id);
 						bean.setCartQuantity(1);
 						bean.setTot(bean.getPrice());
 						cart.addProduct(bean);
@@ -58,15 +55,13 @@ public class CartControl extends HttpServlet {
 					request.getSession().setAttribute("cart", cart);
 					if(action.equalsIgnoreCase("addCartDetails")) {
 						request.removeAttribute("product");
-						request.setAttribute("product", model.doRetrieveByKey(id));
+						request.setAttribute("product", ProductDAO.doRetrieveByKey(id));
 						RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/DetailsView.jsp");
 						dispatcher.forward(request, response);
 					}
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/index.jsp");
-					dispatcher.forward(request, response);
 				} else if (action.equalsIgnoreCase("delete")) {
 					int id = Integer.parseInt(request.getParameter("id"));
-					cart.deleteProduct(model.doRetrieveByKey(id));
+					cart.deleteProduct(ProductDAO.doRetrieveByKey(id));
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/CartView.jsp");
 					dispatcher.forward(request, response);
 				}
@@ -102,7 +97,6 @@ public class CartControl extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

@@ -32,6 +32,18 @@ header{
     width:60px;
 }
 
+#userLogged{
+	margin-top:1.4em;
+	color:#28293a;
+}
+
+#cartQuantity{
+	margin-top:15px;
+	margin-left:0;
+	padding-left:0;
+}
+
+
 #ricerca {
 	padding: 30px 10% 15px 10%;
 	width: 100%;
@@ -40,7 +52,7 @@ header{
 
 #result{
 	border-radius: 10px 10px 0px 0px;
-	width: 91.5%;
+	width: 100%;
 }
 
 #sub {
@@ -70,7 +82,7 @@ header{
      display:flex;
      flex-direction:row;
      justify-content:flex-end;
-     margin-top: 17px;
+     margin-top: 30px;
      margin-right: 3%;
 }
 
@@ -198,6 +210,13 @@ header{
   
   
   #navigationBar{
+  	display:none;
+  }
+   #cartQuantity{
+  	display:none;
+  }
+  
+   #userLogged{
   	display:none;
   }
 }

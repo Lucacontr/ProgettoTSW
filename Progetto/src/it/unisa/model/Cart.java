@@ -1,6 +1,7 @@
 package it.unisa.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Cart {
@@ -61,6 +62,14 @@ public class Cart {
 			}
 		}
 		return false;
+	}
+	
+	public int getTotalQuantity() {
+		int n=0;
+		for (ProductBean prod : products) {
+			n+=prod.getCartQuantity();
+		}
+		return n;
 	}
 	
 	public List<ProductBean> getProducts() {

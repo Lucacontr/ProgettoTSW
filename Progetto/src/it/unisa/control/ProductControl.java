@@ -44,11 +44,11 @@ public class ProductControl extends HttpServlet {
 					String s=request.getParameter("search").toLowerCase();
 					for (ProductBean productBean : list) {
 						if(productBean.getName().toLowerCase().contains(s)) {
-							result.add(productBean.getName());
+							result.add(productBean.getName()+"<br/>");
 						}
 					}
 					String json = new Gson().toJson(result);
-					json.replace(",", "<br/>");
+					System.out.println(json);
 					response.setContentType("application/json");
 			        response.setCharacterEncoding("UTF-8");
 			        response.getWriter().write(json);

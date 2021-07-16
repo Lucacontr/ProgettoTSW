@@ -87,7 +87,7 @@ public class ProductDAO{
 				bean.setPrezzoScontato(rs.getDouble("prezzo_scontato"));
 				bean.setNvendite(rs.getInt("nvendite"));
 				bean.setNvisualizzazioni(rs.getInt("nvisualizzazioni"));
-				
+				bean.setThumbnail(rs.getString("thumbnail"));
 			}
 
 		} finally {

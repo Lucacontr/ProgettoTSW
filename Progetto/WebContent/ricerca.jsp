@@ -14,10 +14,10 @@
 		<link rel="stylesheet" href="<a:url value="/css/general.css"/>">
 		<link rel="shortcut icon" href="<a:url value="/images/favicon.ico"/>" type="image/x-icon">
 	</head>
-<body>
+	<body>
 		<div id="container">   
-		<%@include file="fragments/header.jsp" %>
-		<%@include file="fragments/navigationBar.jsp" %>
+			<%@include file="fragments/header.jsp" %>
+			<%@include file="fragments/navigationBar.jsp" %>
 			<div id="content">
 				<%
 				if (products != null && products.size() != 0) {
@@ -25,7 +25,7 @@
 					while (it.hasNext()) {
 						ProductBean bean = (ProductBean) it.next();
 				%>
-					<div id="box">
+					<div id="box" class="hvr-grow-shadow">
 						<a href="product?action=read&id=<%=bean.getCode()%>">
 							<div id="img">
 								<img src="<%=bean.getThumbnail()%>" alt="IMG">
@@ -41,5 +41,5 @@
 			</div>
 		</div>
 		<%@include file="fragments/footer.jsp" %>
-</body>
+	</body>
 </html>

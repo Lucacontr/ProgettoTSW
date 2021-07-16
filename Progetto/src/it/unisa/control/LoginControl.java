@@ -51,6 +51,8 @@ public class LoginControl extends HttpServlet {
 				    String json = new Gson().toJson(user);
 				    if (user.isValid()){
 				    	session.setAttribute("currentSessionUser", user);
+				    	request.getSession().removeAttribute("orders");
+						request.getSession().setAttribute("orders", OrderDAO.doRetrieveAllByUser(user.getEmail()));
 				    }
 			    	response.setContentType("application/json");
 			        response.setCharacterEncoding("UTF-8");
@@ -110,6 +112,7 @@ public class LoginControl extends HttpServlet {
 					ad.setPassword(password);
 					AdminDAO.doRetrieve(ad);
 					if(ad.isValid()) {
+						request.removeAttribute("currentSessionUser");
 						request.getSession().setAttribute("adminRoles", true);
 						redirectedPage = "/admin/adminView.jsp";
 					}

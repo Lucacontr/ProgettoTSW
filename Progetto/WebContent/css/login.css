@@ -116,6 +116,7 @@ svg {
 }
 
 .login input[type="email"],
+.login input[type="text"],
 .login input[type="password"] {
   background-color: #eee;
   color: #777;

@@ -10,21 +10,65 @@ table td{
 	text-align: center;
 }
 
-#img > img{
-	height: 6em;
-	width: auto;
+#detailImage > img{
+	height: 25em;
 	display:block;
     margin:0px auto;
-    text-align:center;
 }
+
+.detailContent{
+	float:left;
+}
+
+#img > img{
+	height: 6em;
+	display:block;
+    margin:0px auto;
+}
+
+#cartImage > img{
+	height: 6em;
+	display:block;
+    margin:0.5em;
+}
+
+#adminViewTable{
+	table-layout:fixed;
+	width:100%;
+	padding: 1em;
+}
+
+#adminViewTable td{
+	overflow: hidden;
+    text-overflow: ellipsis;
+} 
 
 #result{
 	background-color: white !important;
 }
 
+.box_container{
+	width:auto;
+	margin:1em;
+}
+
+#product > .prod{
+	float:left;
+	margin:auto;
+	padding:1em;
+}
+
+#product{
+	width:100%;
+	border: 3px solid #2690F8;
+	border-radius: 15px;
+	margin:0.5em;
+	float:left;
+}
+
 #box{
 	font-size: 1.5vw;
-    margin:50px 30px;
+    margin:1.6em 1.1em;
     position: static;
     border: 3px solid #2690F8;
     padding: 20px;
@@ -60,12 +104,24 @@ a:active {
 	margin-right: auto;
 }
 
+#butt{
+	background: #5A42EC;
+   	background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+    background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
+	border:none;
+	color:white;
+	border-radius: 15px;
+	font-weight: bold;
+}
+
 div #categorie, #piuVisti, #piuVend{
 	background: #5A42EC;
    	background: -moz-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
     background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
     background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
     margin: 0px;
+    
 }
 
 h1 {
@@ -75,4 +131,21 @@ h1 {
 
 }
 
+  
+.hvr-grow-shadow {
+  display: inline-block;
+  vertical-align: middle;
+  -webkit-transform: perspective(1px) translateZ(0);
+  transform: perspective(1px) translateZ(0);
+  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  -webkit-transition-property: box-shadow, transform;
+  transition-property: box-shadow, transform;
+}
+.hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
+  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
 

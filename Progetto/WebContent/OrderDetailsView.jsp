@@ -1,6 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"
-     import="it.unisa.model.*"
+<%@ page import="it.unisa.model.*"
      import="java.util.Collection"
      import="java.util.Iterator"
 %>
@@ -9,40 +7,40 @@
   
 <!DOCTYPE html>
 <html>
-<head>
-	<link href="css/container.css" rel="stylesheet">
-	<meta charset="ISO-8859-1">
-	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>CCeShop</title>
-</head>
-<body>
-<div class="container">
-<%@include file="fragments/header.jsp" %>
-<%@include file="fragments/navigationBar.jsp" %>
-	<h2>Detail</h2>
-			<table border="1">
-				<tr>
-					<th>Code</th>
-					<th>Name</th>
-					<th>Description</th>
-					<th>Unit Price</th>
-			
-				</tr>
-				<%
-					if (products != null && products.size() != 0) {
-						Iterator<?> it = products.iterator();
-						while (it.hasNext()) {
-							ProductBean product = (ProductBean) it.next();
-				%>
-				<tr>
-					<td><%=product.getCode()%></td>
-					<td><%=product.getName()%></td>
-					<td><%=product.getDescription()%></td>
-					<td><%=product.getPrice()%></td>
-				</tr>
-				<%}}%>
-			</table>
-			<%@include file="fragments/footer.jsp" %>	
-</div>
-</body>
+	<head>
+		<link href="css/container.css" rel="stylesheet">
+		<title>CCeShop</title>
+	</head>
+	<body>
+	<div id="container">
+	<%@include file="fragments/header.jsp" %>
+	<%@include file="fragments/navigationBar.jsp" %>
+		<div id="content">
+		<h2>Detail</h2>
+				<table border="1">
+					<tr>
+						<th>Code</th>
+						<th>Name</th>
+						<th>Description</th>
+						<th>Unit Price</th>
+				
+					</tr>
+					<%
+						if (products != null && products.size() != 0) {
+							Iterator<?> it = products.iterator();
+							while (it.hasNext()) {
+								ProductBean product = (ProductBean) it.next();
+					%>
+					<tr>
+						<td><%=product.getCode()%></td>
+						<td><%=product.getName()%></td>
+						<td><%=product.getDescription()%></td>
+						<td><%=product.getPrice()%></td>
+					</tr>
+					<%}}%>
+				</table>
+				</div>
+	</div>
+	<%@include file="fragments/footer.jsp" %>	
+	</body>
 </html>

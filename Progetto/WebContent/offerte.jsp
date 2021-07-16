@@ -19,7 +19,7 @@
 	</head>
 	
 	<body>
-		<div id="container">   
+		<div id="container">  
 		<%@include file="fragments/header.jsp" %>
 		<%@include file="fragments/navigationBar.jsp" %>
 			<div id="content">
@@ -29,7 +29,7 @@
 					while (it.hasNext()) {
 						ProductBean bean = (ProductBean) it.next();
 				%>
-					<div id="box">
+					<div id="box" class="hvr-grow-shadow">
 						<a href="product?action=read&id=<%=bean.getCode()%>">
 							<div id="img">
 								<img src="<%=bean.getThumbnail()%>" alt="IMG">

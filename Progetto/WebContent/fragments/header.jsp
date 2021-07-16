@@ -1,6 +1,12 @@
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
 
+<%	
+	Cart cart = (Cart) request.getSession().getAttribute("cart");
+	if(cart==null){
+		cart=new Cart();
+	}
+%>
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="<c:url value="/css/header.css"/>">
@@ -56,7 +62,7 @@
 		}
 		
 		var x = window.matchMedia("(max-width: 768px)")
-		myFunction(x) // Call listener function at run time
+		myFunction(x)
 		x.addListener(myFunction)
 </script>
 
@@ -91,7 +97,7 @@
 			</div>
 			<div id="bottone_carrello">
 				<a href="cart?action=Cart"><img src="<c:url value="/images/nuovo/cart2.png"/>"></a>
-			</div>
+			</div><div id="cartQuantity">(<%=cart.getTotalQuantity() %>)</div>
 			<button id="hamburger">&#9776;</button>
   			<button id="cross">&#735;</button>
 		</div> 
@@ -104,6 +110,7 @@
     <a href="category.jsp?nome=tv"><li>TV</li></a>
     <a href="category.jsp?nome=videogames"><li>Videogames</li></a>
     <a href="offerte.jsp"><li>Offerte</li></a>
+    <a href="CartView.jsp"><li>Carrello</li></a>
     <a href="userLogged.jsp"><li>Area Utente</li></a>
   </ul>
 </div> 

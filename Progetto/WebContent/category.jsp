@@ -10,8 +10,6 @@
 		response.sendRedirect("product");	
 		return;
 	}
-	
-	Cart cart = (Cart) request.getSession().getAttribute("cart");
 %>
 
 
@@ -33,12 +31,13 @@
 					while (it.hasNext()) {
 						ProductBean bean = (ProductBean) it.next();
 			%>
-					<div id="box">
+					<div id="box" class="hvr-grow-shadow">
 						<a href="product?action=read&id=<%=bean.getCode()%>">
 							<div id="img">
 								<img src="<%=bean.getThumbnail()%>" alt="IMG">
 							</div>
 							<label class="nome"><%=bean.getName()%></label>
+							<div id="prezzo">Prezzo: <%=bean.getPrice()%></div>
 						</a>
 					</div>
 			<%
@@ -51,7 +50,7 @@
 				}
 			%>
 			</div>
-		<%@include file="fragments/footer.jsp" %>
-		</div>	
+		</div>
+		<%@include file="fragments/footer.jsp" %>	
 	</body>
 </html>
