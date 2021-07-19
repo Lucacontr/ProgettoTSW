@@ -30,19 +30,19 @@
 	<%@include file="../fragments/header.jsp" %>
 	<%@include file="../fragments/navigationBar.jsp" %>
 		<div id="content">
-			<h2>Products </h2>
+			<h2 style="color: #2690F8;">PRODOTTI</h2>
 			<table id="adminViewTable">
 				<tr>
-					<th><a href="../product?sort=id">Code </a></th>
-					<th><a href="../product?sort=nome">Name </a></th>
-					<th><a href="../product?sort=descrizione">Description </a></th>
-					<th><a href="../product?sort=prezzo">Prezzo </a></th>
-					<th><a href="../product?sort=quantità">Quantità </a></th>
-					<th><a href="../product?sort=sconto">Sconto </a></th>
-					<th><a href="../product?sort=prezzo_scontato">Prezzo Scontato </a></th>
-					<th><a href="../product?sort=iva">IVA </a></th>
-					<th><a href="../product?sort=nvendite">#Vendite </a></th>
-					<th><a href="../product?sort=nvisualizzazioni">#Visualizzazioni </a></th>
+					<th><a href="../product?sort=id">Codice: </a></th>
+					<th><a href="../product?sort=nome">Nome: </a></th>
+					<th><a href="../product?sort=descrizione">Descrizione: </a></th>
+					<th><a href="../product?sort=prezzo">Prezzo: </a></th>
+					<th><a href="../product?sort=quantità">Quantità: </a></th>
+					<th><a href="../product?sort=sconto">Sconto: </a></th>
+					<th><a href="../product?sort=prezzo_scontato">Prezzo Scontato: </a></th>
+					<th><a href="../product?sort=iva">IVA: </a></th>
+					<th><a href="../product?sort=nvendite">#Vendite: </a></th>
+					<th><a href="../product?sort=nvisualizzazioni">#Visualizzazioni: </a></th>
 					<th>Action</th>
 				</tr>
 				<%

@@ -30,49 +30,49 @@
 			<%@include file="../fragments/header.jsp" %>
 			<%@include file="../fragments/navigationBar.jsp" %>
 			<div id="content">
-				<h2>Insert</h2>
+				<h2 style="color: #2690F8">INSERISCI PRODOTTO</h2>
 				<form action="../product" method="post">
 					<input type="hidden" name="action" value="insert"> 
-					
-					<label for="nome">Name:</label><br> 
-					<input name="nome" type="text" maxlength="20" required placeholder="enter name"><br> 
-					
-					<label for="descrizione">Description:</label><br>
-					<textarea name="descrizione" maxlength="100" rows="3" required placeholder="enter description"></textarea><br>
-					
-					<label for="prezzo">Price:</label><br> 
-					<input name="prezzo" type="number" min="0" step="0.01" value="0.0" required><br>
+					<table style="width: 100%; border: 2px solid #2690F8;">
+					<tr>
+						<th><label for="nome">Nome</label></th>
+						<th><label for="descrizione">Descrizione</label></th>
+						<th><label for="prezzo">Prezzo</label></th>
+						<th><label for="quantita">Quantità</label></th>
+						<th><label for="sconto">Sconto</label></th>
+						<th><label for="iva">IVA</label></th>
+						<th><label for="thumb">Thumbnail</label></th>
+						<th><label for="images">Inserisci immagini</label></th>
+						<th><label>Seleziona le categorie</label></th>
+					</tr>
+					<tr>
+						<td><input name="nome" type="text" maxlength="20" required placeholder="enter name"></td>
+						<td><textarea name="descrizione" maxlength="100" rows="3" required placeholder="enter description"></textarea></td>
+						<td><input name="prezzo" type="number" min="0" step="0.01" value="0.0" required></td>
+						<td><input name="quantita" type="number" min="1" value="1" required></td>
+						<td><input name="sconto" type="text" min="0" value="0.0" ></td>
+						<td><input name="iva" type="number" min="0" value="0.0" step="0.1" required></td>
+						<td><input name="thumb" type="text" required placeholder="enter link thumbnail"></td>
+						<td><input name="images" type="text" placeholder="enter link image"></td>
+						<td>
+						<% 
+								if (categories != null && categories.size() != 0) {
+								Iterator<?> it = categories.iterator();
+								while (it.hasNext()) {
+									CategoriaBean bean = (CategoriaBean) it.next();
+							%>
+								<input type="checkbox" name="categoria" value="<%=bean.getNome()%>">
+								<label for="categoria"><%=bean.getNome()%></label>
+							<%
+									}
+								}
+							%>
+						</td>
 			
-					<label for="quantita">Quantity:</label><br> 
-					<input name="quantita" type="number" min="1" value="1" required><br>
-			
-					<label for="sconto">Sconto:</label><br> 
-					<input name="sconto" type="text" min="0" value="0.0" ><br>
-			
-					<label for="iva">IVA:</label><br> 
-					<input name="iva" type="number" min="0" value="0.0" step="0.1" required><br>
+					</tr>
+					</table>
+					<br/><br/><input type="submit" value="Aggiungi" id="butt"> <input type="reset" value="Reset" id="butt">
 					
-					<label for="thumb">Thumbnail:</label><br> 
-					<input name="thumb" type="text" required placeholder="enter link thumbnail"><br> 
-					
-					<label for="images">Inserisci immagini</label><br>
-					 <input name="images" type="text" placeholder="enter link image">
-					
-					<label>Seleziona le categorie:</label><br> 
-					<% 
-						if (categories != null && categories.size() != 0) {
-						Iterator<?> it = categories.iterator();
-						while (it.hasNext()) {
-							CategoriaBean bean = (CategoriaBean) it.next();
-					%>
-						<input type="checkbox" name="categoria" value="<%=bean.getNome()%>">
-						<label for="categoria"><%=bean.getNome()%></label>
-					<%
-							}
-						}
-					%>
-					
-					<br/><br/><input type="submit" value="Add"><input type="reset" value="Reset">
 				</form>
 			</div>
 			<%@include file="../fragments/footer.jsp" %>

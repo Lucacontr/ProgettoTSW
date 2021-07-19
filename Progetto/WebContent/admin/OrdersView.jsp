@@ -26,8 +26,8 @@
 <div class="container">
 <%@include file="../fragments/header.jsp" %>
 <%@include file="../fragments/navigationBar.jsp" %>
-<h2>Orders </h2>
-	<table>
+<h2 style="color: #2690F8">ORDINI</h2>
+	<table align="center">
 		<tr>
 			<th>Code</th>
 			<th>Data Effettuazione</th>
@@ -59,21 +59,28 @@
 		%>
 	</table><br/>
 
-
-Filtra prodotti per data:<br/>
+<h2 style="color: #2690F8">FILTRA ORDINI PER DATA:</h2>
+<table align="center">
+<tr>
+	<th>INIZIO</th>
+	<th>FINE</th>
+</tr>
+<tr>
 	<form action="${pageContext.request.contextPath}/order" method="post">
 		<input type="hidden" name="action" value="filterDate">
-		<input type="text" name="inizio" placeholder="inizio yyyy-mm-dd"><br/><br/>
-		<input type="text" name="fine" placeholder="fine yyyy-mm-dd"><br/><br/>
-		<input type="submit" value="Filtra"><input type="reset" value="Reset">
-	</form><br/><br/>
+		<td><input type="text" name="inizio" placeholder="inizio yyyy-mm-dd"></td>
+		<td><input type="text" name="fine" placeholder="fine yyyy-mm-dd"></td>
+		<tr><td><input type="submit" value="Filtra" id="butt"></td><td><input type="reset" value="Reset" id="butt"></td></tr>
+	</form></table><br/><br/>
 	
-Filtra prodotti per utente:<br/>
+<h2 style="color: #2690F8">FILTRA ORDINI PER UTENTE:</h2>
+<table align="center">
 	<form action="${pageContext.request.contextPath}/order" method="post">
 		<input type="hidden" name="action" value="filterUser">
-		<input type="text" name="user" placeholder="mariorossi@gmail.com"><br/><br/>
-		<input type="submit" value="Filtra"><input type="reset" value="Reset">
-	</form>
+		<tr><th>EMAIL UTENTE</th></tr>
+		<tr><td><input type="text" name="user" placeholder="mariorossi@gmail.com"></td></tr>
+		<tr><td><input type="submit" value="Filtra" id="butt"> <input type="reset" value="Reset" id="butt"></td></tr>
+	</form></table>
 </div>
 	<%@include file="../fragments/footer.jsp" %>
 </body>
