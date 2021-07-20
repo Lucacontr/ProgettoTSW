@@ -48,8 +48,9 @@ public class LoginControl extends HttpServlet {
 				    user.setEmail(un);
 				    user.setPassword(pw);
 				    user = UserDAO.doRetrieve(user);
-				    String json = new Gson().toJson(user);
+				    String json ="";
 				    if (user.isValid()){
+				    	json= new Gson().toJson(user);
 				    	session.setAttribute("currentSessionUser", user);
 				    	request.getSession().removeAttribute("orders");
 						request.getSession().setAttribute("orders", OrderDAO.doRetrieveAllByUser(user.getEmail()));

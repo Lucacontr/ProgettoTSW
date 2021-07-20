@@ -34,7 +34,13 @@
                     	pw:pwd
                     },
                     success: function (data) {
-                    	window.location=document.referrer
+                    	if(data=="[object Object]"){
+                    		window.location=document.referrer;
+                    	}
+                    	else{	
+                    		$('#utenteNonValido').html("Email e/o password non validi");
+                    		$('#utenteNonValido').css("color", "red");
+                    	}
                     }
                 });                                
             });
@@ -43,7 +49,7 @@
   <div class="login">
 
     <header class="login__header">
-      <h2><svg class="icon">
+      <h2 style="color:white;"><svg class="icon">
           <use xlink:href="#icon-lock" />
         </svg>Log-In</h2>
     </header>
@@ -57,7 +63,7 @@
         <label for="password">Password</label>
         <input type="password" id="password" name="password" placeholder="password">
       </div>
-
+		<div id="utenteNonValido"></div>
       <div>
         <input class="button" type="submit" value="Log-In" id="submit">
         <a href="guest.jsp">Acquista senza registrarti</a><br/>

@@ -3,17 +3,34 @@
 }
 
 h2 {
-	text-align:center;	
+	text-align:center;
+	color:#2690F8;
 }
 
 table td{
 	text-align: center;
 }
 
+#detailImage{
+	padding-right:3em;
+	padding-left:2em;
+	width:20%;
+}
+
 #detailImage > img{
-	height: 25em;
+	width:20em;
 	display:block;
     margin:0px auto;
+}
+
+#detailDiv{
+	width:80%;
+	overflow:hidden;	
+}
+
+#info{
+	width:100%;
+	overflow:hidden;	
 }
 
 .detailContent{
@@ -27,7 +44,7 @@ table td{
 }
 
 #cartImage > img{
-	height: 6em;
+	width: 6em;
 	display:block;
     margin:0.5em;
 }
@@ -113,6 +130,7 @@ a:active {
 	color:white;
 	border-radius: 15px;
 	font-weight: bold;
+	cursor:pointer;
 }
 
 div #categorie, #piuVisti, #piuVend{
@@ -121,14 +139,24 @@ div #categorie, #piuVisti, #piuVend{
     background: -webkit-linear-gradient(left, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
     background: linear-gradient(to right, #5A42EC 0%, #2690F8 50%, #09BBFE 100%);
     margin: 0px;
-    
 }
 
 h1 {
 	color: white;
 	text-align: center;
 	font-size: 50px;
+}
 
+#tab1, #tab2 {
+    border: 2px solid #2690F8;
+    width: 80%;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#elimina {
+    color: white;
 }
 
   
@@ -137,15 +165,96 @@ h1 {
   vertical-align: middle;
   -webkit-transform: perspective(1px) translateZ(0);
   transform: perspective(1px) translateZ(0);
-  box-shadow: 0 0 1px rgba(0, 0, 0, 0);
   -webkit-transition-duration: 0.3s;
   transition-duration: 0.3s;
   -webkit-transition-property: box-shadow, transform;
   transition-property: box-shadow, transform;
 }
 .hvr-grow-shadow:hover, .hvr-grow-shadow:focus, .hvr-grow-shadow:active {
-  box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.5);
   -webkit-transform: scale(1.1);
   transform: scale(1.1);
+}
+
+
+.mySlides {display: none}
+img {vertical-align: middle;}
+
+#imgCarousel > img{
+	margin:auto;
+}
+
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+  padding:2em;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color:#5A42EC ;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color:#5A42EC;
+  text-decoration: none;
+  color:white;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color:#09BBFE;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color:#5A42EC;
+}
+
+/* Fading animation */
+.fade {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4} 
+  to {opacity: 1}
+}
+
+@media only screen and (max-width: 300px) {
+  .prev, .next, .text {font-size: 11px}
 }
 

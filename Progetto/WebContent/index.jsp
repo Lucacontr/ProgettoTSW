@@ -8,7 +8,6 @@
 		return;
 	}
 	
-	Collection<?> visti = (Collection<?>) ProductDAO.doRetrievePiuVisti();
 	Collection<?> venduti = (Collection<?>) ProductDAO.doRetrievePiuVenduti();
 	
 %>
@@ -27,6 +26,8 @@
 		<%@include file="fragments/header.jsp" %>
 		<%@include file="fragments/navigationBar.jsp" %>
 				<div id="content">
+				<%@include file="fragments/carousel.jsp" %>
+				<script>showSlides(1);</script>
 					<br/><br/><br/><div id="categorie"><h1>CATEGORIE</h1></div>
 					<div class="box_container">
 						<%

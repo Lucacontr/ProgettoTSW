@@ -15,14 +15,15 @@
 			<%@include file="fragments/header.jsp" %>
 			<%@include file="fragments/navigationBar.jsp" %>
 			<div id="content">
-				<table>
+			<h2>DETTAGLI UTENTE</h2>
+				<table id="tab1">
 				<tr>
-					<td>Nome: </td>
-					<td>Cognome: </td>
-					<td>Email: </td>
-					<td>Indirizzo Spedizione: </td>
-					<td>PAN: </td>
-					<td>Scadenza: </td>
+					<th>Nome: </th>
+					<th>Cognome: </th>
+					<th>Email: </th>
+					<th>Indirizzo Spedizione: </th>
+					<th>PAN: </th>
+					<th>Scadenza: </th>
 				</tr>
 				<tr>
 					<td><%=user.getFirstName()%></td>
@@ -32,14 +33,15 @@
 					<td><%=user.getPAN()%></td>
 					<td><%=user.getExpDate()%></td>
 				</tr>
-				</table>
-				<table>
+				</table><br>
+				<h2>DETTAGLI ORDINE</h2>
+				<table id="tab2">
 				<tr>
-					<td>Nome: </td>
-					<td>Quantità: </td>
-					<td>Code: </td>
-					<td>Descrizione: </td>
-					<td>Prezzo: </td>
+					<th>Nome:</th>
+					<th>Quantità:</th>
+					<th>Code:</th>
+					<th>Prezzo Totale:</th>
+					<th></th>
 					
 				</tr>
 					<% List<ProductBean> prodcart = cart.getProducts(); 	
@@ -48,8 +50,9 @@
 				<tr>
 					<td><%=beancart.getName()%></td>
 					<td><%=beancart.getCartQuantity()%></td>
+					<td><%=beancart.getCode()%></td>
 					<td><%=String.format("%.2f", beancart.getTot())%></td>
-					<td><a href="cart?action=delete&id=<%=beancart.getCode()%>">Elimina</a></td>
+					<td><button id=butt><a id="elimina" href="cart?action=delete&id=<%=beancart.getCode()%>">Elimina</a></button></td>
 				</tr>
 				<%} %>
 				</table>

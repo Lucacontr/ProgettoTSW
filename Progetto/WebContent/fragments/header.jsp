@@ -105,12 +105,12 @@
 
 <div id="menu">
   <ul>
-    <a href="category.jsp?nome=informatica"><li>Informatica</li></a>
-    <a href="category.jsp?nome=smartphone"><li>Smartphone</li></a>
-    <a href="category.jsp?nome=tv"><li>TV</li></a>
-    <a href="category.jsp?nome=videogames"><li>Videogames</li></a>
-    <a href="offerte.jsp"><li>Offerte</li></a>
-    <a href="CartView.jsp"><li>Carrello</li></a>
-    <a href="userLogged.jsp"><li>Area Utente</li></a>
+    <li><a href="category.jsp?nome=informatica">Informatica</a></li>
+    <li><a href="category.jsp?nome=smartphone">Smartphon</a>e</li>
+    <li><a href="category.jsp?nome=tv">TV</a></li>
+    <li><a href="category.jsp?nome=videogames">Videogames</a></li>
+    <li><a href="offerte.jsp">Offerte</a></li>
+    <li><a href="CartView.jsp">Carrello</a></li>
+    <li><a href="userLogged.jsp">Area Utente</a></li>
   </ul>
 </div> 

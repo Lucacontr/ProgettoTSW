@@ -16,8 +16,8 @@
 	<%@include file="fragments/header.jsp" %>
 	<%@include file="fragments/navigationBar.jsp" %>
 		<div id="content">
-		<h2>Detail</h2>
-				<table border="1">
+		<h2>DETTAGLI ORDINE</h2>
+				<table cellspacing="40px" id="tab1">
 					<tr>
 						<th>Code</th>
 						<th>Name</th>

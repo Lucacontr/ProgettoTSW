@@ -12,9 +12,13 @@ html, body {
     min-height:100%;
 }
 
+.box_container{
+	padding-left:2em;
+	padding-right:2em;
+}
+
 #footer { 
-	margin:0;
-    bottom:0;
+	margin:auto;
     height:100px;
     position:relative;
     width:100%;
@@ -27,5 +31,7 @@ html, body {
 
 #footer_table{
 	color: white;
-	width: 100% !important;
+	width: 100%;
+	margin:auto;
+
 }

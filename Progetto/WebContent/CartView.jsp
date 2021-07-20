@@ -43,7 +43,7 @@
 					</div>
 				<%}%>
 		
-				<p>Prezzo totale:<%=String.format("%.2f", cart.getTotPrice())%></p>
+				<h2>Prezzo totale:  <%=String.format("%.2f", cart.getTotPrice())%>€</h2>
 				<br/><br/><a href="order?action=checkout">
 					<input type="submit" id="butt" name="submit" value="Checkout"></a>
 				<% } else { %>	

@@ -21,39 +21,42 @@
 			<%
 				if (product != null) {
 			%>
-						<h2 style="color: #2690F8"><%=product.getName()%></h2>
-						<div id="detailImage" class="prod" class="detailContent">
+					<h2 style="color: #2690F8"><%=product.getName()%></h2>
+					<div id="detailDiv">
+						
+						<div id="detailImage" class="detailContent">
 							<img src="<%=product.getThumbnail()%>" alt="IMG" align="left">
 						</div>
 						
 						<br><br>
 						<div id="info" class="detailContent">
 						
-						<table cellspacing="40px" style="border: 2px solid #2690F8;" >
-							<tr>
-								<th>CODICE</th>
-								<th>NOME</th>
-								<th>DESCRIZIONE</th>
-								<th>PREZZO (€)</th>
-								<th>QUANTITA' DISPONIBILE</th>
-							</tr>
-							<tr>
-								<td><%=product.getCode()%></td>
-								<td><%=product.getName()%></td>
-								<td><%=product.getDescription()%></td>
-								<td><%=product.getPrice()%></td>
-								<td><%=product.getQuantity()%></td>
-							</tr>
-						</table><br>
-						<form action="cart?action=addCartDetails&id=<%=product.getCode()%>" method="post">
-							<input type="submit" value="Aggiungi al carrello" id="butt">
-						</form>
-						</div>
+							<table cellspacing="40px" style="border: 2px solid #2690F8;" >
+								<tr>
+									<th>CODICE</th>
+									<th>NOME</th>
+									<th>DESCRIZIONE</th>
+									<th>PREZZO (€)</th>
+									<th>QUANTITA' DISPONIBILE</th>
+								</tr>
+								<tr>
+									<td><%=product.getCode()%></td>
+									<td><%=product.getName()%></td>
+									<td><%=product.getDescription()%></td>
+									<td><%=product.getPrice()%></td>
+									<td><%=product.getQuantity()%></td>
+								</tr>
+							</table><br>
+							<form action="cart?action=addCartDetails&id=<%=product.getCode()%>" method="post">
+								<input type="submit" value="Aggiungi al carrello" id="butt">
+							</form>
 						</div>
 					</div>
 			<%
 				}
 			%>
+			</div>
+		</div>
 		<%@include file="fragments/footer.jsp" %>
 	</body>
 </html>

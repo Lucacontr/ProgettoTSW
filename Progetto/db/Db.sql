@@ -16,6 +16,8 @@ CREATE TABLE prodotto (
   IVA double default 22,
   quantità int default 0,
   thumbnail varchar(700)
+  
+  
 );
 
 CREATE TABLE immagine(
@@ -23,7 +25,7 @@ CREATE TABLE immagine(
     immagine varchar(700),
     
      FOREIGN KEY (prodotto) REFERENCES prodotto(id)
-     ON DELETE RESTRICT
+     ON DELETE CASCADE
      ON UPDATE CASCADE,
      
      PRIMARY KEY(prodotto, immagine)
@@ -102,7 +104,7 @@ CREATE TABLE Appartenenza(
 	PRIMARY KEY(prodotto, categoria),
 	
 	FOREIGN KEY (prodotto) REFERENCES prodotto(id)
-    ON DELETE RESTRICT
+    ON DELETE CASCADE
     ON UPDATE CASCADE,
 	
     FOREIGN KEY (categoria) REFERENCES categoria(nome)
@@ -173,7 +175,7 @@ for each row
 set new.prezzo_scontato=(new.prezzo-(new.prezzo*new.sconto/100));
 
 INSERT INTO utente (nome, cognome, email, pw) values 
-("Luca", "Contrasto", "lucacontr@gmail.com", "luca1234"),
+("Giovanni", "Contrasto", "lucacontr@gmail.com", "luca1234"),
 ("Giacomo", "Cubix", "giacubix@gmail.com", "cubix2021"),
 ("Franco", "Vecchio", "fvecchio@gmail.com", "fravecc12"),
 ("Luigi", "Lodi", "llodi@gmail.com", "lodi89"),

@@ -26,8 +26,8 @@
 				    return;
 		  	} 
 		  %>
-			<h4>Ordini effettuati</h4>
-			<table border="1">
+			<h2>Ordini effettuati</h2>
+			<table cellspacing="40px" id="tab1">
 			<tr>
 				<th>Code </th>
 				<th>Data </th>
@@ -44,7 +44,7 @@
 							<td><%=bean.getId()%></td>
 							<td><%=bean.getDataEff()%></td>
 							<td><%=bean.getPrezzoTot()%></td>
-							<td><a href="order?action=detail&id=<%=bean.getId()%>">Dettaglio ordine</a></td>
+							<td><button id="butt"><a id="elimina" href="order?action=detail&id=<%=bean.getId()%>">Dettaglio ordine</a></button></td>
 						</tr>
 			<%
 					}

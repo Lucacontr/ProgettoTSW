@@ -15,7 +15,7 @@
   <div class="login">
 	
     <header class="login__header">
-      <h2><svg class="icon">
+      <h2 style="color:white;"><svg class="icon">
           <use xlink:href="#icon-lock" />
         </svg>Area Riservata</h2>
     </header>

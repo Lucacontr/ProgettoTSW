@@ -30,31 +30,45 @@
 			<%@include file="../fragments/header.jsp" %>
 			<%@include file="../fragments/navigationBar.jsp" %>
 			<div id="content">
-				<h2 style="color: #2690F8">INSERISCI PRODOTTO</h2>
+				<h2>INSERISCI PRODOTTO</h2>
 				<form action="../product" method="post">
 					<input type="hidden" name="action" value="insert"> 
-					<table style="width: 100%; border: 2px solid #2690F8;">
+					<table cellspacing="40px" style="width: 100%;">
 					<tr>
 						<th><label for="nome">Nome</label></th>
 						<th><label for="descrizione">Descrizione</label></th>
 						<th><label for="prezzo">Prezzo</label></th>
 						<th><label for="quantita">Quantità</label></th>
-						<th><label for="sconto">Sconto</label></th>
-						<th><label for="iva">IVA</label></th>
-						<th><label for="thumb">Thumbnail</label></th>
-						<th><label for="images">Inserisci immagini</label></th>
-						<th><label>Seleziona le categorie</label></th>
 					</tr>
 					<tr>
 						<td><input name="nome" type="text" maxlength="20" required placeholder="enter name"></td>
-						<td><textarea name="descrizione" maxlength="100" rows="3" required placeholder="enter description"></textarea></td>
+						<td><textarea name="descrizione" maxlength="100" rows="6" required placeholder="enter description"></textarea></td>
 						<td><input name="prezzo" type="number" min="0" step="0.01" value="0.0" required></td>
 						<td><input name="quantita" type="number" min="1" value="1" required></td>
-						<td><input name="sconto" type="text" min="0" value="0.0" ></td>
-						<td><input name="iva" type="number" min="0" value="0.0" step="0.1" required></td>
-						<td><input name="thumb" type="text" required placeholder="enter link thumbnail"></td>
-						<td><input name="images" type="text" placeholder="enter link image"></td>
-						<td>
+					</tr>
+					</table>
+					<br>
+					<table cellspacing="40px" style="width: 100%;">
+						<tr>
+							<th><label for="sconto">Sconto</label></th>
+							<th><label for="iva">IVA</label></th>
+							<th><label for="thumb">Thumbnail</label></th>
+							<th><label for="images">Inserisci immagini</label></th>
+						</tr>
+						<tr>
+							<td><input name="sconto" type="text" min="0" value="0.0" ></td>
+							<td><input name="iva" type="number" min="0" value="0.0" step="0.1" required></td>
+							<td><input name="thumb" type="text" required placeholder="enter link thumbnail"></td>
+							<td><input name="images" type="text" placeholder="enter link image"></td>
+						</tr>
+					</table>
+					<br>
+					<table cellspacing="40px" style="width: 100%;">
+						<tr>
+							<th><label>Seleziona le categorie</label></th>
+						</tr>
+						<tr>
+													<td>
 						<% 
 								if (categories != null && categories.size() != 0) {
 								Iterator<?> it = categories.iterator();
@@ -68,14 +82,13 @@
 								}
 							%>
 						</td>
-			
-					</tr>
+						</tr>
 					</table>
 					<br/><br/><input type="submit" value="Aggiungi" id="butt"> <input type="reset" value="Reset" id="butt">
 					
 				</form>
 			</div>
-			<%@include file="../fragments/footer.jsp" %>
 		</div>
+		<%@include file="../fragments/footer.jsp" %>
 	</body>
 </html>
