@@ -42,40 +42,41 @@
 		    
 		});
 		
-		function myFunction(){
-			$( "#cross" ).hide();
-			$( "#menu" ).hide();
-			$( "#hamburger" ).show();
-			$( "#hamburger" ).click(function() {
-				$( "#menu" ).slideToggle( "slow", function() {
-					$( "#hamburger" ).hide();
-					$( "#cross" ).show();
-				});
+			$(window).resize(function(){
+					$("#hamburger").show();
+			        if ($(window).width() < 768) {  
+			    	   $("#hamburger").click(function() {
+								$( "#menu" ).slideDown("slow", function(){
+							    	$( "#hamburger" ).hide();
+									$( "#cross" ).show();
+								});
+						});
+			    	   $("#cross").click(function() {
+				    	   $("#menu").slideUp("slow", function(){
+				    		    $("#hamburger" ).show();
+								$( "#cross" ).hide();
+							});
+			    	   });
+			        } 
+			        else{
+			        	$( "#menu" ).hide();
+				    	$( "#hamburger" ).hide();
+						$( "#cross" ).hide();
+			        }
 			});
-
-			$( "#cross" ).click(function() {
-				$( "#menu" ).slideToggle( "slow", function() {
-					$( "#cross" ).hide();
-					$( "#hamburger" ).show();
-				});
-			});
-		}
-		
-		var x = window.matchMedia("(max-width: 768px)")
-		myFunction(x)
-		x.addListener(myFunction)
 </script>
 
 <header>
 		<div id="logo"><a href="index.jsp"><img src="<c:url value="/images/nuovo/logo.png"/>"></a></div>
-   		<div id="ricerca">
-   			<form method=get action="product">
+   		<form method=get action="product" id="ricerca">
+   			<div id="search_container">
 				<input type="search" id="s" name="s" placeholder="Cerca sul sito">
 				<button type="submit" id="sub"><i class="fa fa-search"></i></button>
 				<div id="result"></div>
 				<input type="hidden" name="action" value="ricerca">
-			</form>		
-		</div>
+			</div>
+		</form>		
+		
 		<div id="userLogged">
 			<%
 	 			UserBean currentUser = (UserBean) session.getAttribute("currentSessionUser");
@@ -97,8 +98,10 @@
 			</div>
 			<div id="bottone_carrello">
 				<a href="cart?action=Cart"><img src="<c:url value="/images/nuovo/cart2.png"/>"></a>
-			</div><div id="cartQuantity">(<%=cart.getTotalQuantity() %>)</div>
+			</div>
 			<button id="hamburger">&#9776;</button>
+			<div id="cartQuantity">(<%=cart.getTotalQuantity() %>)</div>
+			
   			<button id="cross">&#735;</button>
 		</div> 
 </header>
@@ -106,7 +109,7 @@
 <div id="menu">
   <ul>
     <li><a href="category.jsp?nome=informatica">Informatica</a></li>
-    <li><a href="category.jsp?nome=smartphone">Smartphon</a>e</li>
+    <li><a href="category.jsp?nome=smartphone">Smartphone</a></li>
     <li><a href="category.jsp?nome=tv">TV</a></li>
     <li><a href="category.jsp?nome=videogames">Videogames</a></li>
     <li><a href="offerte.jsp">Offerte</a></li>
