@@ -16,15 +16,54 @@
 				<%
 					if(cart != null){
 				%>
-						<a href="login.jsp">Accedi</a> o continua ad acquistare senza loggarti:
+						<br><br><h3 align="center"><a href="login.jsp">Accedi</a> o continua ad acquistare senza loggarti:</h3><br>
 						<form action="order" method="post">
+						<table id="tab1" cellspacing="40px">
+							<tr>
+								<th>Nome</th>
+								<th>Cognome</th>
+							</tr>
+							<tr>
+								<td><input id="nome" name="nome" type="text" placeholder="Mario" required onblur="checkNome(this.form.nome)"></td>
+								<td><input id="cognome" name ="cognome" type="text" placeholder="Rossi" required onblur="checkCognome(this.form.cognome)"></td>
+							</tr>
+						</table><br>
+						<table id="tab1" cellspacing="40px">
+							<tr>
+								<th>E-Mail</th>
+								<th>Telefono</th>
+							</tr>
+							<tr>
+								<td><input id="email" name="email" type="text" placeholder="mariorossi@gmail.com" required onblur="checkEmail(this.form.email)"></td>
+								<td><input id="telefono" name ="telefono" type="text" placeholder="3332343123" required onblur="checkTelefono(this.form.telefono)"></td>
+							
+							</tr>
+						</table><br>
+						<table id="tab1" cellspacing="40px">
+							<tr>
+								<th>Numero Carta</th>
+								<th>Data Scadenza</th>
+								<th>CVV</th>
+								<th>Indirizzo</th>
+							</tr>
+							<tr>
+								<td><input id="PAN" name="PAN" type="text" placeholder="xxxx-xxxx-xxxx-xxxx" required minlength="16" maxlength="16" ></td>
+								<td><input id="expDate" name="expDate" type="text" placeholder="MM/AA" required></td>
+								<td><input id="CVV" name="CVV" type="text" placeholder="xxx" required minlength="3" maxlength="3"></td>
+								<td><input id="address" name="indirizzo" type="text" placeholder="Via Guglielmo Marconi, 14" required></td>
+							</tr>				
+						</table><br>
+						<table id="tab1" cellspacing="40px">
+							<tr>
+								<td><input type="submit" value="Invia" id="butt"></td>
+								<td><input type="reset" id="butt"></td>
+							</tr>
+						
+						</table>
+						
 							<input type="hidden" name="action" value="guest">
-							<label>Nome: <input id="nome" name="nome" type="text" placeholder="Mario" required onblur="checkNome(this.form.nome)"></label><br><br><div id="nomeDiv"></div>
-							<label>Cognome: <input id="cognome" name ="cognome" type="text" placeholder="Rossi" required onblur="checkCognome(this.form.cognome)"></label><div id="cognomeDiv"></div>
-							<label>Email: <input id="email" name="email" type="text" placeholder="mariorossi@gmail.com" required onblur="checkEmail(this.form.email)"></label><br><br><div id="emailDiv"></div>
-							<label>Telefono: <input id="telefono" name ="telefono" type="text" placeholder="3332343123" required onblur="checkTelefono(this.form.telefono)"></label><div id="telefonoDiv"></div>
-							<label>Indirizzo: <input id="indirizzo" name="indirizzo" type="text" placeholder="via Umberto Nobile 1, Eboli SA" required></label><br><br>
-							<input type="submit" value="Invia"> <input type="reset">
+							<br><br>
+							 
 						</form>
 				<%
 					}

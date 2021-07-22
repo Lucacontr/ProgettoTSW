@@ -130,6 +130,7 @@ a:active {
 	border-radius: 15px;
 	font-weight: bold;
 	cursor:pointer;
+	font-size: inherit;
 }
 
 div #categorie, #piuVisti, #piuVend{

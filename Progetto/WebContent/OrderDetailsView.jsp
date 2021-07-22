@@ -19,10 +19,12 @@
 		<h2>DETTAGLI ORDINE</h2>
 				<table cellspacing="40px" id="tab1">
 					<tr>
-						<th>Code</th>
-						<th>Name</th>
-						<th>Description</th>
-						<th>Unit Price</th>
+						<th>Codice</th>
+						<th>Nome</th>
+						<th>Descrizione</th>
+						<th>Prezzo Unitario</th>
+						<th>Quantità</th>
+						<th>Prezzo Totale articolo</th>
 				
 					</tr>
 					<%
@@ -36,6 +38,8 @@
 						<td><%=product.getName()%></td>
 						<td><%=product.getDescription()%></td>
 						<td><%=product.getPrice()%></td>
+						<td><%=product.getQuantity()%></td>
+						<td><%=product.getPrice()*product.getQuantity()%></td>
 					</tr>
 					<%}}%>
 				</table>

@@ -51,6 +51,7 @@ public class DetailDAO {
 				 bean.setName(rs.getString("nome"));
 				 bean.setDescription(rs.getString("descrizione"));
 			 	 bean.setPrice(rs.getInt("prezzoUnitario"));
+			 	 bean.setQuantity(rs.getInt(13));
 				 products.add(bean);
 		      }
 		   } 

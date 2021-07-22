@@ -237,6 +237,14 @@ header{
     font-size: 1.2vw;
   }
   
+  #butt{
+  	
+  }
+  
+  #hamburger{
+  	display:block;
+  }
+  
   #bottone_utente{
      display:none;
   }
