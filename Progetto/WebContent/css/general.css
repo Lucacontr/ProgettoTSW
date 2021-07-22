@@ -12,29 +12,24 @@ table td{
 }
 
 #detailImage{
-	padding-right:3em;
-	padding-left:2em;
 	width:20%;
+	margin:auto;
 }
 
 #detailImage > img{
 	width:20em;
 	display:block;
-    margin:0px auto;
-}
-
-#detailDiv{
-	width:80%;
-	overflow:hidden;	
+    margin:auto;
 }
 
 #info{
 	width:100%;
-	overflow:hidden;	
+	margin:auto;
 }
 
-.detailContent{
-	float:left;
+#info > table{
+	margin:auto;
+	width:80%
 }
 
 #img > img{
@@ -64,7 +59,11 @@ table td{
 	background-color: white !important;
 }
 
-.box_container{
+#contentDetail{
+	margin:auto;
+}
+
+#box_container{
 	width:auto;
 	margin:1em;
 }
@@ -76,7 +75,7 @@ table td{
 }
 
 #product{
-	width:100%;
+	width:95%;
 	border: 3px solid #2690F8;
 	border-radius: 15px;
 	margin:0.5em;

@@ -51,14 +51,14 @@
 					</div>
 					
 					<br/><br/><br/><div id="piuVisti"><h1>I PIU' VISTI</h1></div>
-					<div class="box_container">
+					<div id="box_container" >
 						<%
 							if (visti != null && visti.size() != 0) {
 								Iterator<?> it = visti.iterator();
 								while (it.hasNext()) {
 									ProductBean bean = (ProductBean) it.next();
 						%>
-								<div id="box">
+								<div id="box" class="hvr-grow-shadow">
 									<a href="product?action=read&id=<%=bean.getCode()%>">
 										<div id="img">
 											<img src="<%=bean.getThumbnail()%>" alt="IMG">
@@ -74,14 +74,14 @@
 					</div>
 					<div id="+venduti">
 						<br/><br/><br/><div id="piuVend"><h1>I PIU' VENDUTI</h1></div>
-						<div class="box_container">
+						<div id="box_container" >
 						<%
 							if (venduti != null && venduti.size() != 0) {
 								Iterator<?> it = venduti.iterator();
 								while (it.hasNext()) {
 									ProductBean bean = (ProductBean) it.next();
 						%>
-								<div id="box">
+								<div id="box" class="hvr-grow-shadow">
 									<a href="product?action=read&id=<%=bean.getCode()%>">
 										<div id="img">
 											<img src="<%=bean.getThumbnail()%>" alt="IMG">

@@ -13,23 +13,24 @@
 	</head>
 
 	<body>
+		
+		
+		
 		<div id="container">
-			<div id="content">
 			<%@include file="fragments/header.jsp" %>
 			<%@include file="fragments/navigationBar.jsp" %>
-			<h2 style="color: #2690F8">DETTAGLI DEL PRODOTTO</h2><br>
+			<div id="contentDetail">
+			<h2 style="color: #2690F8">DETTAGLI DEL PRODOTTO</h2><br><br>
 			<%
 				if (product != null) {
 			%>
-					<h2 style="color: #2690F8"><%=product.getName()%></h2>
-					<div id="detailDiv">
-						
-						<div id="detailImage" class="detailContent">
-							<img src="<%=product.getThumbnail()%>" alt="IMG" align="left">
+					<h2 style="color: #2690F8"><%=product.getName()%></h2><br><br>
+						<div id="detailImage">
+							<img id="imgDetail" src="<%=product.getThumbnail()%>" alt="IMG">
 						</div>
 						
-						<br><br>
-						<div id="info" class="detailContent">
+						<br><br><br><br>
+						<div id="info" >
 						
 							<table cellspacing="40px" style="border: 2px solid #2690F8;" >
 								<tr>
@@ -38,6 +39,7 @@
 									<th>DESCRIZIONE</th>
 									<th>PREZZO (€)</th>
 									<th>QUANTITA' DISPONIBILE</th>
+									<th></th>
 								</tr>
 								<tr>
 									<td><%=product.getCode()%></td>
@@ -45,18 +47,41 @@
 									<td><%=product.getDescription()%></td>
 									<td><%=product.getPrice()%></td>
 									<td><%=product.getQuantity()%></td>
+									<td>
+										<form action="cart?action=addCartDetails&id=<%=product.getCode()%>" method="post"  style="margin:auto;">
+											<input type="submit" value="Aggiungi al carrello" id="butt" style="margin:auto;">
+										</form>
+									</td>
 								</tr>
 							</table><br>
-							<form action="cart?action=addCartDetails&id=<%=product.getCode()%>" method="post">
-								<input type="submit" value="Aggiungi al carrello" id="butt">
-							</form>
 						</div>
-					</div>
 			<%
 				}
 			%>
 			</div>
 		</div>
 		<%@include file="fragments/footer.jsp" %>
+		
+		
+		<script>
+			const container = document.getElementById('detailImage')
+			const img = document.getElementById('imgDetail')
+	
+			container.addEventListener('mousemove', (e) =>{
+			    const x = e.clientX - e.target.offsetLeft
+			    const y = e.clientY - e.target.offsetTop
+	
+			    console.log(x, y)
+			    img.style.transformOrigin = `${x}px ${y}px`
+			    img.style.transform = 'scale(1.3)'
+	
+			})
+	
+			container.addEventListener('mouseleave', (e) =>{
+			    img.style.transform =" scale(1)"
+			})
+		</script>
+		
+		
 	</body>
 </html>

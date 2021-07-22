@@ -1,8 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
 
-<%
-	Cart cart = (Cart) request.getSession().getAttribute("cart");
-%>
 <!DOCTYPE html>
 <html>
 	<head>
