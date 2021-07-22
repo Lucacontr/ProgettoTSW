@@ -1,13 +1,14 @@
 <%@ page contentType="text/html; charset=UTF-8" import="java.util.*,it.unisa.model.*"%>
 	
 <% UserBean user = (UserBean) request.getSession().getAttribute("currentSessionUser"); %>
-    
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "a" %>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<link href="css/container.css" rel="stylesheet">
 		<title>Riepilogo Ordine</title>
+		<link rel="shortcut icon" href="<a:url value="/images/favicon.ico"/>" type="image/x-icon">
 	</head>
 
 	<body>

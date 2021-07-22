@@ -10,11 +10,39 @@ public class GuestBean {
      private String telefono;
      private String indirizzo;
      private String data;
+     private String pan;
+     private String dataScad;
+     private String cvv;
      
      public GuestBean() {
     	 LocalDateTime now=LocalDateTime.now();
     	 this.data= now.getYear()+"-"+now.getMonthValue()+"-"+now.getDayOfMonth()+" "+now.getHour()+":"+now.getMinute()+":"+now.getSecond();
      }
+     
+     public String getCvv() {
+		return cvv;
+	}
+     
+     public String getDataScad() {
+		return dataScad;
+	}
+     
+     public String getPan() {
+		return pan;
+	}
+     
+     public void setCvv(String cvv) {
+		this.cvv = cvv;
+	}
+     
+     public void setDataScad(String dataScad) {
+		this.dataScad = dataScad;
+	}
+     
+     public void setPan(String pan) {
+		this.pan = pan;
+	}
+     
      
      public String getData() {
 		return data;

@@ -3,6 +3,7 @@
          import="java.util.*"
          import="it.unisa.model.*"
    %>
+   <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "a" %>
 <% 
 // Check user credentials
   
@@ -14,6 +15,7 @@
       <head>
 		<link href="css/container.css" rel="stylesheet">
          <title>CCeShop</title>
+         <link rel="shortcut icon" href="<a:url value="/images/favicon.ico"/>" type="image/x-icon">
       </head>
       <body>
       <div id="container">

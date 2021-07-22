@@ -88,7 +88,6 @@ public class OrderControl extends HttpServlet {
 					order.setGuest(GuestDAO.getId(guest));
 					order=OrderDAO.doSave(order);
 					DetailDAO.doSave(cart, OrderDAO.getIdGuest(order.getGuest(), order.getDataEff()));
-					request.getSession().removeAttribute("cart");
 					request.getSession().setAttribute("cart", new Cart());
 					response.sendRedirect("index.jsp");
 				}
@@ -129,6 +128,9 @@ public class OrderControl extends HttpServlet {
 		guest.setTelefono(request.getParameter("telefono"));
 		guest.setCognome(request.getParameter("cognome"));
 		guest.setIndirizzo(request.getParameter("indirizzo"));
+		guest.setPan(request.getParameter("PAN"));
+		guest.setDataScad(request.getParameter("expDate"));
+		guest.setCvv(request.getParameter("CVV"));
 		return guest;
 	}
 

@@ -37,7 +37,7 @@ public class GuestDAO {
 			PreparedStatement preparedStatement = null;
 			
 			String insertSQL = "INSERT INTO " + GuestDAO.TABLE_NAME
-					+ " (data_ora, nome, cognome, email, telefono, indirizzo) VALUES (?, ?, ?, ?, ?, ?)";
+					+ " (data_ora, nome, cognome, email, telefono, indirizzo, numCarta, dataScad, CVV) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 			try {
 				connection = ds.getConnection();
@@ -48,6 +48,9 @@ public class GuestDAO {
 				preparedStatement.setString(4, guest.getEmail());
 				preparedStatement.setString(5, guest.getTelefono());
 				preparedStatement.setString(6, guest.getIndirizzo());
+				preparedStatement.setString(7, guest.getPan());
+				preparedStatement.setString(8, guest.getDataScad());
+				preparedStatement.setString(9, guest.getCvv());
 				preparedStatement.executeUpdate();
 				connection.setAutoCommit(false);
 				connection.commit();

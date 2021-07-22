@@ -64,28 +64,6 @@ public class LoginControl extends HttpServlet {
 				    System.out.println(e); 
 				}
 			}
-			else if(action.equalsIgnoreCase("loginOrder")) {
-				try {
-					HttpSession session = request.getSession();
-					String un=request.getParameter("un");
-					String pw=request.getParameter("pw");
-					UserBean user= new UserBean();
-				    user.setEmail(un);
-				    user.setPassword(pw);
-				    user = UserDAO.doRetrieve(user);
-				    String json = new Gson().toJson(user);
-				    if (user.isValid()){
-				    	session.setAttribute("currentSessionUser", user);
-				    }
-			    	response.setContentType("application/json");
-			        response.setCharacterEncoding("UTF-8");
-			        response.getWriter().write(json);
-				} 		
-				catch (Throwable e){
-					e.printStackTrace();
-				    System.out.println(e); 
-				}
-			}
 			else if(action.equalsIgnoreCase("registration")) {
 				UserBean bean= new UserBean();
 				bean.setFirstName(request.getParameter("name"));
