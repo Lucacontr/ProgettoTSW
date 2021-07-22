@@ -35,7 +35,7 @@ public class DetailDAO {
 	   
 	   public static Collection<ProductBean> doRetrieveProducts(int id) {
 	
-	      String searchQuery = "SELECT prodotto.* FROM prodotto join dettaglio where prodotto.id=dettaglio.id_prodotto and id_ordine = ?";
+	      String searchQuery = "SELECT * FROM prodotto join dettaglio where prodotto.id=dettaglio.id_prodotto and id_ordine = ?";
 	      Collection<ProductBean> products = new LinkedList<ProductBean>();
 	      
 		   try{
@@ -50,7 +50,7 @@ public class DetailDAO {
 		    	 bean.setCode(rs.getInt("id"));
 				 bean.setName(rs.getString("nome"));
 				 bean.setDescription(rs.getString("descrizione"));
-			 	 bean.setPrice(rs.getInt("prezzo"));
+			 	 bean.setPrice(rs.getInt("prezzoUnitario"));
 				 products.add(bean);
 		      }
 		   } 

@@ -77,12 +77,12 @@ CREATE TABLE Dettaglio (
     id_Ordine int,
     
     FOREIGN KEY (id_Prodotto) REFERENCES prodotto(id)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT,
     
     FOREIGN KEY (id_Ordine) REFERENCES ordine(id)
-    ON DELETE RESTRICT
-    ON UPDATE CASCADE,
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT,
     
     PRIMARY KEY(id_prodotto, id_Ordine)
 );
