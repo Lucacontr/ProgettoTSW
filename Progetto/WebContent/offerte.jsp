@@ -34,7 +34,9 @@
 							<div id="img">
 								<img src="<%=bean.getThumbnail()%>" alt="IMG">
 							</div>
-							<label class="nome"><%=bean.getName()%></label>
+							<div class="nome"><%=bean.getName()%></div>
+							<s><div class="nome"><%=bean.getPrice()%></div></s>
+							<div class="nome"><%=bean.getPrezzoScontato()%></div>
 						</a>
 					</div>
 				<%
